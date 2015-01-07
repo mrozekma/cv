@@ -1,0 +1,34 @@
+.terminal {
+	display: none;
+	color: #0f0;
+
+	&.text {
+		// display: inline;
+	}
+
+	&.prompt {
+	}
+
+	&.cursor {
+		position: relative;
+		top: 3px;
+		display: inline-block;
+		width: 6px;
+		height: 12pt;
+		background-color: #0f0;
+
+		&.blink {
+			animation: blink 1s infinite;
+			-webkit-animation: blink 1s infinite;
+			-moz-animation: blink 1s infinite;
+		}
+		.frames() {
+			0% { opacity: 1; }
+			50% { opacity: 0; }
+			100% { opacity: 1; }
+		}
+		@keyframes blink {.frames()}
+		@-webkit-keyframes blink {.frames()}
+		@-moz-keyframes blink {.frames()}
+	}
+}

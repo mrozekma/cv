@@ -1,4 +1,5 @@
 from json import dumps as toJS
+from Terminal import include as terminalInclude
 
 def header(handler):
 	print "<!DOCTYPE html>"
@@ -12,6 +13,16 @@ def header(handler):
 	print "<script src=\"//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js\"></script>"
 	print "<link rel=\"stylesheet\" href=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css\" />"
 	print "<script src=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js\"></script>"
+
+	terminalInclude()
+
+	if handler.wrapperData['jsOnReady']:
+		print "<script type=\"text/javascript\">"
+		print "$(document).ready(function() {"
+		for js in handler.wrapperData['jsOnReady']:
+			print "    %s" % js
+		print "});"
+		print "</script>"
 
 	# Less
 	print "<link rel=\"stylesheet/less\" type=\"text/css\" href=\"/static/style.less\">"

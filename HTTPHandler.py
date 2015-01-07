@@ -9,6 +9,7 @@ from rorn.ResponseWriter import ResponseWriter
 class HTTPHandler(ParentHandler):
 	def __init__(self, request, address, server):
 		self.wrappers = True
+		self.wrapperData = {'jsOnReady': []}
 		ParentHandler.__init__(self, request, address, server)
 
 	def log_message(self, fmt, *args):
@@ -29,5 +30,8 @@ class HTTPHandler(ParentHandler):
 		else:
 			self.pageSubtitle = title
 			self.pageTitle = self.pageSubtitle + " - Michael Mrozek"
+
+	def jsOnReady(self, js):
+		self.wrapperData['jsOnReady'].append(js)
 
 from handlers import *

@@ -6,7 +6,7 @@ from threading import currentThread
 
 os.chdir(dirname(abspath(__file__)))
 
-from rorn.HTTPHandler import HTTPHandler
+from HTTPHandler import HTTPHandler
 from rorn.HTTPServer import HTTPServer
 
 # from stasis.Singleton import set as setDB
