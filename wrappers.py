@@ -6,7 +6,7 @@ def header(handler):
 	print "<html>"
 	print "<head>"
 	print "<title>%s</title>" % handler.pageTitle
-	# print "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/syntax-highlighting.css\">"
+	# print "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/third-party/syntax-highlighting.css\">"
 	print "<link rel=\"shortcut icon\" href=\"/static/images/favicon.ico\">"
 
 	# jQuery
@@ -29,12 +29,11 @@ def header(handler):
 	print "<script type=\"text/javascript\">"
 	print "less = %s;" % toJS({'env': 'production', 'async': False, 'dumpLineNumbers': 'comments'})
 	print "</script>"
-	print "<script src=\"/static/less.js\" type=\"text/javascript\"></script>"
+	print "<script src=\"/static/third-party/less.js\" type=\"text/javascript\"></script>"
 
 	print "</head>"
 	print "<body>"
 	print "<div class=\"titlebar\">"
-	# print "<div class=\"icon\"><img src=\"/static/images/terminal.png\"></div>"
 	print "<div class=\"title\">%s</div>" % handler.pageSubtitle
 	print "</div>"
 	print "<div class=\"content\">"
