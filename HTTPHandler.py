@@ -10,6 +10,7 @@ class HTTPHandler(ParentHandler):
 	def __init__(self, request, address, server):
 		self.wrappers = True
 		self.wrapperData = {'jsOnReady': []}
+		self.localData = {}
 		ParentHandler.__init__(self, request, address, server)
 
 	def log_message(self, fmt, *args):

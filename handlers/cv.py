@@ -1,4 +1,4 @@
-from Terminal import Text, Prompt
+from Terminal import Terminal
 
 @get('')
 def cv(handler):
@@ -11,10 +11,7 @@ This is a *test*!
 
 Last line"""
 
-	text = Text(handler, str)
-	prompt = Prompt(handler)
-	text.setAfter("term.hideCursor(); $('#%s').css('display', 'inline');" % prompt.id)
+	term = Terminal(handler)
+	term.printText(str, "term.prompt(function() {console.log('yay');});")
 
-	print text
-	print "<br><br>"
-	print prompt
+	print term
