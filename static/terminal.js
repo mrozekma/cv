@@ -5,7 +5,11 @@ Array.prototype.peek = function() {
 };
 
 // milliseconds to wait between characters when printing
-PRINT_INTERVAL = 50;
+PRINT_INTERVAL = 25;
+// PRINT_INTERVAL = 5;
+
+// extra time to wait after a newline
+NEWLINE_DELAY = 200;
 
 function cursor_move_to(target) {
 	if(target.length > 0) {
@@ -18,19 +22,19 @@ function cursor_move_to(target) {
 }
 
 function cursor_move_backward() {
-	cursor_move_to($('.terminal .prompt .cursor').prev('.user-input'));
+	cursor_move_to($('.terminal .prompt:last .cursor').prev('.user-input'));
 }
 
 function cursor_move_forward() {
-	cursor_move_to($('.terminal .prompt .cursor').next('.user-input'));
+	cursor_move_to($('.terminal .prompt:last .cursor').next('.user-input'));
 }
 
 function cursor_move_beginning() {
-	cursor_move_to($('.terminal .prompt .user-input:first'));
+	cursor_move_to($('.terminal .prompt:last .user-input:first'));
 }
 
 function cursor_move_end() {
-	cursor_move_to($('.terminal .prompt .user-input:last'));
+	cursor_move_to($('.terminal .prompt:last .user-input:last'));
 }
 
 function bind(hotkeys, fn) {
@@ -42,7 +46,7 @@ function bind(hotkeys, fn) {
 	});
 }
 
-function bind_all() {
+function bind_all(term) {
 	if(listener != null) {
 		listener.listen();
 		return;
@@ -65,7 +69,7 @@ function bind_all() {
 	});
 
 	// Let's see how many readline hotkeys I can remember
-	// On second thought, readline(3) it is
+	// ...on second thought, readline(3) it is
 	bind('backspace', function() {
 		$('.terminal .cursor').prev('.user-input').remove();
 	});
@@ -86,6 +90,30 @@ function bind_all() {
 
 	bind('enter', function() {
 		console.error('Unimplemented'); //TODO
+
+		box = $('.terminal');
+		$('.cursor', box).removeClass('cursor');
+
+		// $.get('/resume?raw', function(data) {
+			// n = $(data);
+			// box.append(n);
+			// box[0].scrollTop = box[0].scrollHeight;
+			// n.hide();
+			// n.slideDown(undefined, function() {
+				// box[0].scrollTop = box[0].scrollHeight;
+				// term.prompt();
+			// });
+		// });
+
+		term.prompt();
+
+		// n = $('<div/>').css('border', '1px solid #fff').css('width', '100px').css('height', '100px');
+		// box.append(n);
+		// box[0].scrollTop = box[0].scrollHeight;
+		// n.hide();
+		// n.slideDown(undefined, function() {
+			// term.prompt();
+		// });
 	});
 }
 
@@ -99,7 +127,7 @@ Terminal = function(id) {
 	this.id = id;
 	$(document).ready(function() {
 		if($('.terminal .cursor').parents('.terminal .prompt').length > 0) {
-			bind_all();
+			bind_all(this);
 		}
 	});
 };
@@ -115,7 +143,7 @@ Terminal = function(id) {
 // This should hopefully look similar to markdown, but worries more about parsing easily and looking right for the cases I care about, not on being spec-compliant.
 function parse(text) {
 	var rtn = [];
-	var state = ['text']; // 'text', 'list', 'emph', 'link'
+	var state = ['text']; // 'text', 'list', 'emph', 'link', 'command'
 	var line_start = true;
 	for(var i = 0; i < text.length; i++) {
 		var c = text.charAt(i);
@@ -164,6 +192,21 @@ function parse(text) {
 				rtn.push(['print', c]);
 				break;
 			}
+			// If it's [[...]], this is a command link
+			if(n == '[' && text.charAt(end + 1) == ']') {
+				i++;
+				// The command can optionally be followed by a '|' and then the description
+				var command = text.substring(i + 1, end);
+				var sep = command.indexOf('|');
+				if(sep != -1) {
+					command = command.substring(0, sep);
+					i += sep + 1;
+				}
+				state.push('command');
+				rtn.push(['startnode', '<a/>', {'class': 'command', 'href': '#' + command}]);
+				break;
+			}
+			// Otherwise, it's a normal link
 			// The URL should follow
 			if(text.charAt(end + 1) != '(') {
 				rtn.push(['print', c]);
@@ -190,30 +233,41 @@ function parse(text) {
 			rtn.push(['startnode', '<a/>', {'href': url}]);
 			break;
 		case ']': // End link (maybe)
-			if(state.peek() != 'link') {
+			switch(state.peek()) {
+			case 'command':
+				i++; // ']'
+				state.pop();
+				rtn.push(['endnode']);
+				break;
+			case 'link':
+				// Scan for the end of the URL
+				i++; // '('
+				search:
+				for(i++; i < text.length; i++) {
+					switch(text.charAt(i)) {
+					case '\\':
+						i++;
+						continue;
+					case ')':
+						break search;
+					}
+				}
+				state.pop();
+				rtn.push(['endnode']);
+				break;
+			default:
 				rtn.push(['print', c]);
 				break;
 			}
-			// Scan for the end of the URL
-			i++; // '('
-			search:
-			for(i++; i < text.length; i++) {
-				switch(text.charAt(i)) {
-				case '\\':
-					i++;
-					continue;
-				case ')':
-					break search;
-				}
-			}
-			state.pop();
-			rtn.push(['endnode']);
 			break;
 		case '\n':
 			if(state.peek() == 'list') { // End list item
 				rtn.push(['endnode']);
 			} else {
 				rtn.push(['print', '<br/>']);
+				for(var _ = 0; _ < NEWLINE_DELAY / PRINT_INTERVAL; _++) {
+					rtn.push(['nop']);
+				}
 			}
 			line_start = true;
 			continue;
@@ -242,6 +296,13 @@ Terminal.prototype.print = function(text, on_finish) {
 	var off = 0;
 	var nodes = [box];
 	var tree = parse(text);
+	var ticking = true;
+
+	var key_handler = function() {
+		ticking = false;
+	}
+	$(document).keydown(key_handler);
+
 	var timer = setInterval(function() {
 		while(tree.length > 0) {
 			step = tree.shift();
@@ -253,17 +314,26 @@ Terminal.prototype.print = function(text, on_finish) {
 				}
 				nodes.peek().append(new_node);
 				nodes.push(new_node);
-				break;
+				break; // nothing printed, so don't end this tick
 			case 'endnode':
 				nodes.pop();
-				break;
+				break; // nothing printed, so don't end this tick
 			case 'print':
 				nodes.peek().append(step[1]);
 				Terminal.scrollCursor(nodes.peek(), false);
-				return; // The only action that stops this tick
+				if(ticking) {
+					return;
+				}
+			case 'nop':
+				if(ticking) {
+					return;
+				}
+			default:
+				console.error("Invalid step: " + step[0]);
 			}
 		}
 
+		$(document).off('keydown', key_handler);
 		Terminal.scrollCursor(undefined, true);
 		clearInterval(timer);
 		if(on_finish !== undefined) {
@@ -278,7 +348,7 @@ Terminal.prototype.prompt = function(after) {
 	box.appendTo($('#' + this.id));
 	cursor = Terminal.scrollCursor(box, true);
 	cursor.addClass('user-input end').html('&nbsp;'); // Prompts end in a fake space for the cursor to occupy if it's after all the real user input
-	bind_all();
+	bind_all(this);
 }
 
 // This moves the cursor after 'new_target', and makes it blink if 'blink' is true

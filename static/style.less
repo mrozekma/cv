@@ -5,6 +5,7 @@ html, body {
 body {
 	margin: 10px;
 	background-color: #000;
+	color: #fff;
 	border: 3px solid #888;
 }
 
@@ -36,4 +37,47 @@ a {
 
 .content {
 	padding: 4px;
+	height: ~"calc(100% - 32px)";
+}
+
+.resume {
+	.personal-info {
+		text-align: center;
+		margin-bottom: 12px;
+
+		.pair {
+			div {
+				display: inline;
+			}
+
+			div:not(:first-child)::before {
+				content: "\a0\b7\a0"; // &nbsp;&middot;&nbsp;
+			}
+		}
+	}
+
+	.section {
+		.title {
+			text-align: center;
+			font-size: 18pt;
+			margin-bottom: 12px;
+			border-bottom: 1px solid #fff;
+		}
+
+		table {
+			td:first-child {
+				text-align: right;
+				vertical-align: top;
+				font-weight: bold;
+				padding-right: 12px;
+				&::after {
+					content: ":";
+				}
+			}
+
+			td:nth-child(2) {
+				vertical-align: bottom;
+			}
+		}
+	}
 }
