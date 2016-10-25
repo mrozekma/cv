@@ -4,7 +4,7 @@ html, body {
 
 body {
 	margin: 10px;
-	background-color: #000;
+	background-color: #eee;
 	color: #fff;
 	border: 3px solid #888;
 }
@@ -36,6 +36,7 @@ a {
 }
 
 .content {
+	background-color: #000;
 	padding: 4px;
 	height: ~"calc(100% - 32px)";
 }
@@ -79,5 +80,63 @@ a {
 				vertical-align: bottom;
 			}
 		}
+	}
+}
+
+.terminal {
+	display: block;
+	color: #fff;
+	height: 100%;
+	overflow-y: scroll;
+
+	.prompt, .stdout {
+		font-family: "Lucida Console", monospace;
+		white-space: pre;
+	}
+
+	.prompt {
+		&::before {
+			content: "$ ";
+		}
+
+		a {
+			color: #fff;
+		}
+	}
+
+	.stdout .file_entry {
+		display: inline;
+
+		.description {
+			display: inline;
+			visibility: hidden;
+		}
+
+		&:hover .description {
+			visibility: visible;
+		}
+	}
+
+	.subpage {
+		margin-top: 100px;
+
+		.stdout {
+			margin-left: 2em;
+			font-family: "Arial";
+			white-space: normal;
+
+			a.cite {
+				vertical-align: super;
+				font-size: smaller;
+				margin-left: 4px;
+				&:after {
+					content: "*";
+				}
+			}
+		}
+	}
+
+	.subpage ~ .end {
+		height: ~"calc(100%)";
 	}
 }

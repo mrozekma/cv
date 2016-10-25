@@ -1,7 +1,6 @@
 from json import dumps as toJS
-from Terminal import include as terminalInclude
 
-def header(handler):
+def header(handler, includes):
 	print "<!DOCTYPE html>"
 	print "<html>"
 	print "<head>"
@@ -14,8 +13,6 @@ def header(handler):
 	print "<link rel=\"stylesheet\" href=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css\" />"
 	print "<script src=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js\"></script>"
 
-	terminalInclude()
-
 	if handler.wrapperData['jsOnReady']:
 		print "<script type=\"text/javascript\">"
 		print "$(document).ready(function() {"
@@ -23,6 +20,13 @@ def header(handler):
 			print "    %s" % js
 		print "});"
 		print "</script>"
+
+	for filename in includes['less']:
+		print "<link rel=\"stylesheet/less\" type=\"text/css\" href=\"%s\" />" % filename
+	# for filename in includes['css']:
+		# print "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" % filename
+	for filename in includes['js']:
+		print "<script src=\"%s\" type=\"text/javascript\"></script>" % filename
 
 	# Less
 	print "<link rel=\"stylesheet/less\" type=\"text/css\" href=\"/static/style.less\">"
@@ -34,7 +38,7 @@ def header(handler):
 	print "</head>"
 	print "<body>"
 	print "<div class=\"titlebar\">"
-	print "<div class=\"title\">%s</div>" % handler.pageSubtitle
+	print "<div class=\"title\">%s</div>" % handler.pagePath
 	print "</div>"
 	print "<div class=\"content\">"
 
