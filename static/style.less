@@ -11,7 +11,7 @@ body {
 
 a {
 	text-decoration: none;
-	color: #00f;
+	color: #66f; // #00f is a bit hard to read on the black terminal background
 }
 
 .titlebar {
@@ -88,6 +88,7 @@ a {
 	color: #fff;
 	height: 100%;
 	overflow-y: scroll;
+	outline: none !important; // http://stackoverflow.com/a/11928222/309308
 
 	.prompt, .stdout {
 		font-family: "Lucida Console", monospace;
@@ -118,12 +119,29 @@ a {
 	}
 
 	.subpage {
-		margin-top: 100px;
+		margin-top: 75px;
 
 		.stdout {
-			margin-left: 2em;
+			@border-width: 1px;
+
+			position: relative;
+			margin-left: 4px;
+			padding-left: 16px;
+			padding-bottom: 10px;
 			font-family: "Arial";
 			white-space: normal;
+			border-left: @border-width solid #fff;
+
+			// Truncated bottom border. http://stackoverflow.com/a/12801460/309308
+			&:after {
+				content: "";
+				background: #fff;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: @border-width;
+				width: 16px;
+			}
 
 			a.cite {
 				vertical-align: super;
@@ -136,7 +154,8 @@ a {
 		}
 	}
 
+	// Add quite a bit of space after the last subpage so it can be scrolled to the top, but not quite 100% to avoid End taking you to a blank screen
 	.subpage ~ .end {
-		height: ~"calc(100%)";
+		height: ~"calc(100% - 100px)";
 	}
 }

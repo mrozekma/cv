@@ -13,13 +13,16 @@ def header(handler, includes):
 	print "<link rel=\"stylesheet\" href=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css\" />"
 	print "<script src=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js\"></script>"
 
+	print "<script type=\"text/javascript\">"
+	print "$(document).ready(function() {"
+	# If there's a terminal on the screen, focus it by default so keyboard scrolling works
+	# http://stackoverflow.com/a/11928222/309308
+	print "    $('.terminal').attr('tabindex', -1).focus();"
 	if handler.wrapperData['jsOnReady']:
-		print "<script type=\"text/javascript\">"
-		print "$(document).ready(function() {"
 		for js in handler.wrapperData['jsOnReady']:
 			print "    %s" % js
-		print "});"
-		print "</script>"
+	print "});"
+	print "</script>"
 
 	for filename in includes['less']:
 		print "<link rel=\"stylesheet/less\" type=\"text/css\" href=\"%s\" />" % filename
