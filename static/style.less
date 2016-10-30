@@ -14,6 +14,12 @@ a {
 	color: #66f; // #00f is a bit hard to read on the black terminal background
 }
 
+// All civilized people agree that the proper way to emphasize text is with bold, not italics
+em {
+	font-weight: bold;
+	font-style: normal;
+}
+
 .titlebar {
 	//TODO Not sure if terminal.png is free
 	background: #ccc url(/static/images/terminal.png) no-repeat ~"1px/24px";
@@ -115,6 +121,10 @@ a {
 
 		&:hover .description {
 			visibility: visible;
+		}
+
+		a.symlink {
+			color: #0ff;
 		}
 	}
 
