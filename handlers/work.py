@@ -27,7 +27,7 @@ def subpage(path, mtime, url, logo, title, timeframe):
 			print "<div class=\"job\">"
 			if url is not None:
 				sys.stdout.write("<a target=\"_blank\" href=\"%s\">" % url)
-			sys.stdout.write("<img class=\"logo\" src=\"/static/images/%s\">" % logo)
+			sys.stdout.write("<img class=\"logo\" src=\"/static/images/work/%s\">" % logo)
 			if url is not None:
 				sys.stdout.write("</a>")
 			print

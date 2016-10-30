@@ -18,6 +18,8 @@ def header(handler, includes):
 	# If there's a terminal on the screen, focus it by default so keyboard scrolling works
 	# http://stackoverflow.com/a/11928222/309308
 	print "    $('.terminal').attr('tabindex', -1).focus();"
+	# Have the titlebar link to the root
+	print "    $('.titlebar').css('cursor', 'pointer').click(function() {document.location = '/';});"
 	if handler.wrapperData['jsOnReady']:
 		for js in handler.wrapperData['jsOnReady']:
 			print "    %s" % js
