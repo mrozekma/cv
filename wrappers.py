@@ -8,6 +8,8 @@ def header(handler, includes):
 	# print "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/third-party/syntax-highlighting.css\">"
 	print "<link rel=\"shortcut icon\" href=\"/static/images/favicon.ico\">"
 
+	print "<link rel=\"stylesheet\" href=\"/static/third-party/font-awesome/css/font-awesome.min.css\">"
+
 	# jQuery
 	print "<script src=\"//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js\"></script>"
 	print "<link rel=\"stylesheet\" href=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css\" />"
@@ -28,8 +30,8 @@ def header(handler, includes):
 
 	for filename in includes['less']:
 		print "<link rel=\"stylesheet/less\" type=\"text/css\" href=\"%s\" />" % filename
-	# for filename in includes['css']:
-		# print "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" % filename
+	for filename in includes['css']:
+		print "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" % filename
 	for filename in includes['js']:
 		print "<script src=\"%s\" type=\"text/javascript\"></script>" % filename
 

@@ -42,40 +42,43 @@ class Terminal:
 
 	def __str__(self):
 		w = ResponseWriter()
-		print "<div class=\"terminal\">"
-		for prompt in self.prompt:
-			print "<div class=\"prompt\">%s</div>" % prompt
-		print "<div class=\"stdout\">"
-		print "total %dk" % ((len(self.files) + 2) * 4)
-		latestMTime = max(file['mtime'] for file in self.files if not (file is separator)) if self.files else datetime.utcfromtimestamp(0)
-		print "<div class=\"file_entry\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s <a href=\"#\">.</a></div>" % (Terminal.renderMTime(latestMTime))
-		print "<div class=\"file_entry\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s <a href=\"..\">..</a></div>" % (Terminal.renderMTime(latestMTime))
-		for file in self.files:
-			if file is separator:
-				print "<div class=\"separator\"></div>"
-				continue
-			path = clean(file['path'])
-			permBits = 'rws' if 's' in file['typeBits'] else 'rwx'
-			permBits += ''.join(c if c in file['typeBits'] else '-' for c in 'rwx')
-			permBits += permBits[-3:]
-			if 'd' in file['typeBits']:
-				print "<div class=\"file_entry\">d%s   2 mrozekma mrozekma  4.0K %s <a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
-			else:
-				# Not sure if I'm willing to put in the effort to show real file size here
-				print "<div class=\"file_entry\">-%s   1 mrozekma mrozekma     0 %s <a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
-			if file['description'] is not None:
-				print "%s<div class=\"description\">%s</div>" % (' ' * max(0, 20 - len(path)), clean(file['description'])),
+		try:
+			print "<div class=\"terminal\">"
+			for prompt in self.prompt:
+				print "<div class=\"prompt\">%s</div>" % prompt
+			print "<div class=\"stdout\">"
+			print "total %dk" % ((len(self.files) + 2) * 4)
+			latestMTime = max(file['mtime'] for file in self.files if not (file is separator)) if self.files else datetime.utcfromtimestamp(0)
+			print "<div class=\"file_entry\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s <a href=\"#\">.</a></div>" % (Terminal.renderMTime(latestMTime))
+			print "<div class=\"file_entry\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s <a href=\"..\">..</a></div>" % (Terminal.renderMTime(latestMTime))
+			for file in self.files:
+				if file is separator:
+					print "<div class=\"separator\"></div>"
+					continue
+				path = clean(file['path'])
+				permBits = 'rws' if 's' in file['typeBits'] else 'rwx'
+				permBits += ''.join(c if c in file['typeBits'] else '-' for c in 'rwx')
+				permBits += permBits[-3:]
+				if 'd' in file['typeBits']:
+					print "<div class=\"file_entry\">d%s   2 mrozekma mrozekma  4.0K %s <a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
+				else:
+					# Not sure if I'm willing to put in the effort to show real file size here
+					print "<div class=\"file_entry\">-%s   1 mrozekma mrozekma     0 %s <a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
+				if file['description'] is not None:
+					print "%s<div class=\"description\">%s</div>" % (' ' * max(0, 20 - len(path)), clean(file['description'])),
+				print "</div>"
 			print "</div>"
-		print "</div>"
-		if self.interstitial:
-			print self.interstitial
-		for subpage in self.subpages:
-			print "<div class=\"subpage\">"
-			subpage()
+			if self.interstitial:
+				print self.interstitial
+			for subpage in self.subpages:
+				print "<div class=\"subpage\">"
+				subpage()
+				print "</div>"
+			print "<div class=\"end\"></div>"
 			print "</div>"
-		print "<div class=\"end\"></div>"
-		print "</div>"
-		return w.done()
+		finally:
+			rtn = w.done()
+		return rtn
 
 	def subpage(self, path, mtime, description = None, catName = None):
 		def fn(real_handler):

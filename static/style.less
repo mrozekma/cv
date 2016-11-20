@@ -12,12 +12,19 @@ body {
 a {
 	text-decoration: none;
 	color: #66f; // #00f is a bit hard to read on the black terminal background
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 // All civilized people agree that the proper way to emphasize text is with bold, not italics
 em {
 	font-weight: bold;
 	font-style: normal;
+}
+
+.clear {
+	clear: both;
 }
 
 .titlebar {
@@ -94,6 +101,7 @@ em {
 	color: #fff;
 	height: 100%;
 	overflow-y: scroll;
+	padding-right: 5px;
 	outline: none !important; // http://stackoverflow.com/a/11928222/309308
 
 	.prompt, .stdout {

@@ -1,0 +1,26 @@
+home
+The sprint tool homepage, containing a list of every project and sprint, starting with the current one. Note that while these screenshots are from a real deploy, the names of users, projects, sprints, and tasks have all been anonymized.
+
+backlog
+By far the most used page, the backlog is the list of every task on a given sprint. Each task includes the person assigned to work on it, the status (not started, in progress, blocked, etc.), the sprint goal the task is contributing to, and how much time the assignee estimates before it will be completed.
+
+backlog-filtered
+The backlog supports many filtering options via a search box, but the filters most commonly used during sprint meetings are given buttons along the top: the task assignee and the task status. In this case we're showing all non-started tasks with at least 16 estimated hours.
+
+metrics
+There are quite a few graphs available to track sprint progress, although only two are visible here: the day-to-day total estimated hours remaining versus the number of hours the team is scheduled to work on the project, and the current hours each team member has scheduled versus their remaining availability. This sprint is not going well -- three people have more work than they can complete even if they finish tasks at the scheduled rate, and as a team the remaining hours is about to exceed the total hours available, and projections show nearly 500 hours of uncompleted work at the end of the sprint if progress stays at the same rate.
+
+metrics-past
+The previous metrics screenshot was from a sprint that got off to a bad start; this is the metrics for a more typical sprint that is already complete. The hours drop to 0 on the last day because all incomplete tasks are automatically deferred.
+
+history
+A complete list of task changes during the sprint. Hours are generally the most interesting thing and are graphed at the top, but all changes are listed.
+
+task-history
+All the changes made to a particular task. Again hours get a dedicated graph since that's generally what people want to see.
+
+calendar
+A calendar view of when all sprints begin and end.
+
+error
+A sample error page, included because I'm quite proud of the syntax highlighted code. I had to hack in a test error because the actual Sprint code is free of all bugs.

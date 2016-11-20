@@ -16,15 +16,17 @@ def projects(handler):
 
 	# Generate the list of level -> school symlinks. This is drawn between the regular list and the individual subpages
 	w = ResponseWriter()
-	print "<br>"
-	print "<div class=\"prompt\">ls -lrt by-level/</div>"
-	print "<div class=\"stdout\">"
-	print "total %dk" % ((len(symlinks)) * 4)
-	for school, (level, mtime) in symlinks.iteritems():
-		ln = "../by-school/%s" % school
-		print "<div class=\"file_entry\">lrwxr-xr-x   1 mrozekma mrozekma  %2d %s <a class=\"symlink\" href=\"#%s\">%s</a> -> <a href=\"#%s\">%s</a></div>" % (len(ln), Terminal.renderMTime(datetime.utcfromtimestamp(mtime)), school, level, school, ln)
-	print "</div>"
-	term.setInterstitial(w.done())
+	try:
+		print "<br>"
+		print "<div class=\"prompt\">ls -lrt by-level/</div>"
+		print "<div class=\"stdout\">"
+		print "total %dk" % ((len(symlinks)) * 4)
+		for school, (level, mtime) in symlinks.iteritems():
+			ln = "../by-school/%s" % school
+			print "<div class=\"file_entry\">lrwxr-xr-x   1 mrozekma mrozekma  %2d %s <a class=\"symlink\" href=\"#%s\">%s</a> -> <a href=\"#%s\">%s</a></div>" % (len(ln), Terminal.renderMTime(datetime.utcfromtimestamp(mtime)), school, level, school, ln)
+		print "</div>"
+	finally:
+		term.setInterstitial(w.done())
 
 	# Output everything
 	print term
