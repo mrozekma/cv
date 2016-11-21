@@ -1,0 +1,20 @@
+slack-poll
+Taking a poll in Slack.
+
+irc-poll
+Showing the current weather for everyone in the room, and taking a poll in IRC.
+
+irc-url-info
+Resolving information about Youtube and Twitter URLs. Many other sites are also handled, including Imgur, Reddit, TVTropes, and Twitch.
+
+slack-update
+What it looks like when new commits are pushed to Github. The synchronization and reload/restart is entirely automatic.
+
+irc-update
+The IRC version of a bot update.
+
+slack-emojirace
+Slack supports message editing, which Noisebot abuses for entertainment purposes.
+
+slack-latexmath
+A module to render a LaTeX-formatted equation.

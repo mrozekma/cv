@@ -22,6 +22,7 @@ def projects(handler, tags = None):
 		print "<br>"
 		print "<div class=\"prompt\">~/bin/show-project-filters --all --clickable</div>"
 		print "<div class=\"stdout project-tags\">"
+		#TODO Clicking these should toggle showing only projects with those tags
 		for tag in sorted(allTags):
 			sys.stdout.write("<span class=\"label label-default\">%s</span>" % tag)
 		print
@@ -68,9 +69,9 @@ def sprint():
 def noisebot():
 	# IRC: Choose, Help, Poll, Weather, Wikipedia, Wolfram, Youtube
 	# Slack: EmojiRace, LaTeXMath, Wikipedia, Youtube
-	print "<em>Noisebot</em> originated as a fairly simple collection of Python scripts to provide useful functions for use in the IRC channel populated by the Linux Users Group I belonged to in <a target=\"_blank\" href=\"/education#rose-hulman\">undergrad</a>. It was later rewritten in Java and expanded to support Slack. Unlike other chat bots, Noisebot was designed from the ground up to be <a target=\"_blank\" href=\"https://github.com/mrozekma/noisebot#developer-documentation\">easily updatable by anyone</a>. When a new commit is pushed to the repository, it is automatically validated and then deployed to Github. Running bots are alerted to the change and synchronize automatically, reloading affected modules without restarting. This ease of updating makes Noisebot the only project on this page with a non-trivial number of <a target=\"_blank\" href=\"https://github.com/mrozekma/NoiseBot/graphs/contributors\">contributors</a>."
-
-# https://www.youtube.com/watch?v=l98orlySZZA
+	print "<em>Noisebot</em> originated as a fairly simple collection of Python scripts to provide useful functions for use in the IRC channel populated by the Linux Users Group I belonged to in <a target=\"_blank\" href=\"/education#rose-hulman\">undergrad</a>. It was later rewritten in Java and expanded to support Slack. Unlike other chat bots, Noisebot was designed from the ground up to be <a target=\"_blank\" href=\"https://github.com/mrozekma/noisebot#developer-documentation\">easily updatable by anyone</a>. When a new commit is pushed to the repository, it is automatically validated and then deployed to Github. Running bots are alerted to the change and synchronize automatically, reloading affected modules without restarting. This ease of updating makes Noisebot the only project on this page with a non-trivial number of <a target=\"_blank\" href=\"https://github.com/mrozekma/NoiseBot/graphs/contributors\">contributors</a>.<br><br>"
+	print "If you're interested in watching me code at 4x speed, I have a video of the development of the <a href=\"https://github.com/mrozekma/NoiseBot/blob/master/src/modules/EmojiRace.java\">EmojiRace module</a>:<br><br>"
+	print "<iframe width=\"854\" height=\"480\" src=\"https://www.youtube.com/embed/l98orlySZZA\" frameborder=\"0\" allowfullscreen></iframe>"
 
 @subpage('spades', 'Spades', 'web-based cards interface', 1446781016, 'static/images/projects/spades/spec', ['python', 'javascript', 'html', 'css', 'jquery', 'websocket'], 'spades')
 def spades():
