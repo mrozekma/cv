@@ -1,0 +1,8 @@
+all-choices
+Gir highlights each commit based on the chosen command; here each of the first six commits has a different command to show all possible row colors.
+
+all-pick
+By default (in most circumstances) every commit will start with the "pick" command, so this is what gir will look like when first started.
+
+help
+Gir is entirely keyboard-driven; pressing <kbd>F1</kbd> shows a list of the available hotkeys.

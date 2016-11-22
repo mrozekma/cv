@@ -86,12 +86,16 @@ def spades(pswp):
 	print "This project is a web-based interface to show current and historical games. It communicates with the game server and with client browsers using websockets, and shows each play as it happens. The complete history of the current game and all previous games is available. The most technically challenging part of the project was actually <a class=\"github-link\" target=\"_blank\" href=\"https://github.com/mrozekma/spades/blob/master/EventThread.py#L30-L66\"><i class=\"fa fa-github\"></i>&nbsp;parsing the game server's events</a>, which are the same messages sent to IRC clients and not intended for programmatic use, and <a class=\"github-link\" target=\"_blank\" href=\"https://github.com/mrozekma/spades/blob/master/GameConstructor.py\"><i class=\"fa fa-github\"></i>&nbsp;reconstructing the game</a> from this one-way information.<br><br>"
 	print "While the screenshots above cover the highlights, the <a target=\"_blank\" href=\"http://spades.mrozekma.com/\">live site</a> is publicly accessible and will show the state of the current game."
 
+@subpage('gir', 'Gir', 'git interactive rebase editor', 1432780392, 'static/images/projects/gir/spec', ['python', 'curses', 'git'], 'gir')
+def gir(_):
+	print "<em>Gir</em> is either immediately understandable or completely incomprehensible, depending on your familiarity with Git. Gir is a curses interface for editing git's interactive rebase todo list. Git normally opens this list in the user's default text editor, where each commit is given a line. Gir splits the window in half, drawing a formatted version of the todo list in the upper half with color-coding for the different commands, and showing the current commit's diff in the bottom half so you can remember what it was. Once each commit is marked appropriately, pressing <kbd>Enter</kbd> will submit the todo list to git just as if it were edited in a text editor."
+
 '''
 [x] sprint
 [x] noisebot
 [x] spades
 rorn
-gir
+[x] gir
 helm
 taut?
 arxantv
