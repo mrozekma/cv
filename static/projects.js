@@ -1,18 +1,7 @@
-/*
 $(document).ready(function() {
-	$('#slick-box').slick({
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		arrows: false,
-		fade: true,
-		asNavFor: '#slick-test',
-	});
-	$('#slick-test').slick({
-		slidesToShow: 3,
-		dots: true,
-		centerMode: true,
-		focusOnSelect: true,
-		asNavFor: '#slick-box',
+	$('a.screenshot-link').click(function() {
+		pswp_id = 'pswp-' + $(this).data('pswp');
+		idx = $(this).data('index');
+		$('.screenshots#' + pswp_id + ' .screenshot img[data-index=' + idx + ']').click();
 	});
 });
-*/

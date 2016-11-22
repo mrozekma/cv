@@ -5,8 +5,11 @@ from uuid import uuid4 as uuid
 
 from rorn.ResponseWriter import ResponseWriter
 
+exts = ('png', 'gif')
+
 class Photoswipe:
 	def __init__(self, rootFolder, *paths):
+		self.id = uuid()
 		self.rootFolder = rootFolder
 		self.imgs = [] # [(path, width, height, caption)]
 		self += paths
@@ -21,7 +24,7 @@ class Photoswipe:
 		return self
 
 	def add(self, path, description = None):
-		for ext in ('png', 'gif'):
+		for ext in exts:
 			fullPath = "%s.%s" % (os.path.join(self.rootFolder, path), ext)
 			if os.path.isfile(fullPath):
 				im = Image.open(fullPath)
@@ -30,10 +33,16 @@ class Photoswipe:
 				return
 		raise IOError("Image not found: %s" % path)
 
+	def getIndexByPath(self, seek):
+		for i, (path, width, height, description) in enumerate(self.imgs):
+			if any(path.endswith(os.path.sep + seek + '.' + ext) for ext in exts):
+				return i
+		raise ValueError("Path not found: %s" % seek)
+
 	def __str__(self):
 		w = ResponseWriter()
 		try:
-			id = "pswp-%s" % uuid()
+			id = "pswp-%s" % self.id
 			print "<script type=\"text/javascript\">"
 			print "$(document).ready(function() {"
 			print "    var pswp = $('.pswp')[0];"

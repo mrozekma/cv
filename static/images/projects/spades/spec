@@ -1,0 +1,14 @@
+game-full-round
+A high-speed animation of what game setup and the first round looks like. While this is a real game, here each play takes one second; the actual round took over a month to play out.
+
+game-with-irc
+The early portion of a round (just after the lead in the second trick). The corresponding IRC log that led to this point is superimposed.
+
+game-score-history
+The score history of a completed game. The green line indicates the goal score, while the red and blue lines track each team's score round-to-round. The boxes flagging some of the scores indicate particularly impactful events.
+
+game-round-history
+The history of a single round, including the score change for each team, the point spread between teams, how close the leading team is to winning, which cards each player played, which ones were winners (the green background), a heatmap of suits in each hand, the breakdown of each trick, and a chart of the resulting bid versus score.
+
+player
+A player's history, including their win rate, how often they bid particular amounts and how often they make each bid, how often they win with each partner, and (not depicted here) how often they lead and win with each card in the deck.
