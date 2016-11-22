@@ -90,6 +90,13 @@ def spades(pswp):
 def gir(_):
 	print "<em>Gir</em> is either immediately understandable or completely incomprehensible, depending on your familiarity with Git. Gir is a curses interface for editing git's interactive rebase todo list. Git normally opens this list in the user's default text editor, where each commit is given a line. Gir splits the window in half, drawing a formatted version of the todo list in the upper half with color-coding for the different commands, and showing the current commit's diff in the bottom half so you can remember what it was. Once each commit is marked appropriately, pressing <kbd>Enter</kbd> will submit the todo list to git just as if it were edited in a text editor."
 
+@subpage('woop', 'Woop', 'keyboard-driven web browser', 1402217739, 'static/images/projects/woop/spec', ['python', 'gtk', 'webkit'])
+def woop(_):
+	print "<em>Woop</em> seemed like an excellent idea, until I discovered it had already been <a target=\"_blank\" href=\"http://www.vimperator.org/\">done</a>."
+	phrase = ('Kind', 'of', 'a', 'lot')
+	urls = ('http://vimium.github.io/', 'https://github.com/k2nr/ViChrome', 'https://github.com/jinzhu/vrome', 'https://www.uzbl.org/')
+	print ' '.join("<a target=\"_blank\" href=\"%s\">%s</a>" % (url, word) for word, url in zip(phrase, urls)) + '.'
+	print "Woop was a webkit-based web browser with a vim-like modal interface. Since the keyboard generally sits unused in a web browser unless interacting with a form, it's possible to bind useful functionality directly to letter keys without needing modifiers like <kbd>Ctrl</kbd> or <kbd>Alt</kbd>. For example, just pressing <kbd>t</kbd> can open a new tab. Much like vim itself, this interface is extremely efficient once the user gets acclimated.<br><br>I got the basic functionality working before discovering that the concept had already been implemented, so the project was never completed."
 '''
 [x] sprint
 [x] noisebot
@@ -100,9 +107,8 @@ helm
 taut?
 arxantv
 pytypecheck
-woop (browser)
+[x] woop (browser)
 cv
-pytypecheck
 
 test_dispatcher
 launchpad

@@ -1,0 +1,8 @@
+google
+Woop opened to Google's homepage.
+
+tabopen
+Woop in command mode -- a <em>tabopen</em> command is being typed along the bottom of the screen.
+
+refresh
+Woop in command mode, tab-completing a command.
