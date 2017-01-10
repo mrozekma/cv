@@ -9,11 +9,13 @@ def header(handler, includes):
 	print "<link rel=\"shortcut icon\" href=\"/static/images/favicon.ico\">"
 
 	print "<link rel=\"stylesheet\" href=\"/static/third-party/font-awesome/css/font-awesome.min.css\">"
+	print "<link rel=\"stylesheet\" href=\"/static/third-party/qtip/jquery.qtip.min.css\">"
 
 	# jQuery
 	print "<script src=\"//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js\"></script>"
 	print "<link rel=\"stylesheet\" href=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css\" />"
 	print "<script src=\"//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js\"></script>"
+	print "<script type=\"text/javascript\" src=\"/static/third-party/qtip/jquery.qtip.min.js\">"
 
 	print "<script type=\"text/javascript\">"
 	print "$(document).ready(function() {"
