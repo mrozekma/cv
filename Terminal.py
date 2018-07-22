@@ -44,13 +44,14 @@ class Terminal:
 		w = ResponseWriter()
 		try:
 			print "<div class=\"terminal\">"
+			print "<div class=\"prompt mobile\">export LAYOUT=mobile</div>"
 			for prompt in self.prompt:
 				print "<div class=\"prompt\">%s</div>" % prompt
 			print "<div class=\"stdout\">"
 			print "total %dk" % ((len(self.files) + 2) * 4)
 			latestMTime = max(file['mtime'] for file in self.files if not (file is separator)) if self.files else datetime.utcfromtimestamp(0)
-			print "<div class=\"file_entry\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s <a href=\"#\">.</a></div>" % (Terminal.renderMTime(latestMTime))
-			print "<div class=\"file_entry\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s <a href=\"..\">..</a></div>" % (Terminal.renderMTime(latestMTime))
+			print "<div class=\"file_entry\"><div class=\"metadata\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s </div><a href=\"#\">.</a></div>" % (Terminal.renderMTime(latestMTime))
+			print "<div class=\"file_entry\"><div class=\"metadata\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s </div><a href=\"..\">..</a></div>" % (Terminal.renderMTime(latestMTime))
 			for file in self.files:
 				if file is separator:
 					print "<div class=\"separator\"></div>"
@@ -60,10 +61,10 @@ class Terminal:
 				permBits += ''.join(c if c in file['typeBits'] else '-' for c in 'rwx')
 				permBits += permBits[-3:]
 				if 'd' in file['typeBits']:
-					print "<div class=\"file_entry\">d%s   2 mrozekma mrozekma  4.0K %s <a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
+					print "<div class=\"file_entry\"><div class=\"metadata\">d%s   2 mrozekma mrozekma  4.0K %s </div><a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
 				else:
 					# Not sure if I'm willing to put in the effort to show real file size here
-					print "<div class=\"file_entry\">-%s   1 mrozekma mrozekma     0 %s <a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
+					print "<div class=\"file_entry\"><div class=\"metadata\">-%s   1 mrozekma mrozekma     0 %s </div><a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
 				if file['description'] is not None:
 					print "%s<div class=\"description\">%s</div>" % (' ' * max(0, 20 - len(path)), clean(file['description'])),
 				print "</div>"

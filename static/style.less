@@ -1,3 +1,5 @@
+@wide: 800px;
+
 html, body {
 	height: ~"calc(100% - 14px)";
 }
@@ -132,22 +134,52 @@ kbd {
 		a {
 			color: #fff;
 		}
+
+		@media only screen and (min-width: @wide) {
+			&.mobile {
+				display: none;
+			}
+		}
 	}
 
 	.stdout .file_entry {
-		display: inline;
+		display: inline-block;
+
+		.metadata {
+			display: inline;
+		}
 
 		.description {
 			display: inline;
 			visibility: hidden;
 		}
 
-		&:hover .description {
-			visibility: visible;
+		@media only screen and (min-width: 1500px) {
+			&:hover .description {
+				visibility: visible;
+			}
 		}
 
 		a.symlink {
 			color: #0ff;
+		}
+
+		@media only screen and (max-width: @wide) {
+			margin-bottom: 10px;
+
+			.metadata {
+				display: none;
+			}
+
+			a {
+				font-size: 2em;
+			}
+
+			.description {
+				display: block;
+				visibility: visible;
+				white-space: normal;
+			}
 		}
 	}
 

@@ -35,71 +35,68 @@ def subpage(path, mtime, url, logo, title, timeframe):
 			print "<div class=\"title\">%s</div>" % ('<br>'.join(title) if isinstance(title, tuple) else title)
 			print "<div class=\"timeframe\">%s</div>" % timeframe
 			print "<br>"
-			real_handler()
+			print markdown.markdown(real_handler(), extensions = [])
 			print "</div>"
 		return fn2
 	return fn
 
-def md(text):
-	return markdown.markdown(text, extensions = [])
-
 @subpage('mercury', 1477280113, 'https://www.mrcy.com/', 'mercury.png', 'Software Development Engineer', '2016 - Present')
 def mercury():
-	pass #TODO
+	return '' #TODO
 
 @subpage('microsemi', 1462881600, 'http://www.microsemi.com/', 'microsemi.png', 'Software Developer', '2010 - 2016')
 def microsemi():
-	print md('''
+	return '''
 * Implemented and improved miscellaneous whitebox cryptography algorithms, including RSA, AES, and elliptic curve DSA.
 * Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used transparently by any application that uses OpenSSL.
 * Implemented the security model and key management policy for an Android password manager.
 * Designed and implemented multiple higher level protocols wrapping existing whitebox cryptography to satisfy customer needs.
 * <span title=\"A security assessment performed without the customer's help, mimicking the situation a real attacker would be in.\">Red-</span> and <span title=\"A security assessment performed with the customer's help, including access to background information, design documents, and possibly even source code.\">blue-teamed</span> several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
-''')
+'''
 
 @subpage('arxan_defense_systems', 1289390400, None, 'arxan_defense_systems.png', 'Software Security Analyst', '2009 - 2010')
 def ads():
-	print md('''
+	return '''
 * Implemented many features in [CodeSEAL](http://www.microsemi.com/products/information-assurance/softwareanti-tamper/codeseal), a product that analyzes executables and modifies them to protect against reverse engineering or modification.
 * Developed [WhiteboxRSA](http://www.microsemi.com/products/information-assurance/cryptography/whiteboxcrypto), an RSA implementation that hides the key to frustrate recovery even when the implementation is fully under the attacker's control.
-''')
+'''
 
 @subpage('pre-graduation/arxan', 1245672000, None, 'arxan.png', 'Intern', '2008 - 2009')
 def arxan():
-	print md('''
+	return '''
 * Engineering intern on a team that developed *TransformIT*, a white box cryptography solution.
 * Subsequently accepted an opportunity to continue work remotely during the school year before transitioning to full-time employment after graduation.
-''')
+'''
 
 @subpage('pre-graduation/rose-hulman', 1244635200, 'http://www.rose-hulman.edu/', 'rose-hulman.png', ('Teaching Assistant', 'CSSE Newsletter Editor'), '2005 - 2008')
 def roseHulman():
-	print md('''
+	return '''
 * Assisted students in many introductory programming classes with fundamental object-oriented techniques, UML, project planning, and completing team-based goals.
 * Responsible for all phases of the CSSE newsletter production, from writing to publishing.
-''')
+'''
 
 @subpage('pre-graduation/ventures', 1212148800, 'http://www.rhventures.org/', 'ventures.png', 'Team Lead', '2007 - 2008')
 def ventures():
-	print md('''
+	return '''
 * Head of a team of students that specified, designed, developed and launched the web portal for a promising online startup company.
 * Handled maintenance of development servers and software.
 * Maintained source code repository and bug tracking system.
 * Reviewed code produced by other team members.
-''')
+'''
 
 @subpage('pre-graduation/perry_schools', 1180612800, 'http://www.perry-lake.k12.oh.us/', 'perry.png', ('Website Designer', 'Technician', 'Database Administrator'), '2001 - 2007')
 def perry():
-	print md('''
+	return '''
 * Project coordinator that designed and implemented a completely new look and feel for the school district's 5000+ page website, including a custom CMS and DB design.
 * Converted all existing webpages to a new format and implemented a new, more efficient interface.
 * Designed, implemented, and maintained the school's first online course registration system.
-''')
+'''
 
 @subpage('pre-graduation/perritech', 1117540800, None, 'perritech.png', ('President', 'Technician'), '2001 - 2005')
 def perritech():
-	print md('''
+	return '''
 * Recruited in 2001 as a computer technician, responsible for the 2000+ computer network.
 * Subcontracted to various local businesses for programming, website design, networking and system administration.
 * Promoted to President in 2005, managing four directors and a number of technicians.
 * Spearheaded a presentation at the Ohio State SchoolNet Convention illustrating the benefits of a student-run technology company fully executed within a school district. Subsequently invited to Seoul, Korea for the 6th Global Forum to make a detailed presentation on how to duplicate our success throughout many school districts.
-''')
+'''

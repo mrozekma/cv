@@ -4,6 +4,7 @@ def header(handler, includes):
 	print "<!DOCTYPE html>"
 	print "<html>"
 	print "<head>"
+	print "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
 	print "<title>%s</title>" % handler.pageTitle
 	# print "<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/third-party/syntax-highlighting.css\">"
 	print "<link rel=\"shortcut icon\" href=\"/static/images/favicon.ico\">"
@@ -19,9 +20,6 @@ def header(handler, includes):
 
 	print "<script type=\"text/javascript\">"
 	print "$(document).ready(function() {"
-	# If there's a terminal on the screen, focus it by default so keyboard scrolling works
-	# http://stackoverflow.com/a/11928222/309308
-	print "    $('.terminal').attr('tabindex', -1).focus();"
 	# Have the titlebar link to the root
 	print "    $('.titlebar').css('cursor', 'pointer').click(function() {document.location = '/';});"
 	if handler.wrapperData['jsOnReady']:
