@@ -41,58 +41,63 @@ class Terminal:
 		return rtn
 
 	def __str__(self):
+		latestMTime = max(file['mtime'] for file in self.files if not (file is separator)) if self.files else datetime.utcfromtimestamp(0)
+
+		def printEntry(isDir, permBits, mTime, url, name, description):
+			# Not sure if I'm willing to put in the effort to show real file size here
+			dirBit, numLinks, sizeStr = ('d', 2, '4.0K') if isDir else ('-', 1, '   0')
+			mTimeStr = Terminal.renderMTime(mTime)
+			print(f"<div class=\"file_entry\"><div class=\"metadata\">{dirBit}{permBits}   {numLinks} mrozekma mrozekma  {sizeStr} {mTimeStr} </div><a href=\"{url}\">{name}</a>", end = '')
+			if description is not None:
+				if (len(path) < 20):
+					print(' ' * (20 - len(path)), end = '')
+					print(f"<div class=\"description\">{clean(description)}</div>", end = '')
+			print("</div>")
+
 		w = ResponseWriter()
 		try:
-			print "<div class=\"terminal\">"
-			print "<div class=\"prompt mobile\">export LAYOUT=mobile</div>"
+			print("<div class=\"terminal\">")
+			print("<div class=\"prompt mobile\">export LAYOUT=mobile</div>")
 			for prompt in self.prompt:
-				print "<div class=\"prompt\">%s</div>" % prompt
-			print "<div class=\"stdout\">"
-			print "total %dk" % ((len(self.files) + 2) * 4)
-			latestMTime = max(file['mtime'] for file in self.files if not (file is separator)) if self.files else datetime.utcfromtimestamp(0)
-			print "<div class=\"file_entry\"><div class=\"metadata\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s </div><a href=\"#\">.</a></div>" % (Terminal.renderMTime(latestMTime))
-			print "<div class=\"file_entry\"><div class=\"metadata\">drwxr-xr-x   2 mrozekma mrozekma  4.0K %s </div><a href=\"..\">..</a></div>" % (Terminal.renderMTime(latestMTime))
+				print("<div class=\"prompt\">%s</div>" % prompt)
+			print("<div class=\"stdout\">")
+			print(f"total {(len(self.files) + 2) * 4}k")
+			printEntry(True, 'rwxr-xr-x', latestMTime, '#', '.', None)
+			printEntry(True, 'rwxr-xr-x', latestMTime, '..', '..', None)
 			for file in self.files:
 				if file is separator:
-					print "<div class=\"separator\"></div>"
+					print("<div class=\"separator\"></div>")
 					continue
 				path = clean(file['path'])
 				permBits = 'rws' if 's' in file['typeBits'] else 'rwx'
 				permBits += ''.join(c if c in file['typeBits'] else '-' for c in 'rwx')
 				permBits += permBits[-3:]
-				if 'd' in file['typeBits']:
-					print "<div class=\"file_entry\"><div class=\"metadata\">d%s   2 mrozekma mrozekma  4.0K %s </div><a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
-				else:
-					# Not sure if I'm willing to put in the effort to show real file size here
-					print "<div class=\"file_entry\"><div class=\"metadata\">-%s   1 mrozekma mrozekma     0 %s </div><a href=\"%s\">%s</a>" % (permBits, Terminal.renderMTime(file['mtime']), file['url'], path),
-				if file['description'] is not None:
-					print "%s<div class=\"description\">%s</div>" % (' ' * max(0, 20 - len(path)), clean(file['description'])),
-				print "</div>"
-			print "</div>"
+				printEntry('d' in file['typeBits'], permBits, file['mtime'], file['url'], path, file['description'])
+			print("</div>")
 			if self.interstitial:
-				print self.interstitial
+				print(self.interstitial)
 			for subpage in self.subpages:
-				print "<div class=\"subpage\">"
+				print("<div class=\"subpage\">")
 				subpage()
-				print "</div>"
-			print "<div class=\"end\"></div>"
-			print "</div>"
+				print("</div>")
+			print("<div class=\"end\"></div>")
+			print("</div>")
 		finally:
 			rtn = w.done()
 		return rtn
 
 	def subpage(self, path, mtime, description = None, catName = None):
 		def fn(real_handler):
-			safe_path = clean(path)
-			self.add("#%s" % safe_path, path, 'r', mtime, description)
+			safePath = clean(path)
+			self.add(f"#{safePath}", path, 'r', mtime, description)
 			def wrapper_handler():
-				print "<a name=\"%s\"></a>" % safe_path
-				print "<div class=\"prompt\"><a href=\"#%s\">cat %s</a></div>" % (safe_path, catName or safe_path)
-				print "<div class=\"stdout\">"
+				print(f"<a name=\"{safePath}\"></a>")
+				print(f"<div class=\"prompt\"><a href=\"#{safePath}\">cat {catName or safePath}</a></div>")
+				print("<div class=\"stdout\">")
 				try:
 					return real_handler()
 				finally:
-					print "</div>"
+					print("</div>")
 			self.subpages.append(wrapper_handler)
 			return wrapper_handler
 		return fn

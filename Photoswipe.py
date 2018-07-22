@@ -31,39 +31,36 @@ class Photoswipe:
 				width, height = im.size
 				self.imgs.append((fullPath, width, height, description))
 				return
-		raise IOError("Image not found: %s" % path)
+		raise IOError(f"Image not found: {path}")
 
 	def getIndexByPath(self, seek):
 		for i, (path, width, height, description) in enumerate(self.imgs):
 			if any(path.endswith(os.path.sep + seek + '.' + ext) for ext in exts):
 				return i
-		raise ValueError("Path not found: %s" % seek)
+		raise ValueError(f"Path not found: {seek}")
 
 	def __str__(self):
-		w = ResponseWriter()
-		try:
+		with ResponseWriter() as w:
 			id = "pswp-%s" % self.id
-			print "<script type=\"text/javascript\">"
-			print "$(document).ready(function() {"
-			print "    var pswp = $('.pswp')[0];"
-			print "    var items = %s;" % toJS([{'src': "/%s" % path, 'w': width, 'h': height, 'title': description} for (path, width, height, description) in self.imgs])
-			print "    $('#%s img').click(function() {" % id
-			print "        var options = {"
-			print "            index: parseInt($(this).data('index'), 10),"
-			print "            history: false,"
-			print "        };"
-			print "        new PhotoSwipe(pswp, PhotoSwipeUI_Default, items, options).init()"
-			print "    });"
-			print "});"
-			print "</script>"
-			print "<div id=\"%s\" class=\"screenshots\">" % id
+			print("<script type=\"text/javascript\">")
+			print("$(document).ready(function() {")
+			print("    var pswp = $('.pswp')[0];")
+			print("    var items = %s;" % toJS([{'src': "/%s" % path, 'w': width, 'h': height, 'title': description} for (path, width, height, description) in self.imgs]))
+			print("    $('#%s img').click(function() {" % id)
+			print("        var options = {")
+			print("            index: parseInt($(this).data('index'), 10),")
+			print("            history: false,")
+			print("        };")
+			print("        new PhotoSwipe(pswp, PhotoSwipeUI_Default, items, options).init()")
+			print("    });")
+			print("});")
+			print("</script>")
+			print("<div id=\"%s\" class=\"screenshots\">" % id)
 			for i, (path, width, height, description) in enumerate(self.imgs):
-				print "<div class=\"screenshot\"><img data-index=\"%d\" src=\"/%s\"></div>" % (i, path)
-			print "</div>"
-			print "<div class=\"clear\"></div>"
-		finally:
-			rtn = w.done()
-		return rtn
+				print("<div class=\"screenshot\"><img data-index=\"%d\" src=\"/%s\"></div>" % (i, path))
+			print("</div>")
+			print("<div class=\"clear\"></div>")
+			return w.done()
 
 	@staticmethod
 	def fromSpec(specFilename):

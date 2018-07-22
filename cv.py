@@ -32,7 +32,7 @@ try:
 except KeyboardInterrupt:
 	sys.__stdout__.write("\n\n")
 	console('main', 'Exiting at user request')
-except (Exception, SystemExit), e:
+except (Exception, SystemExit) as e:
 	sys.__stdout__.write("\n\n")
 	console('main', '%s', e)
 

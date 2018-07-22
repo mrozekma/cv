@@ -5,4 +5,5 @@ def console(source, fmt, *args):
 	str = fmt
 	if args:
 		str %= args
-	sys.__stdout__.write("[%s] [%s] %s\n" % (datetime.now().replace(microsecond = 0), source, str))
+	when = datetime.now().replace(microsecond = 0)
+	sys.__stdout__.write(f"[{when}] [{source}] {str}\n")

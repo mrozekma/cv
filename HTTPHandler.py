@@ -37,10 +37,10 @@ class HTTPHandler(ParentHandler):
 			if handler and 'statics' in handler:
 				for key in ensureList(handler['statics']):
 					for type in types:
-						if isfile("static/%s.%s" % (key, type)):
-							includes[type].append("/static/%s.%s" % (key, type))
+						if isfile(f"static/{key}.{type}"):
+							includes[type].append(f"/static/{key}.{type}")
 
-			writer = ResponseWriter()
+			writer = ResponseWriter(storageType = bytes)
 			header(self, includes)
 			sys.stdout.write(self.response)
 			footer(self)

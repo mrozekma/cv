@@ -8,35 +8,35 @@ term = Terminal('cd /work_history', 'ls -lart **/*')
 @get('work_history', statics = 'work')
 def work(handler):
 	handler.title('Work History', 'work_history')
-	print term
+	print(term)
 
 @term.subpage('README.1ST', 1477280113)
 def background():
-	print "<br>"
-	print "My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I've worked at the same place since my <a href=\"#arxan\">2008 internship</a>, despite the regular name changes:"
-	print "<ul>"
-	print "<li><div class=\"timeframe\">Oct 2008</div> Arxan splits into Arxan Defense Systems and Arxan Technologies</li>"
-	print "<li><div class=\"timeframe\">Sep 2010</div> Arxan Defense Systems is acquired by Microsemi<a class=\"cite\" target=\"_blank\" href=\"http://investor.microsemi.com/2010-09-15-Microsemi-Corporation-Acquires-Arxan-Defense-Systems-Inc\"></a></li>"
-	print "<li><div class=\"timeframe\">May 2016</div> The security division of Microsemi is acquired by Mercury Systems<a class=\"cite\" target=\"_blank\" href=\"https://www.mrcy.com/presscenter/pressreleases/pressrelease.aspx?id=16578\"></a></li>"
-	print "</ul>"
-	print "The jobs predating this all took place during undergraduate or high school (and are stored in the <code>pre-graduation</code> directory)."
+	print("<br>")
+	print("My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I've worked at the same place since my <a href=\"#arxan\">2008 internship</a>, despite the regular name changes:")
+	print("<ul>")
+	print("<li><div class=\"timeframe\">Oct 2008</div> Arxan splits into Arxan Defense Systems and Arxan Technologies</li>")
+	print("<li><div class=\"timeframe\">Sep 2010</div> Arxan Defense Systems is acquired by Microsemi<a class=\"cite\" target=\"_blank\" href=\"http://investor.microsemi.com/2010-09-15-Microsemi-Corporation-Acquires-Arxan-Defense-Systems-Inc\"></a></li>")
+	print("<li><div class=\"timeframe\">May 2016</div> The security division of Microsemi is acquired by Mercury Systems<a class=\"cite\" target=\"_blank\" href=\"https://www.mrcy.com/presscenter/pressreleases/pressrelease.aspx?id=16578\"></a></li>")
+	print("</ul>")
+	print("The jobs predating this all took place during undergraduate or high school (and are stored in the <code>pre-graduation</code> directory).")
 
 def subpage(path, mtime, url, logo, title, timeframe):
 	def fn(real_handler):
 		@term.subpage(path, mtime)
 		def fn2():
-			print "<div class=\"job\">"
+			print("<div class=\"job\">")
 			if url is not None:
 				sys.stdout.write("<a target=\"_blank\" href=\"%s\">" % url)
 			sys.stdout.write("<img class=\"logo\" src=\"/static/images/work/%s\">" % logo)
 			if url is not None:
 				sys.stdout.write("</a>")
-			print
-			print "<div class=\"title\">%s</div>" % ('<br>'.join(title) if isinstance(title, tuple) else title)
-			print "<div class=\"timeframe\">%s</div>" % timeframe
-			print "<br>"
-			print markdown.markdown(real_handler(), extensions = [])
-			print "</div>"
+			print()
+			print("<div class=\"title\">%s</div>" % ('<br>'.join(title) if isinstance(title, tuple) else title))
+			print("<div class=\"timeframe\">%s</div>" % timeframe)
+			print("<br>")
+			print(markdown.markdown(real_handler(), extensions = []))
+			print("</div>")
 		return fn2
 	return fn
 

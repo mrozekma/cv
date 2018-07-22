@@ -1,6 +1,3 @@
-from collections import OrderedDict
-from datetime import datetime
-
 from Terminal import Terminal
 
 @get('', statics = 'cv')
@@ -14,4 +11,4 @@ def cv(handler):
 	term.add('hobbies',           'hobbies',           'drx',      1477259577, "Occasionally I'm not at my computer")
 	term.addSeparator()
 	term.add('make-pdf-resume',   'make-pdf-resume',   'xs',       1477259577, "This page isn't particularly printer-friendly")
-	print term
+	print(term)
