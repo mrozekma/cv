@@ -68,7 +68,7 @@
 }
 
 .stdout.project-tags {
-	margin-left: 20px;
+	margin: 0 0 20px 20px;
 
 	/*
 	.category {
@@ -86,6 +86,19 @@
 
 	.label {
 		margin-right: 4px;
+		cursor: pointer;
+
+		&.selected {
+			background-color: #c00;
+		 }
+	}
+}
+
+.tag-filter {
+	display: none;
+
+	.prompt .tag-list {
+		display: inline;
 	}
 }
 

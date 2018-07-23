@@ -17,17 +17,19 @@ def projects(handler, tags = None):
 	print(Photoswipe.getRootElement())
 
 	# Generate the list of level -> school symlinks. This is drawn between the regular list and the individual subpages
-	w = ResponseWriter()
-	try:
+	with ResponseWriter() as w:
 		print("<br>")
-		print("<div class=\"prompt\">~/bin/show-project-filters --all --clickable</div>")
+		print("<div class=\"prompt\">/bin/project-filters --list --clickable</div>")
 		print("<div class=\"stdout project-tags\">")
-		#TODO Clicking these should toggle showing only projects with those tags
 		for tag in sorted(allTags):
 			sys.stdout.write("<span class=\"label label-default\">%s</span>" % tag)
 		print()
 		print("</div>")
-	finally:
+
+		print("<div class=\"tag-filter\">")
+		print("<div class=\"prompt\">/bin/project-filters --set <div class=\"tag-list\"></div></div>")
+		print("<div class=\"stdout\">\nProjects filtered to only those with the requested tags. <button id=\"tag-filter-clear\">Remove filter</button>\n</div>")
+		print("</div>")
 		term.setInterstitial(w.done())
 
 	# Output everything
