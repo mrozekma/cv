@@ -47,15 +47,14 @@ class Terminal:
 			# Not sure if I'm willing to put in the effort to show real file size here
 			dirBit, numLinks, sizeStr = ('d', 2, '4.0K') if isDir else ('-', 1, '   0')
 			mTimeStr = Terminal.renderMTime(mTime)
-			print(f"<div class=\"file_entry\"><div class=\"metadata\">{dirBit}{permBits}   {numLinks} mrozekma mrozekma  {sizeStr} {mTimeStr} </div><a href=\"{url}\">{name}</a>", end = '')
+			print(f"<div class=\"file_entry\"><div class=\"metadata\">{dirBit}{permBits}   {numLinks} <div class=\"ownership\">mrozekma mrozekma</div>  {sizeStr} {mTimeStr} </div><a href=\"{url}\">{name}</a>", end = '')
 			if description is not None:
 				if (len(path) < 20):
 					print(' ' * (20 - len(path)), end = '')
 					print(f"<div class=\"description\">{clean(description)}</div>", end = '')
 			print("</div>")
 
-		w = ResponseWriter()
-		try:
+		with ResponseWriter() as w:
 			print("<div class=\"terminal\">")
 			print("<div class=\"prompt mobile\">export LAYOUT=mobile</div>")
 			for prompt in self.prompt:
@@ -82,9 +81,7 @@ class Terminal:
 				print("</div>")
 			print("<div class=\"end\"></div>")
 			print("</div>")
-		finally:
-			rtn = w.done()
-		return rtn
+			return w.done()
 
 	def subpage(self, path, mtime, description = None, catName = None):
 		def fn(real_handler):

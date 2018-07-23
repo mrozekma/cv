@@ -149,12 +149,19 @@ kbd {
 			display: inline;
 		}
 
+		.ownership {
+			display: none;
+			@media only screen and (min-width: 1420px) {
+				display: inline;
+			}
+		}
+
 		.description {
 			display: inline;
 			visibility: hidden;
 		}
 
-		@media only screen and (min-width: 1500px) {
+		@media only screen and (min-width: 1224px) {
 			&:hover .description {
 				visibility: visible;
 			}
@@ -206,15 +213,6 @@ kbd {
 				left: 0;
 				height: @border-width;
 				width: 16px;
-			}
-
-			a.cite {
-				vertical-align: super;
-				font-size: smaller;
-				margin-left: 4px;
-				&:after {
-					content: "*";
-				}
 			}
 		}
 	}

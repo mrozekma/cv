@@ -1,0 +1,2 @@
+got
+An example of requesting a repository's path. The first time the repository isn't cloned yet, so got clones it before returning the new path. The second time, the clone already exists, so got just reports the path.

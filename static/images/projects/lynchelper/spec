@@ -1,0 +1,11 @@
+codeshare
+Sharing a code snippet. The code snippet is syntax-highlighted, in a monospace font, and suppresses Lync features like emoji expansion.
+
+installer
+A simple GUI for installing Lync Helper. All actions that require admin access are grouped in a single program in case users need to go through IT to run a program with admin permissions.
+
+logging-settings
+Configuration for the logging system. This lets the user customize where log files are stored, and how they are formatted.
+
+logging-tray
+The system tray icon used to control the logging system.

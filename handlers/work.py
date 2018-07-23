@@ -16,8 +16,8 @@ def background():
 	print("My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I've worked at the same place since my <a href=\"#arxan\">2008 internship</a>, despite the regular name changes:")
 	print("<ul>")
 	print("<li><div class=\"timeframe\">Oct 2008</div> Arxan splits into Arxan Defense Systems and Arxan Technologies</li>")
-	print("<li><div class=\"timeframe\">Sep 2010</div> Arxan Defense Systems is acquired by Microsemi<a class=\"cite\" target=\"_blank\" href=\"http://investor.microsemi.com/2010-09-15-Microsemi-Corporation-Acquires-Arxan-Defense-Systems-Inc\"></a></li>")
-	print("<li><div class=\"timeframe\">May 2016</div> The security division of Microsemi is acquired by Mercury Systems<a class=\"cite\" target=\"_blank\" href=\"https://www.mrcy.com/presscenter/pressreleases/pressrelease.aspx?id=16578\"></a></li>")
+	print("<li><div class=\"timeframe\">Sep 2010</div> Arxan Defense Systems is <a target=\"_blank\" href=\"http://investor.microsemi.com/2010-09-15-Microsemi-Corporation-Acquires-Arxan-Defense-Systems-Inc\">acquired</a> by Microsemi</li>")
+	print("<li><div class=\"timeframe\">May 2016</div> The security division of Microsemi is <a target=\"_blank\" href=\"https://www.mrcy.com/presscenter/pressreleases/pressrelease.aspx?id=16578\">acquired</a> by Mercury Systems</li>")
 	print("</ul>")
 	print("The jobs predating this all took place during undergraduate or high school (and are stored in the <code>pre-graduation</code> directory).")
 
@@ -40,9 +40,15 @@ def subpage(path, mtime, url, logo, title, timeframe):
 		return fn2
 	return fn
 
-@subpage('mercury', 1477280113, 'https://www.mrcy.com/', 'mercury.png', 'Software Development Engineer', '2016 - Present')
+@subpage('mercury', 1532302550, 'https://www.mrcy.com/', 'mercury.png', 'Software Development Engineer', '2016 - Present')
 def mercury():
-	return '' #TODO
+	return '''
+* Designed and rolled out an automated build and test system for a number of projects.
+* Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.
+    - Implemented a [tool](/personal_projects#got) to manage cross-repository dependencies in Bitbucket, and an [addon](https://marketplace.atlassian.com/apps/1218193/project-fields) to track additional project information within Bitbucket.
+* Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes
+* Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers
+'''
 
 @subpage('microsemi', 1462881600, 'http://www.microsemi.com/', 'microsemi.png', 'Software Developer', '2010 - 2016')
 def microsemi():
@@ -51,7 +57,7 @@ def microsemi():
 * Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used transparently by any application that uses OpenSSL.
 * Implemented the security model and key management policy for an Android password manager.
 * Designed and implemented multiple higher level protocols wrapping existing whitebox cryptography to satisfy customer needs.
-* <span title=\"A security assessment performed without the customer's help, mimicking the situation a real attacker would be in.\">Red-</span> and <span title=\"A security assessment performed with the customer's help, including access to background information, design documents, and possibly even source code.\">blue-teamed</span> several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
+* <span title="A security assessment performed without the customer's help, mimicking the situation a real attacker would be in.">Red-</span> and <span title="A security assessment performed with the customer's help, including access to background information, design documents, and possibly even source code.">blue-teamed</span> several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
 '''
 
 @subpage('arxan_defense_systems', 1289390400, None, 'arxan_defense_systems.png', 'Software Security Analyst', '2009 - 2010')
