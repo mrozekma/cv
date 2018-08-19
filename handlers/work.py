@@ -13,7 +13,7 @@ def work(handler):
 @term.subpage('README.1ST', 1477280113)
 def background():
 	print("<br>")
-	print("My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I've worked at the same place since my <a href=\"#arxan\">2008 internship</a>, despite the regular name changes:")
+	print("My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I've worked at the same place since my <a href=\"#pre-graduation/arxan\">2008 internship</a>, despite the regular name changes:")
 	print("<ul>")
 	print("<li><div class=\"timeframe\">Oct 2008</div> Arxan splits into Arxan Defense Systems and Arxan Technologies</li>")
 	print("<li><div class=\"timeframe\">Sep 2010</div> Arxan Defense Systems is <a target=\"_blank\" href=\"http://investor.microsemi.com/2010-09-15-Microsemi-Corporation-Acquires-Arxan-Defense-Systems-Inc\">acquired</a> by Microsemi</li>")
