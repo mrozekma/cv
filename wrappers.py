@@ -10,6 +10,7 @@ def header(handler, includes):
 
 	print("<link rel=\"stylesheet\" href=\"/static/third-party/font-awesome/css/font-awesome.min.css\">")
 	print("<link rel=\"stylesheet\" href=\"/static/third-party/qtip/jquery.qtip.min.css\">")
+	print("<link rel=\"stylesheet\" type=\"text/css\" href=\"/code.css\">")
 
 	# jQuery
 	print("<script src=\"//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js\"></script>")

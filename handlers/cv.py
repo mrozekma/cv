@@ -1,3 +1,7 @@
+from textwrap import dedent
+
+from rorn import code
+
 from Terminal import Terminal
 
 @get('', statics = 'cv')
@@ -12,3 +16,16 @@ def cv(handler):
 	term.addSeparator()
 	term.add('make-pdf-resume',   'make-pdf-resume',   'xs',       1477259577, "This page isn't particularly printer-friendly")
 	print(term)
+
+@get('code.css')
+def codeCSS(handler):
+        handler.wrappers = False
+        handler.contentType = 'text/css'
+        code.showCodeCSS()
+
+		# Override a few things
+        print(dedent("""
+        .code_default { border-spacing: 0; }
+        .code_default.light { color: #000; }
+        .selected_line { background-color: #aa0000aa; }
+        """))

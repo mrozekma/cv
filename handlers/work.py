@@ -32,7 +32,7 @@ def subpage(path, mtime, url, logo, title, timeframe):
 			if url is not None:
 				sys.stdout.write("</a>")
 			print()
-			print("<div class=\"title\">%s</div>" % ('<br>'.join(title) if isinstance(title, tuple) else title))
+			print("<div class=\"title\">%s</div>" % (', '.join(title) if isinstance(title, tuple) else title))
 			print("<div class=\"timeframe\">%s</div>" % timeframe)
 			print("<br>")
 			print(markdown.markdown(real_handler(), extensions = []))
@@ -74,13 +74,6 @@ def arxan():
 * Subsequently accepted an opportunity to continue work remotely during the school year before transitioning to full-time employment after graduation.
 '''
 
-@subpage('pre-graduation/rose-hulman', 1244635200, 'http://www.rose-hulman.edu/', 'rose-hulman.png', ('Teaching Assistant', 'CSSE Newsletter Editor'), '2005 - 2008')
-def roseHulman():
-	return '''
-* Assisted students in many introductory programming classes with fundamental object-oriented techniques, UML, project planning, and completing team-based goals.
-* Responsible for all phases of the CSSE newsletter production, from writing to publishing.
-'''
-
 @subpage('pre-graduation/ventures', 1212148800, 'http://www.rhventures.org/', 'ventures.png', 'Team Lead', '2007 - 2008')
 def ventures():
 	return '''
@@ -88,6 +81,13 @@ def ventures():
 * Handled maintenance of development servers and software.
 * Maintained source code repository and bug tracking system.
 * Reviewed code produced by other team members.
+'''
+
+@subpage('pre-graduation/rose-hulman', 1244635200, 'http://www.rose-hulman.edu/', 'rose-hulman.png', ('Teaching Assistant', 'CSSE Newsletter Editor'), '2005 - 2008')
+def roseHulman():
+	return '''
+* Assisted students in many introductory programming classes with fundamental object-oriented techniques, UML, project planning, and completing team-based goals.
+* Responsible for all phases of the CSSE newsletter production, from writing to publishing.
 '''
 
 @subpage('pre-graduation/perry_schools', 1180612800, 'http://www.perry-lake.k12.oh.us/', 'perry.png', ('Website Designer', 'Technician', 'Database Administrator'), '2001 - 2007')

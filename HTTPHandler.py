@@ -26,9 +26,6 @@ class HTTPHandler(ParentHandler):
 			del query['raw']
 		return query
 
-	def invokeHandler(self, handler, query):
-		handler['fn'](handler = self, **query)
-
 	def requestDone(self):
 		if self.wrappers:
 			types = ['less', 'css', 'js']
