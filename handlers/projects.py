@@ -6,14 +6,14 @@ from rorn.ResponseWriter import ResponseWriter
 
 import sys
 
-term = Terminal('cd /personal_projects', 'ls -lar --sort=relevance')
+term = Terminal('cd /personal-projects', 'ls -lar --sort=relevance')
 termLock = Lock()
 allTags = set()
 
-# @get('personal_projects', statics = ['projects'])
-@get('personal_projects', statics = ['projects', 'bootstrap'] + Photoswipe.getStatics())
+# @get('personal-projects', statics = ['projects'])
+@get('personal-projects', statics = ['projects', 'bootstrap'] + Photoswipe.getStatics())
 def projects(handler, tags = None):
-	handler.title('Personal Projects', 'personal_projects')
+	handler.title('Personal Projects', 'personal-projects')
 	print(Photoswipe.getRootElement())
 
 	# Generate the list of level -> school symlinks. This is drawn between the regular list and the individual subpages
@@ -78,7 +78,7 @@ def subpage(project, name, tagline, mtime, screenshotSpec, tags, links = {}):
 
 @subpage('sprint', 'Sprint', 'scrum tracking tool', 1308373920, 'static/images/projects/sprint/spec', ['python', 'javascript', 'html', 'css', 'jquery', 'websocket'], {'repo': 'sprint'})
 def sprint(_):
-	print("The <em>Sprint tool</em>, as it came to be known when I forgot to come up with a real name, is a web-based <a target=\"_blank\" href=\"https://en.wikipedia.org/wiki/Scrum_(software_development)\">Scrum</a> tracking tool. I wrote it largely in 2011-2012 in my free time for use at <a target=\"_blank\" href=\"/work_history#microsemi\">Microsemi</a>. Its predecessor was an Excel spreadsheet filled with formulas and custom cell formatting that tended to slowly degenerate as it was copied from sprint to sprint until the metrics it reported bore little resemblance to the actual hours entered into the cells. While the Sprint tool was originally written just for internal use at my company, former coworkers have carried it with them to at least three other companies that I know of. This was relatively painless, once a few <a target=\"_blank\" href=\"https://github.com/mrozekma/Sprint/commit/b0ac62a97c28b871c4853686bda6426060eb7a90\">poorly-conceived</a> <a target=\"_blank\" href=\"https://github.com/mrozekma/Sprint/commit/b6b1af214e77de7b6680d565aeddfebce00c1385\">hardcoded values</a> were fixed.<br><br>")
+	print("The <em>Sprint tool</em>, as it came to be known when I forgot to come up with a real name, is a web-based <a target=\"_blank\" href=\"https://en.wikipedia.org/wiki/Scrum_(software_development)\">Scrum</a> tracking tool. I wrote it largely in 2011-2012 in my free time for use at <a target=\"_blank\" href=\"/work-history#microsemi\">Microsemi</a>. Its predecessor was an Excel spreadsheet filled with formulas and custom cell formatting that tended to slowly degenerate as it was copied from sprint to sprint until the metrics it reported bore little resemblance to the actual hours entered into the cells. While the Sprint tool was originally written just for internal use at my company, former coworkers have carried it with them to at least three other companies that I know of. This was relatively painless, once a few <a target=\"_blank\" href=\"https://github.com/mrozekma/Sprint/commit/b0ac62a97c28b871c4853686bda6426060eb7a90\">poorly-conceived</a> <a target=\"_blank\" href=\"https://github.com/mrozekma/Sprint/commit/b6b1af214e77de7b6680d565aeddfebce00c1385\">hardcoded values</a> were fixed.<br><br>")
 	print("The Sprint tool is also noteworthy as my first Python webapp, as my previous web work was in PHP. It contained a custom web framework on top of Python's built-in <a target=\"_blank\" href=\"https://docs.python.org/2/library/basehttpserver.html\">HTTP server</a>; this framework has since been pulled out into its <a target=\"_blank\" href=\"https://github.com/mrozekma/rorn\">own project</a> so I could use it on <a href=\"#spades\">other webapps</a>, including <a target=\"_blank\" href=\"https://github.com/mrozekma/cv\">this very site</a>.")
 
 @subpage('noisebot', 'Noisebot', 'chat bot', 1277020414, 'static/images/projects/noisebot/spec', ['java', 'irc', 'slack', 'api'], {'repo': 'noisebot'})
@@ -99,7 +99,7 @@ def spades(pswp):
 
 @subpage('got', 'Got', 'git repository manager', 1532316900, 'static/images/projects/got/spec', ['python', 'git', 'bitbucket', 'api'], {'repo': 'got', 'docs': 'http://got.readthedocs.io/'})
 def got(_):
-	print("<em>Got</em> was written for use at <a target=\"_blank\" href=\"/work_history#mercury\">Mercury</a>. Before my office was acquired by Mercury, all code was stored in a centralized subversion repository, and it was common for projects to depend on each other via relative paths. For example, if <code>products/foo</code> depends on code from <code>libraries/bar</code>, it would simply point at <code>../../libraries/bar</code>.")
+	print("<em>Got</em> was written for use at <a target=\"_blank\" href=\"/work-history#mercury\">Mercury</a>. Before my office was acquired by Mercury, all code was stored in a centralized subversion repository, and it was common for projects to depend on each other via relative paths. For example, if <code>products/foo</code> depends on code from <code>libraries/bar</code>, it would simply point at <code>../../libraries/bar</code>.")
 	print("After the migration to git, <code>products/foo</code> and <code>libraries/bar</code> would now be stored in separate repositories in Bitbucket. This means that when a user builds <code>products/foo</code>:")
 	print("<ol><li>The user might not have <code>libraries/bar</code> cloned.</li><li><code>libraries/bar</code> might be cloned anywhere on disk, not at a fixed location relative to <code>products/foo</code>.</li></ol>")
 	print("Got solves this problem by essentially combining <a target=\"_blank\" href=\"https://en.wikipedia.org/wiki/Pkg-config\">pkg-config</a> with <a target=\"_blank\" href=\"https://code.google.com/archive/p/git-repo/\">git-repo</a> to create a tool that not only provides the locations of repositories on request, but will download those repositories from a remote host if they're not already on disk. This means build systems can simply run <code>got repo_name</code> to get the path to the specified repository, regardless of if it's already been cloned or not.")

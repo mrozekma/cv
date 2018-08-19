@@ -3,11 +3,11 @@ from Terminal import Terminal
 import markdown
 import sys
 
-term = Terminal('cd /work_history', 'ls -lart **/*')
+term = Terminal('cd /work-history', 'ls -lart **/*')
 
-@get('work_history', statics = 'work')
+@get('work-history', statics = 'work')
 def work(handler):
-	handler.title('Work History', 'work_history')
+	handler.title('Work History', 'work-history')
 	print(term)
 
 @term.subpage('README.1ST', 1477280113)
@@ -45,7 +45,7 @@ def mercury():
 	return '''
 * Designed and rolled out an automated build and test system for a number of projects.
 * Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.
-    - Implemented a [tool](/personal_projects#got) to manage cross-repository dependencies in Bitbucket, and an [addon](https://marketplace.atlassian.com/apps/1218193/project-fields) to track additional project information within Bitbucket.
+    - Implemented a [tool](/personal-projects#got) to manage cross-repository dependencies in Bitbucket, and an [addon](https://marketplace.atlassian.com/apps/1218193/project-fields) to track additional project information within Bitbucket.
 * Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes
 * Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers
 '''
@@ -60,7 +60,7 @@ def microsemi():
 * <span title="A security assessment performed without the customer's help, mimicking the situation a real attacker would be in.">Red-</span> and <span title="A security assessment performed with the customer's help, including access to background information, design documents, and possibly even source code.">blue-teamed</span> several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
 '''
 
-@subpage('arxan_defense_systems', 1289390400, None, 'arxan_defense_systems.png', 'Software Security Analyst', '2009 - 2010')
+@subpage('arxan-defense-systems', 1289390400, None, 'arxan_defense_systems.png', 'Software Security Analyst', '2009 - 2010')
 def ads():
 	return '''
 * Implemented many features in [CodeSEAL](http://www.microsemi.com/products/information-assurance/softwareanti-tamper/codeseal), a product that analyzes executables and modifies them to protect against reverse engineering or modification.
@@ -90,7 +90,7 @@ def roseHulman():
 * Responsible for all phases of the CSSE newsletter production, from writing to publishing.
 '''
 
-@subpage('pre-graduation/perry_schools', 1180612800, 'http://www.perry-lake.k12.oh.us/', 'perry.png', ('Website Designer', 'Technician', 'Database Administrator'), '2001 - 2007')
+@subpage('pre-graduation/perry-schools', 1180612800, 'http://www.perry-lake.k12.oh.us/', 'perry.png', ('Website Designer', 'Technician', 'Database Administrator'), '2001 - 2007')
 def perry():
 	return '''
 * Project coordinator that designed and implemented a completely new look and feel for the school district's 5000+ page website, including a custom CMS and DB design.

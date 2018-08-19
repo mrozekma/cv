@@ -52,7 +52,7 @@ def subpage(school, level, mtime, url, logo, degree, timeframe):
 
 @subpage('purdue', "master's", 1431882000, 'https://purdue.edu/', 'purdue.png', 'Master of Science in Computer Science', '2011 - 2015')
 def purdue():
-	print("Continuing education while employed at <a href=\"/work_history#microsemi\">Microsemi</a><br>")
+	print("Continuing education while employed at <a href=\"/work-history#microsemi\">Microsemi</a><br>")
 	print("Cumulative GPA: <em>3.67</em><br>")
 	print("Courses:")
 	print("<ul>")
