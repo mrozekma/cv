@@ -1,0 +1,229 @@
+%% \documentclass[11pt, letterpaper]{awesome-cv}
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+\fontdir[fonts/]
+
+%TODO Not sure if I like the highlighting or not
+%% \setbool{acvSectionColorHighlight}{false}
+
+% Available options: circle|rectangle,edge/noedge,left/right
+%% \photo[edge,right]{filename}
+
+\name{Michael}{Mrozek}
+\position{Software Engineer}
+\email{resume@mrozekma.com}
+\homepage{cv.mrozekma.com}
+\github{mrozekma}
+\gitlab{mrozekma}
+\stackoverflow{309308}{Michael Mrozek}
+
+\begin{document}
+\makecvheader[R]
+
+\makecvfooter{Generated \today. Unabridged version available from \href{http://cv.mrozekma.com/}{http://cv.mrozekma.com/}}{}{\thepage}
+
+\untagged{technical-skills,experience,education,projects,publications}{
+	\centering
+	\vfill
+	No sections requested\ldots
+	\vfill
+}
+
+\iffalse
+\cvsection{Tags}
+\begin{cvparagraph}
+\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+\item background: \iftagged{background}{yes}{no}
+\item technical-skills: \iftagged{technical-skills}{yes}{no}
+    \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \item languages: \iftagged{languages}{yes}{no}
+    \item certifications: \iftagged{certifications}{yes}{no}
+    \end{itemize}
+\item experience: \iftagged{experience}{yes}{no}
+    \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \item mercury: \iftagged{mercury}{yes}{no}
+    \item microsemi: \iftagged{microsemi}{yes}{no}
+    \item arxan-defense-systems: \iftagged{arxan-defense-systems}{yes}{no}
+    \item arxan: \iftagged{arxan}{yes}{no}
+    \item rose-hulman: \iftagged{rose-hulman}{yes}{no}
+    \item ventures: \iftagged{ventures}{yes}{no}
+    \item perry-schools: \iftagged{perry-schools}{yes}{no}
+    \item perritech: \iftagged{perritech}{yes}{no}
+    \end{itemize}
+\item education: \iftagged{education}{yes}{no}
+    \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \item masters: \iftagged{masters}{yes}{no}
+    \item bachelors: \iftagged{bachelors}{yes}{no}
+    \item high-school: \iftagged{high-school}{yes}{no}
+    \end{itemize}
+\item projects: \iftagged{projects}{yes}{no}
+    \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \item sprint: \iftagged{sprint}{yes}{no}
+    \item noisebot: \iftagged{noisebot}{yes}{no}
+    \item spades: \iftagged{spades}{yes}{no}
+    \item got: \iftagged{got}{yes}{no}
+    \item lync-helper: \iftagged{lync-helper}{yes}{no}
+    \item gir: \iftagged{gir}{yes}{no}
+    \item woop: \iftagged{woop}{yes}{no}
+    \end{itemize}
+\item publications: \iftagged{publications}{yes}{no}
+    \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \item subverting-the-fundamentals-sequence: \iftagged{subverting-the-fundamentals-sequence}{yes}{no}
+    \end{itemize}
+\end{itemize}
+\end{cvparagraph}
+\fi
+
+\begin{taggedblock}{technical-skills}
+\cvsection{Technical Skills}
+\tagged{languages}{
+	%TODO
+}
+\tagged{certifications}{
+	%TODO
+}
+\end{taggedblock}
+
+\begin{taggedblock}{experience}
+\cvsection{Experience}
+% \work{Tag}{Company}{Title}{When}{Content}
+\newcommand{\work}[5]{
+	\tagged{#1}{\cventry{#3}{#2}{#4}{}{
+		\begin{cvitems}
+		#5
+		\end{cvitems}
+	}}
+}
+\begin{cventries}
+\work{mercury}{Mercury}{Software Development Engineer}{2016 - Present}{
+	\item Designed and rolled out an automated build and test system for a number of projects.
+	\item Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.
+		\begin{itemize}[leftmargin=3ex, nosep, noitemsep]
+		\item Implemented a tool to manage cross-repository dependencies in Bitbucket, and an addon to track additional project information within Bitbucket.
+		\end{itemize}
+	\item Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes
+	\item Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers
+}
+
+\work{microsemi}{Microsemi}{Software Developer}{2010 - 2016}{
+	\item Implemented and improved miscellaneous whitebox cryptography algorithms, including RSA, AES, and elliptic curve DSA.
+	\item Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used transparently by any application that uses OpenSSL.
+	\item Implemented the security model and key management policy for an Android password manager.
+	\item Designed and implemented multiple higher level protocols wrapping existing whitebox cryptography to satisfy customer needs.
+	\item Red- and blue-teamed several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
+}
+
+\work{arxan-defense-systems}{Arxan Defense Systems}{Software Security Analyst}{2009 - 2010}{
+	\item Implemented many features in CodeSEAL, a product that analyzes executables and modifies them to protect against reverse engineering or modification.
+	\item Developed WhiteboxRSA, an RSA implementation that hides the key to frustrate recovery even when the implementation is fully under the attacker's control.
+}
+
+\work{arxan}{Arxan}{Intern}{2008 - 2009}{
+	\item Engineering intern on a team that developed TransformIT, a white box cryptography solution.
+	\item Subsequently accepted an opportunity to continue work remotely during the school year before transitioning to full-time employment after graduation.
+}
+
+\work{ventures}{Ventures}{Team Lead}{2007 - 2008}{
+	\item Head of a team of students that specified, designed, developed and launched the web portal for a promising online startup company.
+	\item Handled maintenance of development servers and software.
+	\item Maintained source code repository and bug tracking system.
+	\item Reviewed code produced by other team members.
+}
+
+\work{rose-hulman}{Rose-Hulman}{Teaching Assistant, CSSE Newsletter Editor}{2005 - 2008}{
+	\item Assisted students in many introductory programming classes with fundamental object-oriented techniques, UML, project planning, and completing team-based goals.
+	\item Responsible for all phases of the CSSE newsletter production, from writing to publishing.
+}
+
+\work{perry-schools}{Perry Schools}{Website Designer, Technician, Database Administrator}{2001 - 2007}{
+	\item Project coordinator that designed and implemented a completely new look and feel for the school district's 5000+ page website, including a custom CMS and DB design.
+	\item Converted all existing webpages to a new format and implemented a new, more efficient interface.
+	\item Designed, implemented, and maintained the school's first online course registration system.
+}
+
+\work{perritech}{Perritech}{President, Technician}{2001 - 2005}{
+	\item Recruited in 2001 as a computer technician, responsible for the 2000+ computer network.
+	\item Subcontracted to various local businesses for programming, website design, networking and system administration.
+	\item Promoted to President in 2005, managing four directors and a number of technicians.
+	\item Spearheaded a presentation at the Ohio State SchoolNet Convention illustrating the benefits of a student-run technology company fully executed within a school district. Subsequently invited to Seoul, Korea for the 6th Global Forum to make a detailed presentation on how to duplicate our success throughout many school districts.
+}
+\end{cventries}
+\end{taggedblock}
+
+\begin{taggedblock}{education}
+\cvsection{Education}
+% \school{Tag}{School}{Degree}{Location}{When}{Content}
+\newcommand{\school}[6]{
+	\tagged{#1}{\cventry{#3}{#2}{#4}{#5}{
+		#6
+	}}
+}
+
+\begin{cventries}
+\school{masters}{Purdue University}{MS Computer Science}{West Lafayette, IN}{May 2015}{
+	Cumulative GPA: 3.67
+}
+
+\school{bachelors}{Rose-Hulman Institute of Technology}{BS Computer Science, Software Engineering (Cum Laude)}{Terre Haute, IN}{May 2009}{
+	\makebox[2in][l]{Cumulative GPA: 3.48} Upperclass GPA: 3.70
+}
+
+\school{high-school}{Perry High School}{Graduate with Honors}{Perry, OH}{May 2005}{
+	\makebox[2in][l]{AP Computer Science -- 5} National AP Scholar with Distinction
+}
+\end{cventries}
+\end{taggedblock}
+
+\begin{taggedblock}{projects}
+\cvsection{Projects}
+% \project{Tag}{Name}{Repo URL}{Content}
+\newcommand{\project}[4]{
+	\tagged{#1}{
+		\cvsubsection{#2} \href{#3}{\faGithubSquare}
+
+		\begin{cvparagraph}
+		#4
+		\end{cvparagraph}
+	}
+}
+
+\project{sprint}{Sprint}{https://github.com/mrozekma/sprint}{
+	A web-based Scrum tracking tool tailor-made for our project needs at Microsemi. Now used at several other companies.
+}
+
+\project{noisebot}{Noisebot}{https://github.com/mrozekma/noisebot}{
+	An IRC/Slack chat bot that supports reloadable modules and easy modification by end-users.
+}
+
+\project{spades}{Spades}{https://github.com/mrozekma/spades}{
+	A web-based view of an IRC-hosted Spades card game. Offers a convenient view of the current game state, previous hands, and even past games.
+}
+
+\project{got}{Got}{https://github.com/mrozekma/got}{
+	A command-line application to automatically download and track Git repositories. Intended to faciliate dependency resolution.
+}
+
+\project{lync-helper}{Lync Helper}{https://gitlab.com/mrozekma/lynchelper}{
+	A GUI for sharing code over an office chat network. Supports syntax highlighting. Also logs conversations to text files on disk.
+}
+
+\project{gir}{Gir}{https://github.com/mrozekma/gir}{
+	An ncurses editors for git interactive rebase files, which are normally edited in a regular text editor.
+}
+
+\project{woop}{Woop}{}{
+	A webkit-based web browser with vim-style keybindings and modes.
+}
+\end{taggedblock}
+
+\begin{taggedblock}{publications}
+\cvsection{Publications}
+
+\tagged{subverting-the-fundamentals-sequence}{
+	\begin{cvparagraph}
+	Clifton, C., Kaczmarczyk, L.C., Mrozek, M. ``Subverting the Fundamentals Sequence: Using Version Control to Enhance Course Management''.\\
+	Presented at the 38\textsuperscript{th} Annual Technical Symposium on Computer Science Education (SIGCSE 2007).
+	\end{cvparagraph}
+}
+\end{taggedblock}
+
+\end{document}
