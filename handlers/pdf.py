@@ -12,7 +12,7 @@ from rorn.utils import basePath
 sections = [
 	'Technical Skills', [
 		'Languages',
-		'-Certifications',
+		'Tools and Frameworks',
 	],
 	'Experience', [
 		'Mercury',
@@ -35,7 +35,7 @@ sections = [
 		'Spades',
 		'Got',
 		'Lync Helper',
-		'-Gir',
+		'Gir',
 		'-Woop',
 	],
 	'Publications', [
@@ -66,7 +66,7 @@ def pdfMenu(handler):
 	<div class="terminal">
 	<div class="prompt">/make-pdf-resume --help</div>
 	<div class="stdout"><br>
-	This tool generates a PDF containing a more traditional resume. Which sections to include and omit are already set to sane defaults below, but you can change the selections as desired.<br><br>
+	This tool generates a PDF containing a more traditional resume. Which sections to include and omit can be customized as desired, but the default values are sane and have been chosen to fit within a single page.<br><br>
 	<small>Thanks to Byungjin Park for the use of the <a href="https://github.com/posquit0/Awesome-CV">Awesome CV</a> document class.</small>
 	</div>
 	<br>
@@ -127,5 +127,7 @@ def pdfRender(handler, **kw):
 			sys.stdout.write(f.read())
 		handler.contentType = 'application/pdf'
 		handler.wrappers = False
+	except FileNotFoundError:
+		raise RuntimeError("Failed to generate PDF")
 	finally:
 		shutil.rmtree(dest)
