@@ -46,15 +46,15 @@ def mercury():
 * Designed and rolled out an automated build and test system for a number of projects.
 * Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.
     - Implemented a [tool](/personal-projects#got) to manage cross-repository dependencies in Bitbucket, and an [addon](https://marketplace.atlassian.com/apps/1218193/project-fields) to track additional project information within Bitbucket.
-* Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes
-* Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers
+* Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes.
+* Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers.
 '''
 
 @subpage('microsemi', 1462881600, 'http://www.microsemi.com/', 'microsemi.png', 'Software Developer', '2010 - 2016')
 def microsemi():
 	return '''
 * Implemented and improved miscellaneous whitebox cryptography algorithms, including RSA, AES, and elliptic curve DSA.
-* Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used transparently by any application that uses OpenSSL.
+* Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used by any application utilizing OpenSSL.
 * Implemented the security model and key management policy for an Android password manager.
 * Designed and implemented multiple higher level protocols wrapping existing whitebox cryptography to satisfy customer needs.
 * <span title="A security assessment performed without the customer's help, mimicking the situation a real attacker would be in.">Red-</span> and <span title="A security assessment performed with the customer's help, including access to background information, design documents, and possibly even source code.">blue-teamed</span> several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
@@ -77,7 +77,7 @@ def arxan():
 @subpage('pre-graduation/ventures', 1212148800, 'http://www.rhventures.org/', 'ventures.png', 'Team Lead', '2007 - 2008')
 def ventures():
 	return '''
-* Head of a team of students that specified, designed, developed and launched the web portal for a promising online startup company.
+* Head of a team of students that specified, designed, developed, and launched the web portal for a promising online startup company.
 * Handled maintenance of development servers and software.
 * Maintained source code repository and bug tracking system.
 * Reviewed code produced by other team members.

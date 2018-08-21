@@ -81,7 +81,21 @@
 \begin{taggedblock}{technical-skills}
 \cvsection{Technical Skills}
 
-\newcommand{\languages}{
+\newcounter{numSkills}
+\tagged{languages}{\stepcounter{numSkills}}
+\tagged{tools-and-frameworks}{\stepcounter{numSkills}}
+
+\newcommand{\skill}[2]{
+	% Some tweaks are made in two-column mode to get the content to fit better
+	\ifnum\thenumSkills=2
+	\progressbar[width=3em]{#1}~~~\parbox[t]{.43\textwidth}{#2}\\
+	\else
+	\progressbar{#1}~~~#2\\
+	\fi
+}
+
+\begin{paracol}{\thenumSkills}
+\tagged{languages}{
 	\cvsubsection{Languages}
 
 	\begin{cvparagraph}
@@ -90,7 +104,8 @@
 	\skill{.5}{Experience with SQL and miscellaneous databases, including MySQL, MariaDB, PostgreSQL, and Redis.}
 	\end{cvparagraph}
 }
-\newcommand{\tools}{
+\switchcolumn
+\tagged{tools-and-frameworks}{
 	\cvsubsection{Tools and Frameworks}
 
 	\begin{cvparagraph}
@@ -101,36 +116,15 @@
 	\skill{.5}{Experience creating GUIs in JavaFX and Qt.}
 	\end{cvparagraph}
 }
-
-% bothSkillsSections = languages && tools-and-frameworks
-\newbool{bothSkillsSections}
-\setbool{bothSkillsSections}{false}
-\tagged{languages}{\tagged{tools-and-frameworks}{\setbool{bothSkillsSections}{true}}}
-
-% if(languages && tools-and-frameworks)
-\ifbool{bothSkillsSections}{
-	% Display the sections side by side
-	\newcommand{\skill}[2]{
-		\progressbar[width=3em]{#1}~~~\parbox[t]{.43\textwidth}{#2}\\
-	}
-	\begin{paracol}{2}
-	\languages
-	\switchcolumn
-	\tools
-	\end{paracol}
-}{
-	\newcommand{\skill}[2]{
-		\progressbar{#1}~~~#2\\
-	}
-	\tagged{languages}{\languages}
-	\tagged{tools-and-frameworks}{\tools}
-}
+\end{paracol}
 
 \vspace{-30pt} % Way too much space after the previous section
-\end{taggedblock}
 
+\end{taggedblock}
 \begin{taggedblock}{experience}
+
 \cvsection{Experience}
+
 % \work{Tag}{Company}{Title}{When}{Content}
 \newcommand{\work}[5]{
 	\tagged{#1}{\cventry{#3}{#2}{#4}{}{
@@ -146,13 +140,13 @@
 		\begin{itemize}[leftmargin=3ex, nosep, noitemsep]
 		\item Implemented a tool to manage cross-repository dependencies in Bitbucket, and an addon to track additional project information within Bitbucket.
 		\end{itemize}
-	\item Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes
-	\item Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers
+	\item Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes.
+	\item Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers.
 }%
 
 \work{microsemi}{Microsemi}{Software Developer}{2010 - 2016}{
 	\item Implemented and improved miscellaneous whitebox cryptography algorithms, including RSA, AES, and elliptic curve DSA.
-	\item Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used by any application wrapping OpenSSL.
+	\item Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used by any application utilizing OpenSSL.
 	\item Implemented the security model and key management policy for an Android password manager.
 	\item Designed and implemented multiple higher level protocols wrapping existing whitebox cryptography to satisfy customer needs.
 	\item Red- and blue-teamed several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
@@ -169,7 +163,7 @@
 }%
 
 \work{ventures}{Ventures}{Team Lead}{2007 - 2008}{
-	\item Head of a team of students that specified, designed, developed and launched the web portal for a promising online startup company.
+	\item Head of a team of students that specified, designed, developed, and launched the web portal for a promising online startup company.
 	\item Handled maintenance of development servers and software.
 	\item Maintained source code repository and bug tracking system.
 	\item Reviewed code produced by other team members.
@@ -191,12 +185,12 @@
 	\item Subcontracted to various local businesses for programming, website design, networking and system administration.
 	\item Promoted to President in 2005, managing four directors and a number of technicians.
 	\item Spearheaded a presentation at the Ohio State SchoolNet Convention illustrating the benefits of a student-run technology company fully executed within a school district. Subsequently invited to Seoul, Korea for the 6th Global Forum to make a detailed presentation on how to duplicate our success throughout many school districts.
-}
+}%
 \end{cventries}
 \vspace{-5pt}
 \end{taggedblock}
-
 \begin{taggedblock}{education}
+
 \cvsection{Education}
 % \school{Tag}{School}{Degree}{Location}{When}{Content}
 \newcommand{\school}[6]{
@@ -219,11 +213,31 @@
 }%
 \end{cventries}
 \vspace{-5pt}
-\end{taggedblock}
 
+\end{taggedblock}
 \begin{taggedblock}{projects}
+
 \cvsection{Projects}
-\newcounter{projectColSplit}
+
+\newcounter{numProjects}
+\tagged{sprint}{\stepcounter{numProjects}}
+\tagged{noisebot}{\stepcounter{numProjects}}
+\tagged{spades}{\stepcounter{numProjects}}
+\tagged{got}{\stepcounter{numProjects}}
+\tagged{lync-helper}{\stepcounter{numProjects}}
+\tagged{gir}{\stepcounter{numProjects}}
+\tagged{woop}{\stepcounter{numProjects}}
+
+% Use up to three columns for the projects, but only if there are enough projects to cover them
+\newcounter{numProjectCols}
+\ifnum\thenumProjects>3
+\setcounter{numProjectCols}{3}
+\else
+\setcounter{numProjectCols}{\thenumProjects}
+\fi
+
+\newcounter{projectCurCol}
+\globalcounter{projectCurCol}
 % \project{Tag}{Name}{Repo URL}{Content}
 \newcommand{\project}[4]{
 	\tagged{#1}{
@@ -233,15 +247,17 @@
 		#4
 		\end{cvparagraph}
 
-		\stepcounter{projectColSplit}
-		\ifnum\the\value{projectColSplit}=2
-		\setcounter{projectColSplit}{0}
+		\stepcounter{projectCurCol}
+		\ifnum\theprojectCurCol=\thenumProjectCols
+		\setcounter{projectCurCol}{0}
+		\switchcolumn*
+		\else
 		\switchcolumn
 		\fi
 	}
 }
 
-\begin{paracol}{3}
+\begin{paracol}{\thenumProjectCols}
 \project{sprint}{Sprint}{https://github.com/mrozekma/sprint}{
 	A web-based Scrum tracking tool tailor-made for our project needs at Microsemi. Now used at several other companies.
 }
@@ -271,9 +287,10 @@
 }
 \end{paracol}
 \vspace{-20pt} % Way too much space after the previous section
-\end{taggedblock}
 
+\end{taggedblock}
 \begin{taggedblock}{publications}
+
 \cvsection{Publications}
 
 \tagged{subverting-the-fundamentals-sequence}{
