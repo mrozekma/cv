@@ -12,6 +12,7 @@ def static(handler, filename, v = None):
 	types = {
 		'css': 'text/css',
 		'js': 'text/javascript',
+		'pdf': 'application/pdf',
 		'png': 'image/png',
 		'svg': 'image/svg+xml'
 	}
