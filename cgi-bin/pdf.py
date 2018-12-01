@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Dependencies: texlive-xetex texlive-luatex texlive-fonts-extra
+
 import cgitb
 cgitb.enable()
 
