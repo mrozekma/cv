@@ -192,6 +192,7 @@
         display: block;
         visibility: visible;
         white-space: normal;
+        margin-left: 1ch;
       }
     }
   }

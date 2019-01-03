@@ -1,5 +1,5 @@
 <template>
-  <cv-terminal prompts="ls -la --sort=relevance" :paths="pages"/>
+  <cv-terminal prompts="ls -la --sort=relevance" :paths="pages" :style="{'--line-count': pages.length}"/>
 </template>
 
 <script>
@@ -30,7 +30,7 @@
   };
 </script>
 
-<style>
+<style lang="less" scoped>
   @import "../node_modules/animate.css/animate.css";
 
   .animated.quick {
@@ -42,28 +42,23 @@
     height: 100%;
   }
 
-  /*
-  .page-enter-active {
-    animation: acrossIn .40s ease-out both;
-  }
-  .page-leave-active {
-    animation: acrossOut .60s ease-in both;
-  }
-  @keyframes acrossIn {
-    0% {
-      transform: translate3d(-100%, 0, 0);
-    }
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
-  }
-  @keyframes acrossOut {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(100%, 0, 0);
+  /deep/ .stdout {
+    line-height: 1.2;
+
+    // The descriptions are pretty useful on the homepage, so if the screen is too small, show them below the links instead
+    // This is very inelegant, but I can't think of a better pure-CSS way to do it
+    @media only screen and (min-width: 801px) and (max-width: 1223px) {
+      .file_entry {
+        .description {
+          position: absolute;
+          left: calc(16px + 36ch); // The metadata is 36 characters long (at this size, anyway)
+          top: calc(39px + (4em + 2em + var(--line-count) * 1em + 1em) * 1.2); // 4 lines for the command and total count, 2 for '.' and '..', 1 for each page, and 1 more to leave a blank line before the description. All multiplied by the line-height
+          white-space: normal;
+        }
+        &:hover .description {
+          visibility: visible;
+        }
+      }
     }
   }
-  */
 </style>
