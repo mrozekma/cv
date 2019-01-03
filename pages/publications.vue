@@ -1,5 +1,5 @@
 <template>
-  <cv-terminal :prompts="['cd /publications', 'ls -lart **/*']">
+  <cv-terminal :prompts="['cd /publications', 'ls -lat **/*']">
     <cv-subpage path="SupportingCS1.pdf" :mtime="1173268800" description="Subverting the fundamentals sequence">
       <br>
       <a href="/papers/SupportingCS1.pdf" target="_blank">

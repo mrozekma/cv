@@ -1,5 +1,5 @@
 <template>
-  <cv-terminal ref="term" :prompts="['cd /work-history', 'ls -lart **/*']">
+  <cv-terminal ref="term" :prompts="['cd /work-history', 'ls -lat **/*']">
     <cv-subpage path="README.1ST" :mtime="1477280113">
       <br>
       My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I've worked at the same place since my <a href="#pre-graduation/arxan">2008 internship</a>, despite the regular name changes:

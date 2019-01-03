@@ -1,5 +1,5 @@
 <template>
-  <cv-terminal :prompts="['cd /personal-projects', 'ls -lar --sort=relevance']">
+  <cv-terminal :prompts="['cd /personal-projects', 'ls -la --sort=relevance']">
     <br>
     <div class="prompt">/bin/project-filters --list --clickable</div>
     <div class="stdout project-tags">

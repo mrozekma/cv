@@ -1,5 +1,5 @@
 <template>
-  <cv-terminal :prompts="['cd /education', 'ls -lart by-school/']">
+  <cv-terminal :prompts="['cd /education', 'ls -lat by-school/']">
     <br>
     <div class="prompt">ls -lrt by-level/</div><br>
     <div class="stdout">

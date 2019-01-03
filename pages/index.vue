@@ -1,5 +1,5 @@
 <template>
-  <cv-terminal prompts="ls -lar --sort=relevance" :paths="pages"/>
+  <cv-terminal prompts="ls -la --sort=relevance" :paths="pages"/>
 </template>
 
 <script>
