@@ -49,10 +49,10 @@
 
       position: relative;
       margin-left: 4px;
-      padding-left: 16px;
-      padding-bottom: 10px;
+      padding: 0 10px 10px 16px;
       font-family: "Arial";
       white-space: normal;
+      text-align: justify;
       border-left: @border-width solid #fff;
 
       // Truncated bottom border. http://stackoverflow.com/a/12801460/309308
