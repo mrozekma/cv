@@ -14,7 +14,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     <cv-project
       project="sprint"
       name="Sprint"
-      tagline="scrum tracking tool"
+      tagline="Scrum tracking tool"
       :mtime="1308373920"
       :tags="['python', 'javascript', 'html', 'css', 'jquery', 'websocket']"
       :links="{repo: 'sprint'}"
@@ -57,7 +57,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     <cv-project
       project="noisebot"
       name="Noisebot"
-      tagline="chat bot"
+      tagline="Chat bot"
       :mtime="1277020414"
       :tags="['java', 'irc', 'slack', 'api']"
       :links="{repo: 'noisebot'}"
@@ -98,7 +98,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     <cv-project
       project="spades"
       name="Spades"
-      tagline="web-based cards interface"
+      tagline="Web-based cards interface"
       :mtime="1446781016"
       :tags="['python', 'javascript', 'html', 'css', 'jquery', 'websocket', 'api']"
       :links="{repo: 'spades', production: 'http://spades.mrozekma.com/'}"
@@ -133,7 +133,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     <cv-project
       project="got"
       name="Got"
-      tagline="git repository manager"
+      tagline="Git repository manager"
       :mtime="1532316900"
       :tags="['python', 'git', 'bitbucket', 'api']"
       :links="{repo: 'got', docs: 'http://got.readthedocs.io/'}"
@@ -159,7 +159,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     <cv-project
       project="lynchelper"
       name="Lync Helper"
-      tagline="lync utility pack"
+      tagline="Lync utility pack"
       :mtime="1532316900"
       :tags="['c#', 'lync', 'api']"
       :links="{repo: {host: 'gitlab', name: 'lynchelper'}}"
@@ -190,7 +190,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     <cv-project
       project="gir"
       name="Gir"
-      tagline="git interactive rebase editor"
+      tagline="Git interactive rebase editor"
       :mtime="1432780392"
       :tags="['python', 'curses', 'git']"
       :links="{repo: 'gir'}"
@@ -213,7 +213,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     <cv-project
       project="woop"
       name="Woop"
-      tagline="keyboard-driven web browser"
+      tagline="Keyboard-driven web browser"
       :mtime="1402217739"
       :tags="['python', 'gtk', 'webkit']"
     >

@@ -1,5 +1,5 @@
 <template>
-  <cv-subpage v-if="visible" :path="project" :mtime="mtime">
+  <cv-subpage v-if="visible" :path="project" :mtime="mtime" :description="tagline">
     <div class="name">{{ name }}</div>
     <div class="tagline">{{ tagline }}</div>
     <div class="project-filters">
@@ -138,6 +138,7 @@
     .tagline {
       display: inline-block;
       margin-left: 5px;
+      text-transform: lowercase;
     }
 
     .project-filters {
