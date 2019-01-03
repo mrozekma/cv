@@ -324,7 +324,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     },
     head: function() {
       return {
-        title: 'Work History',
+        title: 'Personal Projects',
       };
     },
     computed: {
