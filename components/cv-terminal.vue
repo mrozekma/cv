@@ -9,6 +9,7 @@
         <template v-else>
           <div class="metadata">{{ path.bits }}   {{ path.numLinks }} <div class="ownership">mrozekma mrozekma</div>  {{ path.sizeStr }} {{ path.mtimeStr }} </div>
           <a v-if="path.path.startsWith('#')" :href="path.path">{{ path.name }}</a>
+          <a v-else-if="path.path.startsWith('http')" _target="_blank" :href="path.path" class="symlink">{{ path.name }}</a>
           <nuxt-link v-else :to="path.path">{{ path.name }}</nuxt-link>
           <template v-if="path.description">{{ path.descSpacer }}<div class="description">{{ path.description }}</div></template>
         </template>
@@ -38,7 +39,7 @@
 
         const route = this.$route;
         const formatSize = this.formatSize;
-        const paths = ['.', '..'].concat((this.paths === undefined) ? this.dynamicPaths : this.paths);
+        const paths = ['.', '..'].concat((this.paths === undefined) ? this.dynamicPaths : this.paths).concat(['source']);
         const maxPathLen = Math.max.apply(null, paths.map(path => path.name ? path.name.length : 0));
         const latestMtime = Math.max.apply(null, paths.map(path => path.mtime || 0));
 
@@ -53,6 +54,9 @@
               break;
             case '..':
               path = {name: '..', path: (route.name == 'index') ? '#' : '/', bits: 'drx', mtime: latestMtime, description: null};
+              break;
+            case 'source':
+              path = {name: 'source', path: `https://github.com/mrozekma/cv/blob/master/pages/${route.name}.vue`, bits: 'rx', mtime: latestMtime, description: null, size: 6};
               break;
           }
 
@@ -70,7 +74,7 @@
             size: size,
             sizeStr: _.padStart(formatSize(size), 4, ' '),
             mtimeStr: renderMtime(path.mtime),
-            descSpacer: ' '.repeat(maxPathLen - path.name.length + 3),
+            descSpacer: ' '.repeat(Math.max(0, maxPathLen - path.name.length + 3)),
           };
         });
       },
