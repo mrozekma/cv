@@ -25,6 +25,7 @@
     "image-size": "^0.6.3",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "moment": "^2.23.0",
     "nuxt": "^2.0.0",
     "photoswipe": "^4.1.2",
     "vue-directive-tooltip": "^1.5.0"

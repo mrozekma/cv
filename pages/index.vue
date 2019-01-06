@@ -1,5 +1,14 @@
 <template>
-  <cv-terminal prompts="ls -la --sort=relevance" :paths="pages" :style="{'--line-count': pages.length}"/>
+  <cv-terminal prompts="ls -la --sort=relevance" :paths="pages">
+    <br>
+    <cv-man cmd="cv" description="online portfolio">
+      <h1>Description</h1>
+      This is a more comprehensive version of my <nuxt-link to="make-pdf-resume">résumé</nuxt-link>. It has my unabridged <nuxt-link to="education">education</nuxt-link> and <nuxt-link to="work-history">work</nuxt-link> history, and vastly more information about my <nuxt-link to="personal-projects">personal projects</nuxt-link>, including source code, screenshots, and videos.<br><br>
+      The site itself is a <a target="_blank" href="https://vuejs.org">Vue.js</a> single-page application powered by <a target="_blank" href="https://nuxtjs.org">Nuxt</a>. It's formatted like a terminal window because&hellip; well, I was bored. The links above navigate to each section of the portfolio; links within those sections jump down to the specified subsection. The <a href="#">..</a> link in each section comes back here, as does clicking the titlebar. The <a target="_blank" href="https://github.com/mrozekma/cv/blob/master/pages/index.vue" class="symlink">source</a> link on each page navigates to that page's source code. Any screenshots can be clicked to bring up a full-screen view with captions.
+      <h1>Version</h1>
+      This is <a target="_blank" :href="`https://github.com/mrozekma/cv/tree/${gitInfo.hash}`"><span class="desktop">{{ gitInfo.description }}</span><span class="mobile">{{ gitInfo.hash.substr(0, 7) }}</span></a>, last updated {{ gitInfo.commitDate }}.
+    </cv-man>
+  </cv-terminal>
 </template>
 
 <script>
@@ -13,11 +22,11 @@
     {name: 'make-pdf-resume',     bits: 'xs',  mtime: 1477259577, description: "This page isn't particularly printer-friendly"},
   ];
 
+  import gitInfo from 'git-info!';
   import CvTerminal from '~/components/cv-terminal.vue';
+  import CvMan from '~/components/cv-man.vue';
   export default {
-    components: {
-      CvTerminal,
-    },
+    components: {CvTerminal, CvMan},
     head: function() {
       return {
         title: 'Michael Mrozek',
@@ -25,7 +34,7 @@
       };
     },
     data: function() {
-      return {pages};
+      return {pages, gitInfo};
     },
   };
 </script>
@@ -43,16 +52,15 @@
   }
 
   /deep/ .stdout {
-    line-height: 1.2;
-
     // The descriptions are pretty useful on the homepage, so if the screen is too small, show them below the links instead
-    // This is very inelegant, but I can't think of a better pure-CSS way to do it
     @media only screen and (min-width: 801px) and (max-width: 1223px) {
+      position: relative;
+
       .file_entry {
         .description {
           position: absolute;
-          left: calc(16px + 36ch); // The metadata is 36 characters long (at this size, anyway)
-          top: calc(39px + (4em + 2em + var(--line-count) * 1em + 1em) * 1.2); // 4 lines for the command and total count, 2 for '.' and '..', 1 for each page, and 1 more to leave a blank line before the description. All multiplied by the line-height
+          left: calc(36ch);
+          top: 0;
           white-space: normal;
         }
         &:hover .description {
@@ -60,5 +68,9 @@
         }
       }
     }
+  }
+
+  a.symlink {
+    color: #0ff;
   }
 </style>

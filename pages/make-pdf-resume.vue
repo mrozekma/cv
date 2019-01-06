@@ -1,6 +1,6 @@
 <template>
   <cv-terminal prompts="/make-pdf-resume --help" :paths="false">
-    <div class="stdout">This tool generates a PDF containing a more traditional resume. Which sections to include and omit can be customized as desired, but the default values are sane and have been chosen to fit within a single page.<br><br>
+    <div class="stdout">This tool generates a PDF containing a more traditional résumé. Which sections to include and omit can be customized as desired, but the default values are sane and have been chosen to fit within a single page.<br><br>
 <small>Thanks to Byungjin Park for the use of the <a target="_blank" href="https://github.com/posquit0/Awesome-CV">Awesome CV</a> document class.</small>
     </div>
     <br>

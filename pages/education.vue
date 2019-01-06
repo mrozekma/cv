@@ -3,7 +3,10 @@
     <br>
     <div class="prompt">ls -lrt by-level/</div><br>
     <div class="stdout">
-      <div v-for="link in symlinks" class="file_entry">lrwxr-xr-x   1 mrozekma mrozekma  {{ link.sizeStr }} {{ link.mtimeStr }} <a class="symlink" :href="`#${link.school}`">{{ link.level }}</a> -> <a :href="`#${link.school}`">{{ link.ln }}</a></div>
+      <div v-for="link in symlinks" class="file_entry">
+        <div class="metadata">lrwxr-xr-x   1 <div class="ownership">mrozekma mrozekma</div>  {{ link.sizeStr }} {{ link.mtimeStr }} </div>
+        <a class="symlink" :href="`#${link.school}`">{{ link.level }}</a> -> <a :href="`#${link.school}`">{{ link.ln }}</a>
+      </div>
     </div>
 
     <cv-school
@@ -104,4 +107,3 @@
 <style lang="less" scoped>
 
 </style>
-

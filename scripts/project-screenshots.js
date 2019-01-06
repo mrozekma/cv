@@ -1,4 +1,4 @@
-// This is some hacky madness to run some code at build time when imported by personal-projects.vue.
+// This is some hacky madness to run some code at build time when imported by cv-project-screenshots.vue.
 // I'm sure there's a better way to do this with webpack, but haven't figured it out yet.
 const fs = require('fs');
 const sizeOf = require('image-size');

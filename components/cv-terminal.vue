@@ -132,6 +132,19 @@
   .prompt, .stdout {
     font-family: "Lucida Console", monospace;
     white-space: pre;
+
+    &.desktop, .desktop {
+      display: none;
+    }
+
+    @media only screen and (min-width: 800px) {
+      &.desktop, .desktop {
+        display: inline;
+      }
+      &.mobile, .mobile {
+        display: none;
+      }
+    }
   }
 
   .prompt {
@@ -141,12 +154,6 @@
 
     a {
       color: #fff;
-    }
-
-    @media only screen and (min-width: 800px) {
-      &.mobile {
-        display: none;
-      }
     }
   }
 </style>
@@ -181,7 +188,7 @@
       color: #0ff;
     }
 
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 799px) {
       margin-bottom: 10px;
 
       .metadata {
