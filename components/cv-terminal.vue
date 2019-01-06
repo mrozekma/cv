@@ -1,7 +1,9 @@
 <template>
   <div class="full">
     <div class="prompt mobile">export LAYOUT=mobile</div>
-    <div v-for="prompt in promptList" class="prompt">{{ prompt }}</div><br>
+    <template v-if="prompts">
+      <div v-for="prompt in promptList" class="prompt">{{ prompt }}</div><br>
+    </template>
     <div v-if="annotatedPaths" class="stdout">
       <div>total {{ formatSize(totalSize) }}</div>
       <div v-for="path in annotatedPaths" class="file_entry">

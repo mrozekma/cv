@@ -1,11 +1,14 @@
 <template>
-  <cv-terminal prompts="/make-pdf-resume --help" :paths="false">
-    <div class="stdout">This tool generates a PDF containing a more traditional résumé. Which sections to include and omit can be customized as desired, but the default values are sane and have been chosen to fit within a single page.<br><br>
-<small>Thanks to Byungjin Park for the use of the <a target="_blank" href="https://github.com/posquit0/Awesome-CV">Awesome CV</a> document class.</small>
-    </div>
+  <cv-terminal :prompts="false" :paths="false">
+    <cv-man cmd="make-pdf-resume" description="PDF generator">
+      <h1>Description</h1>
+      This tool generates a PDF containing a more traditional résumé. Which sections to include and omit can be customized as desired, but the default values are sane and have been chosen to fit within a single page.
+      <h1>Acknowledgements</h1>
+      Thanks to Byungjin Park for the use of the <a target="_blank" href="https://github.com/posquit0/Awesome-CV">Awesome CV</a> LaTeX document class.
+    </cv-man>
     <br>
     <div class="prompt">export NCURSES=1</div>
-    <div class="prompt">/make-pdf-resume</div>
+    <div class="prompt">make-pdf-resume</div>
     <div class="pdf-generator">
       <div class="title"><input type="checkbox" :checked="allChecked" :indeterminate.prop="!allChecked" @click="toggleRoot">&nbsp;PDF Generator</div>
       <form action="/cgi-bin/pdf.py/resume.pdf"> <!-- The actual script is pdf.py, but we want the filename to be resume.pdf -->
@@ -82,11 +85,10 @@
   ];
 
   import CvTerminal from '~/components/cv-terminal.vue';
+  import CvMan from '~/components/cv-man.vue';
   export default {
     name: "make-pdf-resume",
-    components: {
-      CvTerminal,
-    },
+    components: {CvTerminal, CvMan},
     head: function() {
       return {
         title: 'PDF',
