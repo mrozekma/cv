@@ -7,22 +7,25 @@
 <script>
   import PhotoSwipe from '../node_modules/photoswipe/dist/photoswipe.js';
   import PhotoSwipeUI_Default from '../node_modules/photoswipe/dist/photoswipe-ui-default';
-  import '../node_modules/photoswipe/dist/photoswipe.css';
-  import '../node_modules/photoswipe/dist/default-skin/default-skin.css';
 
-  import { findParent } from '~/scripts/vue-hierarchy.js';
-  import allDims from 'project-screenshots!'; // See ~/scripts/project-screenshots.js
+  import allDims from 'screenshot-dims!';
 
   export default {
     name: "cv-project-screenshots",
+    inject: ['project'],
     computed: {
       dims: function() {
-        return allDims[findParent(this, 'cv-project').project];
+        return allDims.projects[this.project.project];
       }
     },
     data: function() {
       return {
         photoswipeItems: null,
+      };
+    },
+    provide: function() {
+      return {
+        screenshots: this,
       };
     },
     methods: {

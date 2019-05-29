@@ -101,6 +101,11 @@
         }
       },
     },
+    provide: function() {
+      return {
+        project: this,
+      };
+    },
   }
 </script>
 

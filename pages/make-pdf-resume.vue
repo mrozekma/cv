@@ -28,9 +28,9 @@
           <button id="go-button" type="submit">Go</button>
           <nuxt-link tag="button" id="cancel-button" to="/">Cancel</nuxt-link>
         </div>
-        <div class="clear"></div>
       </form>
     </div>
+    <div class="clear"></div><br>
   </cv-terminal>
 </template>
 

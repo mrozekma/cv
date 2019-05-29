@@ -59,7 +59,7 @@
       url="http://www.perry-lake.k12.oh.us/"
       logo="perry.png"
       degree="High School"
-      timeframe="2005 - 2009"
+      timeframe="2001 - 2005"
     >
       Graduate with Honors<br>
       Class rank: 3<br>
