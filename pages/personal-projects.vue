@@ -157,6 +157,38 @@ Projects filtered to only those with the requested tags. <button @click="selecte
     </cv-project>
 
     <cv-project
+      project="serial-bridge"
+      name="Serial Bridge"
+      tagline="Serial port multiplexer"
+      :mtime="1546539079"
+      :tags="['python', 'vue', 'websocket']"
+      :links="{repo: 'serial-bridge'}"
+    >
+      <cv-project-screenshots>
+        <cv-project-screenshot name="serial-bridge">
+          Animation of connecting to a device and logging some of its output.
+        </cv-project-screenshot>
+        <cv-project-screenshot name="device-list">
+          Home page, showing the list of available devices and some info on configuring the local host to open telnet/SSH connections.
+        </cv-project-screenshot>
+        <cv-project-screenshot name="view-menu">
+          View menu. This menu lets you control which ports on a device are visible.
+        </cv-project-screenshot>
+        <cv-project-screenshot name="commands-menu">
+          Commands menu. These commands are part of the app's configuration file and map to small blocks of Python.
+        </cv-project-screenshot>
+        <cv-project-screenshot name="test-output">
+          Output from several ports on the device.
+        </cv-project-screenshot>
+        <cv-project-screenshot name="logging-done">
+          Dialog that's shown after logging output.
+        </cv-project-screenshot>
+      </cv-project-screenshots>
+
+      <em>Serial Bridge</em> was also written for use at <nuxt-link to="/work-history#mercury">Mercury</nuxt-link>. Its primary function is to make COM ports accessible remotely, so devices connected to a host machine can be accessed without needing to remote desktop into the host machine. Serial Bridge also allows multiple people to connect to the same device at once, which is normally impossible with a COM port. In addition to making the ports available over TCP, a web interface provides access via a browser.
+    </cv-project>
+
+    <cv-project
       project="lynchelper"
       name="Lync Helper"
       tagline="Lync utility pack"
