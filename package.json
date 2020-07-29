@@ -1,36 +1,36 @@
 {
-  "name": "cv",
-  "version": "1.0.0",
-  "description": "CV",
-  "author": "Michael Mrozek",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt --hostname 0.0.0.0",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.8",
-    "@fortawesome/free-brands-svg-icons": "^5.5.0",
-    "@fortawesome/free-solid-svg-icons": "^5.5.0",
-    "@fortawesome/pro-light-svg-icons": "^5.5.0",
-    "@fortawesome/pro-regular-svg-icons": "^5.5.0",
-    "@fortawesome/pro-solid-svg-icons": "^5.5.0",
-    "@fortawesome/vue-fontawesome": "^0.1.2",
-    "animate.css": "^3.7.0",
-    "babel-runtime": "^6.26.0",
-    "bootstrap-less": "^3.3.8",
-    "cross-env": "^5.2.0",
-    "image-size": "^0.6.3",
-    "less": "^3.9.0",
-    "less-loader": "^4.1.0",
-    "moment": "^2.23.0",
-    "nuxt": "^2.0.0",
-    "photoswipe": "^4.1.2",
-    "vue-directive-tooltip": "^1.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0"
-  }
+	"name": "cv",
+	"version": "1.0.0",
+	"description": "CV",
+	"author": "Michael Mrozek",
+	"private": true,
+	"scripts": {
+		"dev": "nuxt --hostname 0.0.0.0",
+		"build": "nuxt build",
+		"start": "nuxt start",
+		"generate": "nuxt generate"
+	},
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.8",
+		"@fortawesome/free-brands-svg-icons": "^5.5.0",
+		"@fortawesome/free-solid-svg-icons": "^5.5.0",
+		"@fortawesome/pro-light-svg-icons": "^5.5.0",
+		"@fortawesome/pro-regular-svg-icons": "^5.5.0",
+		"@fortawesome/pro-solid-svg-icons": "^5.5.0",
+		"@fortawesome/vue-fontawesome": "^0.1.2",
+		"animate.css": "^3.7.0",
+		"babel-runtime": "^6.26.0",
+		"bootstrap-less": "^3.3.8",
+		"cross-env": "^5.2.0",
+		"image-size": "^0.6.3",
+		"less": "^3.9.0",
+		"less-loader": "^4.1.0",
+		"moment": "^2.23.0",
+		"nuxt": "^2.0.0",
+		"photoswipe": "^4.1.2",
+		"vue-directive-tooltip": "^1.5.0"
+	},
+	"devDependencies": {
+		"nodemon": "^1.11.0"
+	}
 }
