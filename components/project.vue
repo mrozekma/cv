@@ -21,12 +21,44 @@
 	</cv-subpage>
 </template>
 
-<script>
-	const _ = require('lodash');
+<script lang="ts">
+	import Vue, { PropType } from 'vue';
+	import _ from 'lodash';
 
-	import { faGithub, faGitlab } from '@fortawesome/free-brands-svg-icons';
+	type RepoSourceName = 'github' | 'gitlab';
+	interface RepoSource {
+		root: string;
+		icon: IconDefinition;
+		public: boolean;
+	}
+
+	interface Links {
+		repo?: RepoSourceName | {
+			host?: RepoSourceName;
+			name: string;
+			icon?: IconDefinition;
+		};
+		production?: string;
+		docs?: string;
+	}
+
+	interface Link {
+		url: string;
+		icon: IconDefinition;
+	}
+
+	interface RepoLink extends Link {
+		name: string;
+		hostKey: string;
+		hostName: string;
+		public: boolean;
+	}
+
+	import { faGithub, faGitlab, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 	import { faBook, faColumns } from '@fortawesome/pro-regular-svg-icons';
-	const repoSources = {
+	const repoSources: {
+		[ K: /* RepoSourceName */ string ]: RepoSource
+	} = {
 		github: {
 			root: 'https://github.com/mrozekma',
 			icon: faGithub,
@@ -39,24 +71,24 @@
 		},
 	};
 
+	import { findParent } from '~/scripts/vue-hierarchy';
+	import CvPersonalProjects from '~/pages/personal-projects.vue';
 	import CvSubpage from '~/components/subpage.vue';
-	export default {
+	const component = Vue.extend({
 		name: "cv-project",
-		components: {
-			CvSubpage,
+		components: { CvSubpage },
+		props: {
+			'project': String,
+			'name': String,
+			'tagline': String,
+			'mtime': Number,
+			'tags': Array as PropType<string[]>,
+			'links': Object as PropType<Links>,
 		},
-		props: ['project', 'name', 'tagline', 'mtime', 'tags', 'links'],
 		computed: {
-			personalProjects: function() {
-				for(let seek = this.$parent; seek; seek = seek.$parent) {
-					if(seek.selectedTags !== undefined) {
-						return seek;
-					}
-				}
-				throw "Unable to find root";
-			},
-			visible: function() {
-				const selectedTags = this.personalProjects.selectedTags;
+			visible(): boolean {
+				const personalProjects = findParent(this, CvPersonalProjects);
+				const selectedTags = personalProjects.selectedTags;
 				if(selectedTags.length == 0) {
 					return true;
 				}
@@ -67,9 +99,9 @@
 				}
 				return true;
 			},
-			repo: function() {
-				if(this.links && this.links.repo) {
-					const obj = _.isString(this.links.repo) ? {name: this.links.repo} : this.links.repo;
+			repo(): RepoLink | undefined {
+				if(this.links?.repo) {
+					const obj = _.isString(this.links.repo) ? { name: this.links.repo } : this.links.repo;
 					if(obj.host && !repoSources[obj.host]) {
 						throw `Unrecognized host: ${obj.host}`;
 					}
@@ -78,22 +110,22 @@
 						name: obj.name,
 						hostKey: host,
 						hostName: _.capitalize(host),
-						icon: obj.icon || repoSources[host].icon,
+						icon: obj.icon ?? repoSources[host].icon,
 						public: repoSources[host].public,
 						url: `${repoSources[host].root}/${obj.name}`,
 					};
 				}
 			},
-			production: function() {
-				if(this.links && this.links.production) {
+			production(): Link | undefined {
+				if(this.links?.production) {
 					return {
 						url: this.links.production,
 						icon: faColumns,
 					};
 				}
 			},
-			docs: function() {
-				if(this.links && this.links.docs) {
+			docs(): Link | undefined {
+				if(this.links?.docs) {
 					return {
 						url: this.links.docs,
 						icon: faBook,
@@ -101,12 +133,14 @@
 				}
 			},
 		},
-		provide: function() {
+		provide(): any {
 			return {
 				project: this,
 			};
 		},
-	}
+	});
+	export default component;
+	export type Project = InstanceType<typeof component>;
 </script>
 
 <style lang="less" scoped>

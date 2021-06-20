@@ -68,42 +68,44 @@
 	</cv-terminal>
 </template>
 
-<script>
+<script lang="ts">
+	import Vue from 'vue';
 	import { iterChildren } from '~/scripts/vue-hierarchy';
-	import renderMtime from '~/scripts/mtime.js';
+	import renderMtime from '~/scripts/mtime';
 
-	const _ = require('lodash');
+	import _ from 'lodash';
+
+	interface Symlink {
+		school: string;
+		level: string;
+		mtimeStr: string;
+		ln: string;
+		sizeStr: string;
+	}
 
 	import CvTerminal from '~/components/terminal.vue';
 	import CvSchool from '~/components/school.vue';
-	export default {
+	export default Vue.extend({
 		name: "education",
-		components: {
-			CvTerminal,
-			CvSchool,
-		},
-		head: function() {
+		components: { CvTerminal, CvSchool },
+		head() {
 			return {
 				title: 'Education',
 			};
 		},
-		data: function() {
+		data() {
 			return {
-				symlinks: null,
+				symlinks: [] as Symlink[],
 			};
 		},
-		mounted: function() {
-			this.symlinks = Array.from(iterChildren(this, 'cv-school')).map(child => ({
+		mounted() {
+			this.symlinks = Array.from(iterChildren(this, CvSchool)).map(child => ({
 				school: child.school,
 				level: child.level,
 				mtimeStr: renderMtime(child.mtime),
 				ln: `../by-school/${child.school}`,
-				sizeStr: _.padStart(`../by-school/${child.school}`.length, 4, ' '),
+				sizeStr: _.padStart('' + `../by-school/${child.school}`.length, 4, ' '),
 			}));
 		},
-	}
+	});
 </script>
-
-<style lang="less" scoped>
-
-</style>

@@ -14,15 +14,23 @@
 	</cv-subpage>
 </template>
 
-<script>
+<script lang="ts">
+	import Vue from 'vue';
+
 	import CvSubpage from '~/components/subpage.vue';
-	export default {
+	export default Vue.extend({
 		name: "cv-school",
-		components: {
-			CvSubpage,
+		components: { CvSubpage },
+		props: {
+			'school': String,
+			'level': String,
+			'mtime': Number,
+			'url': String,
+			'logo': String,
+			'degree': String,
+			'timeframe': String,
 		},
-		props: ['school', 'level', 'mtime', 'url', 'logo', 'degree', 'timeframe'],
-	}
+	});
 </script>
 
 <style lang="less" scoped>

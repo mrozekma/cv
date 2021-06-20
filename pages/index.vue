@@ -11,7 +11,7 @@
 	</cv-terminal>
 </template>
 
-<script>
+<script lang="ts">
 	const pages = [
 		{name: 'work-history',        bits: 'drx', mtime: 1543120144, description: "The places I've worked and the things I did while I was there"},
 		{name: 'personal-projects',   bits: 'drx', mtime: 1477259577, description: "Things nobody paid me to do. Much more interesting, on the whole"},
@@ -22,21 +22,27 @@
 		{name: 'make-pdf-resume',     bits: 'xs',  mtime: 1477259577, description: "This page isn't particularly printer-friendly"},
 	];
 
-	import gitInfo from 'git-info!';
+	import { GitInfo } from '~/nuxt.config';
+	declare var GIT_INFO: GitInfo; // From DefinePlugin
+
+	import Vue from 'vue';
 	import CvTerminal from '~/components/terminal.vue';
 	import CvMan from '~/components/man.vue';
-	export default {
-		components: {CvTerminal, CvMan},
-		head: function() {
+	export default Vue.extend({
+		components: { CvTerminal, CvMan },
+		head() {
 			return {
 				title: 'Michael Mrozek',
-				titleTemplate: null,
+				titleTemplate: undefined,
 			};
 		},
-		data: function() {
-			return {pages, gitInfo};
+		data() {
+			return {
+				pages,
+				gitInfo: GIT_INFO,
+			};
 		},
-	};
+	});
 </script>
 
 <style lang="less" scoped>

@@ -80,12 +80,12 @@
 				<li>Spearheaded a presentation at the Ohio State SchoolNet Convention illustrating the benefits of a student-run technology company fully executed within a school district. Subsequently invited to Seoul, Korea for the 6th Global Forum to make a detailed presentation on how to duplicate our success throughout many school districts.</li>
 			</ul>
 		</cv-work>
-
 	</cv-terminal>
 </template>
 
-<script>
+<script lang="ts">
 	import Vue from 'vue';
+	//@ts-ignore No declaration file
 	import Tooltip from 'vue-directive-tooltip';
 	import 'vue-directive-tooltip/dist/vueDirectiveTooltip.css';
 	Vue.use(Tooltip, {
@@ -95,19 +95,15 @@
 	import CvTerminal from '~/components/terminal.vue';
 	import CvSubpage from '~/components/subpage.vue';
 	import CvWork from '~/components/work.vue';
-	export default {
+	export default Vue.extend({
 		name: "work-history",
-		components: {
-			CvTerminal,
-			CvSubpage,
-			CvWork,
-		},
-		head: function() {
+		components: { CvTerminal, CvSubpage, CvWork },
+		head() {
 			return {
 				title: 'Work History',
 			};
 		},
-	}
+	});
 </script>
 
 <style lang="less" scoped>

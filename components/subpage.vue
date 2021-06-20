@@ -8,21 +8,23 @@
 	</div>
 </template>
 
-<script>
-	export default {
+<script lang="ts">
+	import Vue from 'vue';
+
+	const component = Vue.extend({
 		name: "cv-subpage",
 		props: {
 			path: {
 				type: String,
-				required: true,
+				// required: true,
 			},
 			mtime: {
 				type: Number,
-				required: true,
+				// required: true,
 			},
 			catName: {
 				type: String,
-				default: function() {
+				default() {
 					return this.path;
 				},
 			},
@@ -30,7 +32,9 @@
 				type: String,
 			},
 		},
-	}
+	});
+	export default component;
+	export type Subpage = InstanceType<typeof component>;
 </script>
 
 <style lang="less">

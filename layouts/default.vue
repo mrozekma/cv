@@ -77,22 +77,24 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
+	import Vue from 'vue';
+
 	import '../node_modules/photoswipe/dist/photoswipe.css';
 	import '../node_modules/photoswipe/dist/default-skin/default-skin.css';
 
-	export default {
-		head: function() {
+	export default Vue.extend({
+		head() {
 			return {
 				titleTemplate: '%s - Michael Mrozek',
 			};
 		},
 		computed: {
-			title: function() {
+			title() {
 				return (this.$route.name == 'index') ? '' : this.$route.name;
 			}
 		},
-	};
+	});
 </script>
 
 <style lang="less">

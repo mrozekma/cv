@@ -268,42 +268,39 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 	</cv-terminal>
 </template>
 
-<script>
-	import { iterChildren } from '~/scripts/vue-hierarchy.js';
+<script lang="ts">
+	import Vue from 'vue';
 
-	const _ = require('lodash');
-	import { faGithub } from '@fortawesome/free-brands-svg-icons';
+	import { iterChildren } from '~/scripts/vue-hierarchy';
+
+	import _ from 'lodash';
+	import { faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
 	import CvTerminal from '~/components/terminal.vue';
 	import CvProject from '~/components/project.vue';
 	import CvProjectScreenshots from '~/components/project-screenshots.vue';
 	import CvProjectScreenshot from '~/components/project-screenshot.vue';
-	export default {
+	const component = Vue.extend({
 		name: "personal-projects",
-		components: {
-			CvTerminal,
-			CvProject,
-			CvProjectScreenshots,
-			CvProjectScreenshot,
-		},
-		head: function() {
+		components: { CvTerminal, CvProject, CvProjectScreenshots, CvProjectScreenshot },
+		head() {
 			return {
 				title: 'Personal Projects',
 			};
 		},
 		computed: {
-			githubIcon: function() {
+			githubIcon(): IconDefinition {
 				return faGithub;
 			},
 		},
-		data: function() {
+		data() {
 			return {
-				allTags: null,
-				selectedTags: [],
+				allTags: [] as string[],
+				selectedTags: [] as string[],
 			};
 		},
 		methods: {
-			toggleTag: function(tag) {
+			toggleTag(tag: string) {
 				const idx = this.selectedTags.indexOf(tag);
 				if(idx == -1) {
 					this.selectedTags.push(tag);
@@ -312,10 +309,12 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 				}
 			},
 		},
-		mounted: function() {
-			this.allTags = _.uniq(_.flatten(Array.from(iterChildren(this, 'cv-project')).map(project => project.tags))).sort();
+		mounted() {
+			this.allTags = _.uniq(_.flatten(Array.from(iterChildren(this, CvProject)).map(project => project.tags))).sort();
 		},
-	}
+	});
+	export default component;
+	export type PersonalProjectsComp = InstanceType<typeof component>;
 </script>
 
 <style lang="less" scoped>

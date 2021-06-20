@@ -12,21 +12,20 @@
 	</cv-terminal>
 </template>
 
-<script>
+<script lang="ts">
+	import Vue from 'vue';
+
 	import CvTerminal from '~/components/terminal.vue';
 	import CvSubpage from '~/components/subpage.vue';
-	export default {
+	export default Vue.extend({
 		name: "publications",
-		components: {
-			CvTerminal,
-			CvSubpage,
-		},
-		head: function() {
+		components: { CvTerminal, CvSubpage },
+		head() {
 			return {
 				title: 'Publications',
 			};
 		},
-	}
+	});
 </script>
 
 <style lang="less" scoped>

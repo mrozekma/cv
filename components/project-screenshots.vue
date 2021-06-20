@@ -4,53 +4,72 @@
 	</div>
 </template>
 
-<script>
-	import PhotoSwipe from '../node_modules/photoswipe/dist/photoswipe.js';
-	import PhotoSwipeUI_Default from '../node_modules/photoswipe/dist/photoswipe-ui-default';
+<script lang="ts">
+	import Vue from 'vue';
 
-	import allDims from 'screenshot-dims!';
+	// @ts-ignore No declaration file
+	import PhotoSwipe from '@/node_modules/photoswipe/dist/photoswipe.js';
+	// @ts-ignore No declaration file
+	import PhotoSwipeUI_Default from '@/node_modules/photoswipe/dist/photoswipe-ui-default';
 
-	export default {
+	import { Dimensions, DimensionsByFilename } from '~/nuxt.config';
+	declare var SCREENSHOT_DIMS: Dimensions; // From DefinePlugin
+
+	interface PhotoswipeItem {
+		src: string;
+		w: number;
+		h: number;
+		title: string;
+	}
+
+	import { Project } from './project.vue';
+	import { ProjectScreenshot } from './project-screenshot.vue';
+	const component = Vue.extend({
 		name: "cv-project-screenshots",
-		inject: ['project'],
+		inject: [ 'project' ],
 		computed: {
-			dims: function() {
-				return allDims.projects[this.project.project];
-			}
+			dims(): DimensionsByFilename {
+				const project = (this as any).project as Project;
+				return SCREENSHOT_DIMS.projects[project.project];
+			},
+			children(): ProjectScreenshot[] {
+				return this.$children as ProjectScreenshot[];
+			},
 		},
-		data: function() {
+		data() {
 			return {
-				photoswipeItems: null,
+				photoswipeItems: [] as PhotoswipeItem[],
 			};
 		},
-		provide: function() {
+		provide() {
 			return {
 				screenshots: this,
 			};
 		},
 		methods: {
-			show: function(name) {
+			show(name: string) {
 				const opts = {
-					index: this.$children.map(child => child.name).indexOf(name),
+					index: this.children.map(child => child.name).indexOf(name),
 					history: false,
 				};
 				new PhotoSwipe(document.querySelectorAll('.pswp')[0], PhotoSwipeUI_Default, this.photoswipeItems, opts).init();
 			}
 		},
-		mounted: function() {
-			this.photoswipeItems = this.$children.map(child => ({
+		mounted() {
+			this.photoswipeItems = this.children.map(child => ({
 				src: child.src,
 				w: this.dims[child.name].width,
 				h: this.dims[child.name].height,
 				title: child.description,
 			}));
 		},
-	}
+	});
+	export default component;
+	export type ProjectScreenshots = InstanceType<typeof component>;
 </script>
 
 <style lang="less" scoped>
 	// The desired layout is one double-tall image on the left, and two rows of images on the right. The number of images is based on the width of the window (we never want more than two rows, since that's all that will fit next to the image on the left)
-
 	@screenshot-height: 200px;
 	@screenshot-width: 310px;
 	@screenshot-space: 5px;

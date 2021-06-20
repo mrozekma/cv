@@ -1,10 +1,10 @@
 <template>
 	<div class="full">
 		<div class="prompt mobile">export LAYOUT=mobile</div>
-		<template v-if="prompts">
+		<template v-if="promptList">
 			<div v-for="prompt in promptList" class="prompt">{{ prompt }}</div><br>
 		</template>
-		<div v-if="annotatedPaths" class="stdout">
+		<div v-if="annotatedPaths.length > 0" class="stdout">
 			<div>total {{ formatSize(totalSize) }}</div>
 			<div v-for="path in annotatedPaths" class="file_entry">
 				<br v-if="path.name == '-'">
@@ -22,75 +22,106 @@
 	</div>
 </template>
 
-<script>
-	const _ = require('lodash');
-	import { iterChildren } from '~/scripts/vue-hierarchy.js';
-	import renderMtime from '~/scripts/mtime.js';
+<script lang="ts">
+	import Vue, { PropType } from 'vue';
+	import _ from 'lodash';
 
-	export default {
+	import { iterChildren } from '~/scripts/vue-hierarchy';
+	import renderMtime from '~/scripts/mtime';
+
+	export interface Path {
+		name: string;
+		path?: string;
+		bits: string;
+		mtime: number;
+		description?: string;
+		size?: number;
+	}
+
+	interface AnnotatedPath extends Path {
+		path: string;
+		size: number;
+
+		isDir: boolean;
+		numLinks: number;
+		sizeStr: string;
+		mtimeStr: string;
+		descSpacer: string;
+	}
+
+	type PathOrSpacer = Path | '-';
+	type AnnotatedPathOrSpacer = AnnotatedPath | { name: '-'; size: 0 }
+
+	function isPath(path: PathOrSpacer): path is Path {
+		return path !== '-';
+	}
+
+	import CvSubpage from './subpage.vue';
+
+	export default Vue.extend({
 		name: "cv-terminal",
-		props: ['prompts', 'paths'],
-		computed: {
-			promptList: function() {
-				return _.castArray(this.prompts);
+		props: {
+			prompts: {
+				type: [ String, Array, Boolean ] as PropType<string | string[] | false>,
+				required: true,
 			},
-			annotatedPaths: function() {
-				if(this.paths === false) {
-					return false;
-				}
-
-				const route = this.$route;
-				const formatSize = this.formatSize;
-				const paths = ['.', '..'].concat((this.paths === undefined) ? this.dynamicPaths : this.paths).concat(['source']);
-				const maxPathLen = Math.max.apply(null, paths.map(path => path.name ? path.name.length : 0));
-				const latestMtime = Math.max.apply(null, paths.map(path => path.mtime || 0));
-
-				return paths.map(function(path) {
-					// path keys: name, bits, mtime, description, (opt) path, (opt) size
-					// extra annotation keys: numLinks, sizeStr
-					switch(path) {
-						case '-':
-							return {name: '-'};
-						case '.':
-							path = {name: '.', path: '#', bits: 'drx', mtime: latestMtime, description: null};
-							break;
-						case '..':
-							path = {name: '..', path: (route.name == 'index') ? '#' : '/', bits: 'drx', mtime: latestMtime, description: null};
-							break;
-						case 'source':
-							path = {name: 'source', path: `https://github.com/mrozekma/cv/blob/master/pages/${route.name}.vue`, bits: 'rx', mtime: latestMtime, description: null, size: 6};
-							break;
-					}
-
-					const isDir = path.bits.includes('d');
-					const ownerBits = path.bits.includes('s') ? 'rws' : 'rwx';
-					const otherBits = ['r', 'w', 'x'].map(c => path.bits.includes(c) ? c : '-').join('');
-					const size = (path.size !== undefined) ? path.size : isDir ? 4 * 1024 : 0;
-
-					return {
-						...path,
-						path: path.path || path.name,
-						isDir: isDir,
-						bits: (isDir ? 'd' : '-') + ownerBits + otherBits + otherBits,
-						numLinks: isDir ? 2 : 1,
-						size: size,
-						sizeStr: _.padStart(formatSize(size), 4, ' '),
-						mtimeStr: renderMtime(path.mtime),
-						descSpacer: ' '.repeat(Math.max(0, maxPathLen - path.name.length + 3)),
-					};
-				});
-			},
-			totalSize: function() {
-				return this.annotatedPaths.map(path => path.size || 0).reduce((total, num) => total + num);
+			paths: {
+				type: [ Boolean, Array ] as PropType<undefined | false | PathOrSpacer[]>,
+				default: undefined,
 			},
 		},
-		data: function() {
+		computed: {
+			promptList(): string[] {
+				return (this.prompts === false) ? [] : _.castArray<string>(this.prompts);
+			},
+			annotatedPaths(): AnnotatedPathOrSpacer[] {
+				return (this.paths === false) ? [] : Array.from(this.annotatePaths(this.paths ?? this.dynamicPaths));
+			},
+			totalSize(): number {
+				return this.annotatedPaths.map(path => path.size).reduce((total, num) => total + num);
+			},
+		},
+		data() {
 			return {
-				dynamicPaths: [],
-			}
+				dynamicPaths: [] as Path[],
+			};
 		},
 		methods: {
-			formatSize: function(size) {
+			annotatePath(path: Path, maxPathLen: number): AnnotatedPath {
+				const isDir = path.bits.includes('d');
+				const ownerBits = path.bits.includes('s') ? 'rws' : 'rwx';
+				const otherBits = ['r', 'w', 'x'].map(c => path.bits.includes(c) ? c : '-').join('');
+				const size = (path.size !== undefined) ? path.size : isDir ? 4 * 1024 : 0;
+
+				return {
+					...path,
+					path: path.path || path.name,
+					isDir: isDir,
+					bits: (isDir ? 'd' : '-') + ownerBits + otherBits + otherBits,
+					numLinks: isDir ? 2 : 1,
+					size: size,
+					sizeStr: _.padStart(this.formatSize(size), 4, ' '),
+					mtimeStr: renderMtime(path.mtime),
+					descSpacer: ' '.repeat(Math.max(0, maxPathLen - path.name.length + 3)),
+				};
+			},
+			*annotatePaths(paths: PathOrSpacer[]): IterableIterator<AnnotatedPathOrSpacer> {
+				const route = this.$route;
+				const maxPathLen = Math.max.apply(null, paths.map(path => isPath(path) ? path.name.length : 0));
+				const latestMtime = Math.max.apply(null, paths.map(path => isPath(path) ? path.mtime : 0));
+
+				yield this.annotatePath({ name: '.', path: '#', bits: 'drx', mtime: latestMtime }, maxPathLen);
+				yield this.annotatePath({ name: '..', path: (route.name == 'index') ? '#' : '/', bits: 'drx', mtime: latestMtime }, maxPathLen);
+				for(const path of paths) {
+					if(path === '-') {
+						yield { name: '-', size: 0 };
+					} else {
+						yield this.annotatePath(path, maxPathLen);
+					}
+				}
+				yield this.annotatePath({ name: 'source', path: `https://github.com/mrozekma/cv/blob/master/pages/${route.name}.vue`, bits: 'rx', mtime: latestMtime, size: 6 }, maxPathLen);
+			},
+			formatSize(size: number): string {
 				if(size < 1024) {
 					return '' + size;
 				} else {
@@ -111,9 +142,9 @@
 				}
 			},
 		},
-		mounted: function() {
+		mounted() {
 			if(this.paths === undefined) {
-				this.dynamicPaths = Array.from(iterChildren(this, 'cv-subpage')).map(child => ({
+				this.dynamicPaths = Array.from(iterChildren(this, CvSubpage)).map<Path>(child => ({
 					name: child.path,
 					path: '#' + child.path,
 					description: child.description,
@@ -121,9 +152,10 @@
 					size: child.$el.innerHTML.length,
 					bits: 'r',
 				}));
+				console.log(this.dynamicPaths.length);
 			}
-		},
-	}
+		}
+	});
 </script>
 
 <style lang="less">

@@ -5,10 +5,10 @@
 	"author": "Michael Mrozek",
 	"private": true,
 	"scripts": {
-		"dev": "nuxt --hostname 0.0.0.0",
-		"build": "nuxt build",
-		"start": "nuxt start",
-		"generate": "nuxt generate"
+		"dev": "node -r ts-node/register node_modules/nuxt/bin/nuxt -c nuxt.config.ts --hostname 0.0.0.0",
+		"build": "node -r ts-node/register node_modules/nuxt/bin/nuxt build -c nuxt.config.ts",
+		"start": "node -r ts-node/register node_modules/nuxt/bin/nuxt start -c nuxt.config.ts",
+		"generate": "node -r ts-node/register node_modules/nuxt/bin/nuxt generate -c nuxt.config.ts"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.8",
@@ -22,7 +22,7 @@
 		"babel-runtime": "^6.26.0",
 		"bootstrap-less": "^3.3.8",
 		"cross-env": "^5.2.0",
-		"image-size": "^0.6.3",
+		"image-size": "^0.9.1",
 		"less": "^3.9.0",
 		"less-loader": "^4.1.0",
 		"moment": "^2.23.0",
@@ -31,6 +31,11 @@
 		"vue-directive-tooltip": "^1.5.0"
 	},
 	"devDependencies": {
-		"nodemon": "^1.11.0"
+		"@nuxt/types": "^2.14.0",
+		"@nuxt/typescript-build": "^2.0.2",
+		"@types/lodash": "^4.14.161",
+		"babel-plugin-lodash": "^3.3.4",
+		"nodemon": "^1.11.0",
+		"ts-node": "^10.0.0"
 	}
 }

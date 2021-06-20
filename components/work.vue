@@ -15,14 +15,21 @@
 </template>
 
 <script>
+	import Vue from 'vue';
+
 	import CvSubpage from '~/components/subpage.vue';
-	export default {
+	export default Vue.extend({
 		name: "cv-work",
-		components: {
-			CvSubpage,
+		components: { CvSubpage },
+		props: {
+			path: String,
+			mtime: Number,
+			url: String,
+			logo: String,
+			title: String,
+			timeframe: String,
 		},
-		props: ['path', 'mtime', 'url', 'logo', 'title', 'timeframe'],
-	}
+	});
 </script>
 
 <style lang="less" scoped>

@@ -17,7 +17,9 @@
 </template>
 
 <script>
-	export default {
+	import Vue from 'vue';
+
+	export default Vue.extend({
 		name: "cv-man",
 		props: {
 			cmd: String,
@@ -27,7 +29,7 @@
 			},
 			description: String,
 		},
-	}
+	});
 </script>
 
 <style lang="less" scoped>

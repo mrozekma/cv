@@ -34,8 +34,18 @@
 	</cv-terminal>
 </template>
 
-<script>
-	const sections = [
+<script lang="ts">
+	import Vue from 'vue';
+
+	interface Section {
+		name: string;
+		entries: {
+			name: string;
+			checked?: boolean;
+		}[];
+	}
+
+	const sections: Section[] = [
 		{
 			name: 'Technical Skills',
 			entries: [
@@ -84,40 +94,41 @@
 		},
 	];
 
+	// Foo Bar Baz -> foo-bar-baz
+	function makeFormName(text: string) {
+		return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+	}
+
 	import CvTerminal from '~/components/terminal.vue';
 	import CvMan from '~/components/man.vue';
-	export default {
+	export default Vue.extend({
 		name: "make-pdf-resume",
-		components: {CvTerminal, CvMan},
-		head: function() {
+		components: { CvTerminal, CvMan },
+		head() {
 			return {
 				title: 'PDF',
 			};
 		},
 		computed: {
-			allChecked: function() {
+			allChecked(): boolean {
 				return this.sections.every(section => section.entries.every(entry => entry.checked));
 			},
 		},
-		data: function() {
+		data() {
 			return {
 				sections: sections.map(section => ({
 					name: section.name,
-					key: this.makeFormName(section.name),
-					// checked: (section.checked !== false),
-					// indeterminate: false,
+					key: makeFormName(section.name),
 					entries: section.entries.map(entry => ({
 						name: entry.name,
-						key: this.makeFormName(entry.name),
+						key: makeFormName(entry.name),
 						checked: (entry.checked !== false),
 					})),
 				})),
 			};
 		},
 		methods: {
-			// Foo Bar Baz -> foo-bar-baz
-			makeFormName: text => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+/, '').replace(/-+$/, ''),
-			sectionState: function(section) {
+			sectionState(section: Section) {
 				const all = section.entries.every(entry => entry.checked);
 				const some = section.entries.some(entry => entry.checked);
 				return {
@@ -125,13 +136,13 @@
 					indeterminate: some && !all,
 				};
 			},
-			toggleSection: function(section) {
+			toggleSection(section: Section) {
 				const newState = !section.entries.every(entry => entry.checked);
 				for(const entry of section.entries) {
 					entry.checked = newState;
 				}
 			},
-			toggleRoot: function() {
+			toggleRoot() {
 				const newState = !this.allChecked;
 				for(const section of this.sections) {
 					for(const entry of section.entries) {
@@ -140,20 +151,14 @@
 				}
 			},
 		},
-	}
+	});
 </script>
 
 <style lang="less" scoped>
-	// @option-width: 200px;
-	// @gap: 10px;
-
 	.pdf-generator {
-		/*width: 800px;*/
-		/*height: 600px;*/
 		display: inline-block;
 		margin: 10px 0 0 3px;
 		border: 1px solid #fff;
-		// width: @option-width + (@gap * 4); // left margin + left padding + right padding + right margin
 		width: 400px;
 
 		.title {
@@ -164,24 +169,6 @@
 			font-variant: small-caps;
 			text-align: center;
 		}
-
-		/*
-		.option {
-				display: table;
-				margin: @gap;
-				padding: @gap;
-				width: @option-width;
-				background-color: #999;
-				border-radius: 4px;
-				text-align: center;
-				cursor: pointer;
-
-				&.disabled {
-						background-color: #333;
-						text-decoration: line-through;
-				}
-		}
-		*/
 
 		ul {
 			list-style-type: none;

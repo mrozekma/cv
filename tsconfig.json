@@ -1,0 +1,33 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"strict": true,
+		"jsx": "preserve",
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"types": [
+			"@types/node",
+			"@nuxt/types"
+		],
+		"paths": {
+			"~/*": [
+				"./*"
+			]
+		},
+		"lib": [
+			"esnext",
+			"dom",
+			"dom.iterable",
+			"scripthost"
+		]
+	},
+	"exclude": [
+		"node_modules"
+	]
+}
