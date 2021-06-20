@@ -131,9 +131,10 @@
 			sectionState(section: Section) {
 				const all = section.entries.every(entry => entry.checked);
 				const some = section.entries.some(entry => entry.checked);
+				const indeterminate = some && !all;
 				return {
-					checked: some,
-					indeterminate: some && !all,
+					checked: some && !indeterminate,
+					indeterminate,
 				};
 			},
 			toggleSection(section: Section) {
