@@ -117,6 +117,44 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 		</cv-project>
 
 		<cv-project
+			project="ninja"
+			name="Ninja"
+			tagline="Non-linear data analysis tool"
+			:mtime="1565645910"
+			:tags="['vue', 'typescript', 'canvas']"
+			:links="{repo: 'ninja', production: 'https://ninja.mrozekma.com/', docs: 'https://github.com/mrozekma/ninja/wiki'}"
+		>
+			<cv-project-screenshots ref="ninja-screenshots">
+				<cv-project-screenshot name="home">
+					A blank script, with most of the tools visible.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="settings">
+					The settings dialog.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="properties">
+					A single tool added to the script, with its properties visible.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="routing">
+					A very simple script that adds a given number to itself and prints the result.
+				</cv-project-screenshot>
+			</cv-project-screenshots>
+
+			<em>Ninja</em> came about when a coworker was using <a target="_blank" href="https://gchq.github.io/CyberChef/">CyberChef</a> and complained about some of its limitations:
+
+			<ul>
+			<li><b>Linear data flow</b> &mdash; Each operation has one input and one output. For example, when encrypting data with AES, the input is the plaintext, which means the key (and any other setting) must be a constant. It's often desirable to have multiple parameters of a single operation configurable by data coming from other operations.</li>
+			<li><b>Type confusion</b> &mdash; Because many of the operations work with raw data, there's constantly a need to specify if the data is encoded in hex or just provided as raw bytes. Many operations can only handle one form and will provide unexpected results if given the other form.</li>
+			<li><b>PKCS#7 padding</b> &mdash; The padding mode used by the miscellaneous crypto operations cannot be changed, and will pad data that's already block-aligned. The authors have indicated this is intentional and unlikely to change, but is often not what we want.</li>
+			</ul>
+
+			Ninja takes the great idea of connectable data-transforming widgets and lays them out in two dimensions, allowing inputs and outputs to be connected freely. Unfortunately once I got the app itself working, I lost interest in making the many tools that are necessary for full functionality, although I would like to come back to it at some point.<br><br>
+
+			For a simple script to experiment with (depicted in <a href="#" @click="$refs['ninja-screenshots'].show('routing')">one of the screenshots</a> above), click <a target="_blank" href="https://ninja.mrozekma.com/#eyJ2ZXJzaW9uIjoxLCJ0b29scyI6W3sidHlwZSI6IkNhbGMiLCJuYW1lIjoiQ2FsYyBhK2IiLCJsb2MiOnsieCI6MTU4LCJ5IjoxNDV9LCJpbnB1dHMiOnsiZXhwciI6IiRhKyRiIn0sImNvbm5lY3Rpb25zIjp7ImEiOlsiQ29uc3QgKDIpIiwib3V0Il0sImIiOlsiQ29uc3QgKDIpIiwib3V0Il19fSx7InR5cGUiOiJUZW1wbGF0ZSIsIm5hbWUiOiJUZW1wbGF0ZSIsImxvYyI6eyJ4IjozNywieSI6MjcyfSwiaW5wdXRzIjp7ImV4cHIiOiJUaGUgc3VtIG9mICRhIGFuZCAkYiBpcyAkc3VtIn0sImNvbm5lY3Rpb25zIjp7ImEiOlsiQ29uc3QgKDIpIiwib3V0Il0sImIiOlsiQ29uc3QgKDIpIiwib3V0Il0sInN1bSI6WyJDYWxjIGErYiIsIm91dCJdfX0seyJ0eXBlIjoiQ2FsYyIsIm5hbWUiOiJDb25zdCAoMikiLCJsb2MiOnsieCI6MTAsInkiOjEwfSwiaW5wdXRzIjp7ImV4cHIiOiIyIn0sImNvbm5lY3Rpb25zIjp7fX1dLCJ2aWV3cG9ydCI6eyJ4IjotMSwieSI6MCwic2NhbGUiOjF9LCJsb2NrQXV0b0xheW91dCI6ZmFsc2UsIndhdGNoZXMiOltbIkNhbGMgYStiIiwiZXhwciJdLFsiQ2FsYyBhK2IiLCJvdXQiXSxbIlRlbXBsYXRlIiwib3V0Il0sWyJDb25zdCAoMikiLCJvdXQiXV19">here</a>. For a more complicated script, see this demonstration video:<br><br>
+
+			<iframe width="860" height="480" src="https://www.youtube.com/embed/pAvc2g23dwk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</cv-project>
+
+		<cv-project
 			project="sprint"
 			name="Sprint"
 			tagline="Scrum tracking tool"
@@ -135,7 +173,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 					The backlog supports many filtering options via a search box, but the filters most commonly used during sprint meetings are given buttons along the top: the task assignee and the task status. In this case we're showing all non-started tasks with at least 16 estimated hours.
 				</cv-project-screenshot>
 				<cv-project-screenshot name="metrics">
-					There are quite a few graphs available to track sprint progress, although only two are visible here: the day-to-day total estimated hours remaining versus the number of hours the team is scheduled to work on the project, and the current hours each team member has scheduled versus their remaining availability. This sprint is not going well -- three people have more work than they can complete even if they finish tasks at the scheduled rate, and as a team the remaining hours is about to exceed the total hours available, and projections show nearly 500 hours of uncompleted work at the end of the sprint if progress stays at the same rate.
+					There are quite a few graphs available to track sprint progress, although only two are visible here: the day-to-day total estimated hours remaining versus the number of hours the team is scheduled to work on the project, and the current hours each team member has scheduled versus their remaining availability. This sprint is not going well &mdash; three people have more work than they can complete even if they finish tasks at the scheduled rate, and as a team the remaining hours is about to exceed the total hours available, and projections show nearly 500 hours of uncompleted work at the end of the sprint if progress stays at the same rate.
 				</cv-project-screenshot>
 				<cv-project-screenshot name="metrics-past">
 					The previous metrics screenshot was from a sprint that got off to a bad start; this is the metrics for a more typical sprint that is already complete. The hours drop to 0 on the last day because all incomplete tasks are automatically deferred.
@@ -193,11 +231,11 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 				</cv-project-screenshot>
 			</cv-project-screenshots>
 
-			<em>Noisebot</em> originated as a fairly simple collection of Python scripts to provide useful functions for use in the IRC channel populated by the Linux Users Group I belonged to in <nuxt-link to="/education#rose-hulman">undergrad</nuxt-link>. It was later rewritten in Java and expanded to support Slack. Unlike other chat bots, Noisebot was designed from the ground up to be <a target="_blank" href="https://github.com/mrozekma/noisebot#developer-documentation">easily updatable by anyone</a>. When a new commit is pushed to the repository, it is automatically validated and then deployed to Github. Running bots are alerted to the change and synchronize automatically, reloading affected modules without restarting. This ease of updating makes Noisebot the only project on this page with a non-trivial number of <a target="_blank" href="https://github.com/mrozekma/NoiseBot/graphs/contributors">contributors</a>.<br><br>
+			<em>Noisebot</em> originated as a fairly simple collection of Python scripts to provide useful functions in the IRC channel populated by the Linux Users Group I belonged to in <nuxt-link to="/education#rose-hulman">undergrad</nuxt-link>. It was later rewritten in Java and expanded to support Slack. Unlike other chat bots, Noisebot was designed from the ground up to be <a target="_blank" href="https://github.com/mrozekma/noisebot#developer-documentation">easily updatable by anyone</a>. When a new commit is pushed to the repository, it is automatically validated and then deployed to Github. Running bots are alerted to the change and synchronize automatically, reloading affected modules without restarting. This ease of updating makes Noisebot the only project on this page with a non-trivial number of <a target="_blank" href="https://github.com/mrozekma/NoiseBot/graphs/contributors">contributors</a>.<br><br>
 
 			If you're interested in watching me code at 4x speed, I have a video of the development of the <a target="_blank" href="https://github.com/mrozekma/NoiseBot/blob/master/src/modules/EmojiRace.java">EmojiRace module</a>:<br><br>
 
-			<iframe width="854" height="480" src="https://www.youtube.com/embed/l98orlySZZA" frameborder="0" allowfullscreen></iframe>
+			<iframe width="860" height="480" src="https://www.youtube.com/embed/l98orlySZZA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</cv-project>
 
 		<cv-project
@@ -327,7 +365,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 					Woop opened to Google's homepage.
 				</cv-project-screenshot>
 				<cv-project-screenshot name="tabopen">
-					Woop in command mode -- a <em>tabopen</em> command is being typed along the bottom of the screen.
+					Woop in command mode &mdash; a <em>tabopen</em> command is being typed along the bottom of the screen.
 				</cv-project-screenshot>
 				<cv-project-screenshot name="refresh">
 					Woop in command mode, tab-completing a command.
