@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-	const pages = [
+	const pages: PathOrSpacer[] = [
 		{name: 'work-history',        bits: 'drx', mtime: 1543120144, description: "The places I've worked and the things I did while I was there"},
 		{name: 'personal-projects',   bits: 'drx', mtime: 1477259577, description: "Things nobody paid me to do. Much more interesting, on the whole"},
 		{name: 'education',           bits: 'drx', mtime: 1431910800, description: "Where I learned to do the above things"},
@@ -26,7 +26,7 @@
 	declare var GIT_INFO: GitInfo; // From DefinePlugin
 
 	import Vue from 'vue';
-	import CvTerminal from '~/components/terminal.vue';
+	import CvTerminal, { PathOrSpacer } from '~/components/terminal.vue';
 	import CvMan from '~/components/man.vue';
 	export default Vue.extend({
 		components: { CvTerminal, CvMan },

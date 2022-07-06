@@ -12,6 +12,111 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 		</div>
 
 		<cv-project
+			project="serial-bridge"
+			name="Serial Bridge"
+			tagline="Serial port multiplexer"
+			:mtime="1569550860"
+			:tags="['vue', 'typescript', 'websocket', 'api']"
+			:links="{repo: 'serial-bridge', docs: 'https://serial-bridge.readthedocs.io/en/latest/'}"
+		>
+			<cv-project-screenshots>
+				<cv-project-screenshot name="device-expanded">
+					A list of connected devices, with the first device expanded to show more information.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="real-device-list">
+					A list of devices from a real deploy, but with some device information anonymized.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="setup">
+					The setup tab on the homepage, which lets the user specify some preferences.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="device-output">
+					A device view. Each terminal represents a single port on the device. The colorful output in the middle terminal was produced by the Python Rich library.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="device-commands-menu">
+					The commands menu, used to quickly write to a port on a device.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="device-ports">
+					A list of ports on a particular device.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="find-ports">
+					A wizard for identifying which ports on a system corresponds to a particular device.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="ports">
+					All ports on the host system.
+				</cv-project-screenshot>
+			</cv-project-screenshots>
+
+			<em>Serial Bridge</em> was written for use at <nuxt-link to="/work-history#mercury">Mercury</nuxt-link>. Its primary function is to make COM ports accessible remotely, so devices connected to a host machine can be accessed without needing to remote desktop into the host machine. Serial Bridge also allows multiple people to connect to the same device at once, which is normally impossible with a COM port. In addition to making the ports available over TCP, a web interface provides access via a browser.
+		</cv-project>
+
+		<cv-project
+			project="chalk"
+			name="Chalk"
+			tagline="Coding interviews"
+			:mtime="1589693700"
+			:tags="['vue', 'typescript', 'websocket', 'api', 'firebase', 'monaco']"
+			:links="{repo: 'chalk', production: 'https://chalk.run/'}"
+		>
+			<cv-project-screenshots>
+				<cv-project-screenshot name="home">
+					The list of upcoming interviews, as a calendar and a list.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="interview">
+					Details about a single interview, including the position, schedule, potential questions to ask, and the applicant's resume.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="questions">
+					A library of questions to ask. This is from a live instance, so the names have been blurred.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="question">
+					Details of a single question from the question library.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="help">
+					Information on how to create and conduct an interview.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="board">
+					The view during the interview itself, from the perspective of the interviewer.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="board-candidate">
+					The view during the interview itself, from the perspective of the applicant.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="conducting-interview">
+					An animation of both sides of a (very short) interview.
+				</cv-project-screenshot>
+			</cv-project-screenshots>
+
+			<em>Chalk</em> came about during the COVID-19 pandemic, when <nuxt-link to="/work-history#mercury">we</nuxt-link> were suddenly unable to interview candidates in person. We use Skype for Business for an audio connection, but were unable to find a suitable shared code editor for the coding portion of the interview &mdash; existing sites are either expensive or very unreliable. Chalk's main feature is the collaborative code editor, which keeps all viewers synchronized. While I wish I could take credit, this is a combination of several third-party technologies: <a target="_blank" href="https://firebase.google.com/">Firebase</a> for the realtime database, <a target="_blank" href="https://microsoft.github.io/monaco-editor/">Monaco</a> (the editor that powers <a target="_blank" href="https://code.visualstudio.com/">Visual Studio Code</a>) for the code editor, and <a target="_blank" href="https://firepad.io/">Firepad</a> to connect them. Other features include a question library to make it easy to standardize questions across multiple interviews, file storage to enable quick access to things like the candidate's resume, and a compiler (courtesy of <a target="_blank" href="https://godbolt.org/">Compiler Explorer</a>) to check for errors.
+		</cv-project>
+
+		<cv-project
+			project="point-vote"
+			name="Point Vote"
+			tagline="Planning poker"
+			:mtime="1653709560"
+			:tags="['vue', 'typescript', 'websocket']"
+			:links="{repo: 'point-vote'}"
+		>
+			<cv-project-screenshots>
+				<cv-project-screenshot name="home">
+					The homepage, where users can create or join a voting session.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="session">
+					A voting session, between votes.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="voting">
+					A voting session, mid-vote.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="voted">
+					A voting session, after all votes are cast.
+				</cv-project-screenshot>
+				<cv-project-screenshot name="point-vote">
+					An animation of pretty much all the features available in Point Vote.
+				</cv-project-screenshot>
+			</cv-project-screenshots>
+
+			<em>Point Vote</em> was thrown together in a week (as demonstrated by the complete lack of style) when the Jira addon we were using for <a target="_blank" href="https://en.wikipedia.org/wiki/Planning_poker">planning poker</a> skyrocketed in price. It might make more sense for Point Vote to be a Jira addon as well, but from past experience those are a pretty big hassle to test and keep updated, and I would like eventually to break the dependency on Jira and let the tool operate independently.
+		</cv-project>
+
+		<cv-project
 			project="sprint"
 			name="Sprint"
 			tagline="Scrum tracking tool"
@@ -101,7 +206,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 			tagline="Web-based cards interface"
 			:mtime="1446781016"
 			:tags="['python', 'javascript', 'html', 'css', 'jquery', 'websocket', 'api']"
-			:links="{repo: 'spades', production: 'http://spades.mrozekma.com/'}"
+			:links="{repo: 'spades'}"
 		>
 			<cv-project-screenshots ref="spades-screenshots">
 				<cv-project-screenshot name="game-full-round">
@@ -127,7 +232,7 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 
 			This project is a web-based interface to show current and historical games. It communicates with the game server and with client browsers using websockets, and shows each play as it happens. The complete history of the current game and all previous games is available. The most technically challenging part of the project was actually <a class="github-link" target="_blank" href="https://github.com/mrozekma/spades/blob/master/EventThread.py#L30-L66"><font-awesome-icon :icon="githubIcon"/>&nbsp;parsing the game server's events</a>, which are the same messages sent to IRC clients and not intended for programmatic use, and <a class="github-link" target="_blank" href="https://github.com/mrozekma/spades/blob/master/GameConstructor.py"><font-awesome-icon :icon="githubIcon"/>&nbsp;reconstructing the game</a> from this one-way information.<br><br>
 
-			While the screenshots above cover the highlights, the <a target="_blank" href="http://spades.mrozekma.com/">live site</a> is publicly accessible and will show the state of the current game.
+			<!-- While the screenshots above cover the highlights, the <a target="_blank" href="http://spades.mrozekma.com/">live site</a> is publicly accessible and will show the state of the current game. -->
 		</cv-project>
 
 		<cv-project
@@ -154,38 +259,6 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 			</ol>
 
 			Got solves this problem by essentially combining <a target="_blank" href="https://en.wikipedia.org/wiki/Pkg-config">pkg-config</a> with <a target="_blank" href="https://code.google.com/archive/p/git-repo/">git-repo</a> to create a tool that not only provides the locations of repositories on request, but will download those repositories from a remote host if they're not already on disk. This means build systems can simply run <code>got repo_name</code> to get the path to the specified repository, regardless of if it's already been cloned.
-		</cv-project>
-
-		<cv-project
-			project="serial-bridge"
-			name="Serial Bridge"
-			tagline="Serial port multiplexer"
-			:mtime="1546539079"
-			:tags="['python', 'vue', 'websocket']"
-			:links="{repo: 'serial-bridge'}"
-		>
-			<cv-project-screenshots>
-				<cv-project-screenshot name="serial-bridge">
-					Animation of connecting to a device and logging some of its output.
-				</cv-project-screenshot>
-				<cv-project-screenshot name="device-list">
-					Home page, showing the list of available devices and some info on configuring the local host to open telnet/SSH connections.
-				</cv-project-screenshot>
-				<cv-project-screenshot name="view-menu">
-					View menu. This menu lets you control which ports on a device are visible.
-				</cv-project-screenshot>
-				<cv-project-screenshot name="commands-menu">
-					Commands menu. These commands are part of the app's configuration file and map to small blocks of Python.
-				</cv-project-screenshot>
-				<cv-project-screenshot name="test-output">
-					Output from several ports on the device.
-				</cv-project-screenshot>
-				<cv-project-screenshot name="logging-done">
-					Dialog that's shown after logging output.
-				</cv-project-screenshot>
-			</cv-project-screenshots>
-
-			<em>Serial Bridge</em> was also written for use at <nuxt-link to="/work-history#mercury">Mercury</nuxt-link>. Its primary function is to make COM ports accessible remotely, so devices connected to a host machine can be accessed without needing to remote desktop into the host machine. Serial Bridge also allows multiple people to connect to the same device at once, which is normally impossible with a COM port. In addition to making the ports available over TCP, a web interface provides access via a browser.
 		</cv-project>
 
 		<cv-project

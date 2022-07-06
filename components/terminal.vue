@@ -49,7 +49,7 @@
 		descSpacer: string;
 	}
 
-	type PathOrSpacer = Path | '-';
+	export type PathOrSpacer = Path | '-';
 	type AnnotatedPathOrSpacer = AnnotatedPath | { name: '-'; size: 0 }
 
 	function isPath(path: PathOrSpacer): path is Path {
