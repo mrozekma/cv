@@ -24,14 +24,23 @@ if any(tagPattern.match(entry) is None for entry in entries):
 	raise ValueError("Bad tag name")
 
 rootDir = Path(__file__).parent.parent
-dest = tempfile.mkdtemp(prefix = 'cv-tmp')
+texDir = rootDir / 'tex'
+dest = Path(tempfile.mkdtemp(prefix = 'cv-tmp'))
 try:
-	subprocess.run(['xelatex', '-halt-on-error', '-output-directory', dest, '-jobname', 'resume', r'\input{prolog}'] + [fr"\usetag{{{entry}}}" for entry in entries] + [r'\input{resume}'], cwd = rootDir / 'tex', stdout = subprocess.DEVNULL, stderr = subprocess.STDOUT)
+	texIn = texDir / 'resume.tex'
+	texOut = dest / 'resume.tex'
+	tex = texIn.read_text()
+	tex = tex.replace(r'%%% TAGS %%%', '\n'.join(fr"\usetag{{{entry}}}" for entry in entries))
+	texOut.write_text(tex)
+
+	with open(dest / 'stdout', 'w') as f:
+		subprocess.run(['xelatex', '-halt-on-error', '-output-directory', str(dest), str(texOut)], cwd = texDir, stdout = f, stderr = subprocess.STDOUT)
 	print("Content-type: application/pdf\n")
 	sys.stdout.flush()
 	pdf = Path(dest) / 'resume.pdf'
 	sys.stdout.buffer.write(pdf.read_bytes())
-except FileNotFoundError:
+except Exception:
+	print((dest / 'stdout').read_text(), file = sys.stderr)
 	raise RuntimeError("Failed to generate PDF")
 finally:
 	shutil.rmtree(dest)

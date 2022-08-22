@@ -11,7 +11,7 @@
 			The jobs predating this all took place during undergraduate or high school (and are stored in the <code>pre-graduation</code> directory).
 		</cv-subpage>
 
-		<cv-work path="mercury" :mtime="1532302550" url="https://www.mrcy.com/" logo="mercury.png" title="Software Development Engineer" timeframe="2016 - Present">
+		<cv-work path="mercury" :mtime="1532302550" url="https://www.mrcy.com/" logo="mercury.png" title="Senior Principal Software Engineer" timeframe="2016 - Present">
 			<ul>
 				<li>Designed and rolled out an automated build and test system for a number of projects.</li>
 				<li>Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.

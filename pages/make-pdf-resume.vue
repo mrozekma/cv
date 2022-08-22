@@ -49,8 +49,8 @@
 		{
 			name: 'Technical Skills',
 			entries: [
-				{ name: 'Languages' },
-				{ name: 'Tools and Frameworks' },
+				{ name: 'Languages and Frameworks' },
+				{ name: 'Tools' },
 			],
 		},
 		{
@@ -77,12 +77,16 @@
 		{
 			name: 'Projects',
 			entries: [
+				{ name: 'Serial Bridge' },
+				{ name: 'Chalk' },
+				{ name: 'Point Vote' },
+				{ name: 'Ninja' },
 				{ name: 'Sprint' },
 				{ name: 'Noisebot' },
-				{ name: 'Spades' },
-				{ name: 'Got' },
-				{ name: 'Lync Helper' },
-				{ name: 'Gir' },
+				{ name: 'Spades', checked: false },
+				{ name: 'Got', checked: false },
+				{ name: 'Lync Helper', checked: false },
+				{ name: 'Gir', checked: false },
 				{ name: 'Woop', checked: false },
 			],
 		},

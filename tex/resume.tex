@@ -1,19 +1,54 @@
-%% \documentclass[11pt, letterpaper]{awesome-cv}
+\documentclass[11pt, letterpaper]{awesome-cv}
 \usepackage{paracol}
 \usepackage{progressbar}
+\usepackage{tagging}
+
+% Tags are inserted here by pdf.py:
+%%% TAGS %%%
+
+% When editing, manually enable sections:
+\iftrue
+\usetag{technical-skills}
+\usetag{languages-and-frameworks}
+\usetag{tools}
+\usetag{experience}
+\usetag{mercury}
+\usetag{microsemi}
+\usetag{arxan-defense-systems}
+% \usetag{arxan}
+% \usetag{rose-hulman}
+% \usetag{ventures}
+% \usetag{perry-schools}
+% \usetag{perritech}
+\usetag{education}
+\usetag{masters}
+\usetag{bachelors}
+% \usetag{high-school}
+\usetag{projects}
+\usetag{serial-bridge}
+\usetag{chalk}
+\usetag{point-vote}
+\usetag{ninja}
+\usetag{sprint}
+\usetag{noisebot}
+% \usetag{spades}
+% \usetag{got}
+% \usetag{lync-helper}
+% \usetag{gir}
+% \usetag{woop}
+% \usetag{publications}
+% \usetag{subverting-the-fundamentals-sequence}
+\fi
+
+% Settings
 \geometry{left=1cm, top=.8cm, right=1cm, bottom=1cm, footskip=.5cm}
-\fontdir[fonts/]
-
-%TODO Not sure if I like the highlighting or not
-%% \setbool{acvSectionColorHighlight}{false}
-
-% Available options: circle|rectangle,edge/noedge,left/right
-%% \photo[edge,right]{filename}
-
+\colorlet{awesome}{awesome-nephritis}
 \renewcommand{\acvSectionTopSkip}{1mm}
 \progressbarchange{ticksheight=0}
 
+% Personal info
 \name{Michael}{Mrozek}
+\photo[edge,right]{photo}
 \position{Software Engineer}
 \email{resume@mrozekma.com}
 \homepage{cv.mrozekma.com}
@@ -22,9 +57,9 @@
 \stackoverflow{309308}{Michael Mrozek}
 
 \begin{document}
-\makecvheader[R]
 
-\makecvfooter{Generated \today. Unabridged version available from \href{http://cv.mrozekma.com/}{http://cv.mrozekma.com/}}{}{\thepage}
+\makecvheader[R]
+\makecvfooter{Generated \today. Unabridged version available from \href{https://cv.mrozekma.com/}{https://cv.mrozekma.com/}}{}{\thepage}
 
 \untagged{technical-skills,experience,education,projects,publications}{
 	\centering
@@ -40,8 +75,8 @@
 \item background: \iftagged{background}{yes}{no}
 \item technical-skills: \iftagged{technical-skills}{yes}{no}
 	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-	\item languages: \iftagged{languages}{yes}{no}
-	\item certifications: \iftagged{certifications}{yes}{no}
+	\item languages-and-frameworks: \iftagged{languages-and-frameworks}{yes}{no}
+	\item tools: \iftagged{tools}{yes}{no}
 	\end{itemize}
 \item experience: \iftagged{experience}{yes}{no}
 	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
@@ -62,6 +97,10 @@
 	\end{itemize}
 \item projects: \iftagged{projects}{yes}{no}
 	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+	\item serial-bridge: \iftagged{serial-bridge}{yes}{no}
+	\item chalk: \iftagged{chalk}{yes}{no}
+	\item point-vote: \iftagged{point-vote}{yes}{no}
+	\item ninja: \iftagged{ninja}{yes}{no}
 	\item sprint: \iftagged{sprint}{yes}{no}
 	\item noisebot: \iftagged{noisebot}{yes}{no}
 	\item spades: \iftagged{spades}{yes}{no}
@@ -82,8 +121,8 @@
 \cvsection{Technical Skills}
 
 \newcounter{numSkills}
-\tagged{languages}{\stepcounter{numSkills}}
-\tagged{tools-and-frameworks}{\stepcounter{numSkills}}
+\tagged{languages-and-frameworks}{\stepcounter{numSkills}}
+\tagged{tools}{\stepcounter{numSkills}}
 
 \newcommand{\skill}[2]{
 	% Some tweaks are made in two-column mode to get the content to fit better
@@ -95,30 +134,40 @@
 }
 
 \begin{paracol}{\thenumSkills}
-\tagged{languages}{
-	\cvsubsection{Languages}
+\tagged{languages-and-frameworks}{
+	\cvsubsection{Languages and Frameworks}
 
 	\begin{cvparagraph}
-	\skill{.9}{Extensive experience with C++, Java, Python, and shell scripting.}
-	\skill{.6}{Experience with PHP and C\#. Desperate for more C\# opportunities.}
-	\skill{.5}{Experience with SQL and miscellaneous databases, including MySQL, MariaDB, PostgreSQL, and Redis.}
+	\skill{.9}{Extensive experience with C, Java, Python, Typescript, and scripting.}
+	\skill{.6}{Experience with C++, Rust, and PHP.}
+	\skill{.4}{Experience with SQL and miscellaneous databases, including MySQL, MariaDB, PostgreSQL, and Redis.\vspace{1mm}}
+	% For some reason the space between these lines is a little cramped, so I added a tiny manual vspace after the previous skill
+	\skill{.8}{Personal experience with Vue, Vite, Webpack, Yarn, and other modern web development tooling.}
 	\end{cvparagraph}
 }
 \switchcolumn
-\tagged{tools-and-frameworks}{
-	\cvsubsection{Tools and Frameworks}
+\tagged{tools}{
+	\cvsubsection{Tools}
 
 	\begin{cvparagraph}
+	\skill{.9}{Extensive experience with Linux and Windows.}
 	\skill{.9}{Extensive experience with Git. Some experience with Subversion.}
-	\skill{.9}{Extensive experience with Linux and Windows (through 10).}
-	\skill{.8}{Extensive experience with the Atlassian toolset, including Jira, Bitbucket, and Confluence.}
-	\skill{.7}{Experience with jQuery.}
-	\skill{.5}{Experience creating GUIs in JavaFX and Qt.}
+	\skill{.7}{Experience with VSCode, Emacs, PyCharm, and other editors/IDEs.}
+	\skill{.6}{Experience with the Atlassian toolset, including Jira, Bitbucket, and Confluence.\vspace{1mm}}
+	% For some reason the space between these lines is a little cramped, so I added a tiny manual vspace after the previous skill
+	\skill{.5}{Personal experience with Firebase and cloud hosting.}
+	% \skill{.7}{Experience with jQuery.}
+	% \skill{.5}{Experience creating GUIs in JavaFX and Qt.}
 	\end{cvparagraph}
 }
 \end{paracol}
 
-\vspace{-30pt} % Way too much space after the previous section
+% Way too much space after the previous section
+% \ifnum\thenumSkills=2
+% \vspace{-30pt}
+% \else
+\vspace{-20pt}
+% \fi
 
 \end{taggedblock}
 \begin{taggedblock}{experience}
@@ -134,7 +183,7 @@
 	}}
 }
 \begin{cventries}
-\work{mercury}{Mercury}{Software Development Engineer}{2016 - Present}{
+\work{mercury}{Mercury}{Senior Principal Software Engineer}{2016 - Present}{
 	\item Designed and rolled out an automated build and test system for a number of projects.
 	\item Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.
 		\begin{itemize}[leftmargin=3ex, nosep, noitemsep]
@@ -142,6 +191,8 @@
 		\end{itemize}
 	\item Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes.
 	\item Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers.
+	\item Responsible for assisting newer engineers with understanding tasks, solving problems, debugging issues, and generally answering questions about the system architecture and design.
+	\item Responsible for approving pull requests before they can be merged and suggesting fixes or improvements.
 }%
 
 \work{microsemi}{Microsemi}{Software Developer}{2010 - 2016}{
@@ -169,18 +220,18 @@
 	\item Reviewed code produced by other team members.
 }%
 
-\work{rose-hulman}{Rose-Hulman}{Teaching Assistant, CSSE Newsletter Editor}{2005 - 2008}{
+\work{rose-hulman}{Rose-Hulman}{Teaching Assistant ~\cdotp~ CSSE Newsletter Editor}{2005 - 2008}{
 	\item Assisted students in many introductory programming classes with fundamental object-oriented techniques, UML, project planning, and completing team-based goals.
 	\item Responsible for all phases of the CSSE newsletter production, from writing to publishing.
 }%
 
-\work{perry-schools}{Perry Schools}{Website Designer, Technician, Database Administrator}{2001 - 2007}{
+\work{perry-schools}{Perry Schools}{Website Designer ~\cdotp~ Technician ~\cdotp~ Database Administrator}{2001 - 2007}{
 	\item Project coordinator that designed and implemented a completely new look and feel for the school district's 5000+ page website, including a custom CMS and DB design.
 	\item Converted all existing webpages to a new format and implemented a new, more efficient interface.
 	\item Designed, implemented, and maintained the school's first online course registration system.
 }%
 
-\work{perritech}{Perritech}{President, Technician}{2001 - 2005}{
+\work{perritech}{Perritech}{President ~\cdotp~ Technician}{2001 - 2005}{
 	\item Recruited in 2001 as a computer technician, responsible for the 2000+ computer network.
 	\item Subcontracted to various local businesses for programming, website design, networking and system administration.
 	\item Promoted to President in 2005, managing four directors and a number of technicians.
@@ -194,9 +245,14 @@
 \cvsection{Education}
 % \school{Tag}{School}{Degree}{Location}{When}{Content}
 \newcommand{\school}[6]{
-	\tagged{#1}{\cventry{#3}{#2}{#4}{#5}{
-		#6
-	}}
+	\tagged{#1}{
+		\cventry{#3}{#2}{#4}{#5}{
+			% At this point I don't think my GPA warrants space on my resume, so commenting out the content here
+			% #6
+		}
+		% Since there's no content, can save some space
+		\vspace{-10pt}
+	}
 }
 
 \begin{cventries}
@@ -220,6 +276,10 @@
 \cvsection{Projects}
 
 \newcounter{numProjects}
+\tagged{serial-bridge}{\stepcounter{numProjects}}
+\tagged{chalk}{\stepcounter{numProjects}}
+\tagged{point-vote}{\stepcounter{numProjects}}
+\tagged{ninja}{\stepcounter{numProjects}}
 \tagged{sprint}{\stepcounter{numProjects}}
 \tagged{noisebot}{\stepcounter{numProjects}}
 \tagged{spades}{\stepcounter{numProjects}}
@@ -246,10 +306,12 @@
 		\begin{cvparagraph}
 		#4
 		\end{cvparagraph}
+		\vspace{-2mm}
 
 		\stepcounter{projectCurCol}
 		\ifnum\theprojectCurCol=\thenumProjectCols
 		\setcounter{projectCurCol}{0}
+		% This makes every entry in the current column (that we're about to leave) the same height
 		\switchcolumn*
 		\else
 		\switchcolumn
@@ -258,8 +320,25 @@
 }
 
 \begin{paracol}{\thenumProjectCols}
+\project{serial-bridge}{Serial Bridge}{https://github.com/mrozekma/serial-bridge}{
+	A web-based remote serial port interface heavily utilized at Mercury to interact with hardware UARTs.
+	\vspace{-3mm}
+}
+
+\project{chalk}{Chalk}{https://github.com/mrozekma/chalk}{
+	A coding interview site with a collaborative live code editor, question library, and compiler.
+}
+
+\project{point-vote}{Point Vote}{https://github.com/mrozekma/point-vote}{
+	A website for hosting live scrum planning poker sessions.
+}
+
+\project{ninja}{Ninja}{https://github.com/mrozekma/ninja}{
+	A website for performing calculations via a graphical data flow.
+}
+
 \project{sprint}{Sprint}{https://github.com/mrozekma/sprint}{
-	A web-based Scrum tracking tool tailor-made for our project needs at Microsemi. Now used at several other companies.
+	A web-based Scrum tracking tool tailor-made for our project needs at Microsemi.
 }
 
 \project{noisebot}{Noisebot}{https://github.com/mrozekma/noisebot}{
@@ -286,11 +365,11 @@
 	A webkit-based web browser with vim-style keybindings and modes.
 }
 \end{paracol}
-\vspace{-20pt} % Way too much space after the previous section
+\vspace{-5pt} % Way too much space after the previous section
 
 \end{taggedblock}
 \begin{taggedblock}{publications}
-
+\vspace{5mm}
 \cvsection{Publications}
 
 \tagged{subverting-the-fundamentals-sequence}{

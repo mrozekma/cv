@@ -54,7 +54,7 @@
 
 		<cv-school
 			school="perry"
-			level="high_school"
+			level="high-school"
 			:mtime="1118854800"
 			url="http://www.perry-lake.k12.oh.us/"
 			logo="perry.png"

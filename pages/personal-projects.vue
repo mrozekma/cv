@@ -96,6 +96,9 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 			:links="{repo: 'point-vote'}"
 		>
 			<cv-project-screenshots>
+				<cv-project-screenshot name="point-vote">
+					An animation of pretty much all the features available in Point Vote.
+				</cv-project-screenshot>
 				<cv-project-screenshot name="home">
 					The homepage, where users can create or join a voting session.
 				</cv-project-screenshot>
@@ -107,9 +110,6 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 				</cv-project-screenshot>
 				<cv-project-screenshot name="voted">
 					A voting session, after all votes are cast.
-				</cv-project-screenshot>
-				<cv-project-screenshot name="point-vote">
-					An animation of pretty much all the features available in Point Vote.
 				</cv-project-screenshot>
 			</cv-project-screenshots>
 
@@ -125,6 +125,9 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 			:links="{repo: 'ninja', production: 'https://ninja.mrozekma.com/', docs: 'https://github.com/mrozekma/ninja/wiki'}"
 		>
 			<cv-project-screenshots ref="ninja-screenshots">
+				<cv-project-screenshot name="routing">
+					A very simple script that adds a given number to itself and prints the result.
+				</cv-project-screenshot>
 				<cv-project-screenshot name="home">
 					A blank script, with most of the tools visible.
 				</cv-project-screenshot>
@@ -133,9 +136,6 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 				</cv-project-screenshot>
 				<cv-project-screenshot name="properties">
 					A single tool added to the script, with its properties visible.
-				</cv-project-screenshot>
-				<cv-project-screenshot name="routing">
-					A very simple script that adds a given number to itself and prints the result.
 				</cv-project-screenshot>
 			</cv-project-screenshots>
 

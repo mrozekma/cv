@@ -79,3 +79,6 @@ dist
 
 # IDE
 .idea
+
+# Resume generated PDF
+tex/resume.pdf
