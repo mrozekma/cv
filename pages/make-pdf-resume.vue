@@ -11,7 +11,7 @@
 		<div class="prompt">make-pdf-resume</div>
 		<div class="pdf-generator">
 			<div class="title"><input type="checkbox" :checked="allChecked" :indeterminate.prop="!allChecked" @click="toggleRoot">&nbsp;PDF Generator</div>
-			<form action="/cgi-bin/pdf.py/resume.pdf"> <!-- The actual script is pdf.py, but we want the filename to be resume.pdf -->
+			<form action="/cgi-bin/pdf.py">
 				<input type="hidden" name="background" value="on"/>
 				<ul>
 					<li><input type="checkbox" checked disabled> Background</li>

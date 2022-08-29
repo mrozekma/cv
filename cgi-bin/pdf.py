@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # Dependencies: texlive-xetex texlive-luatex texlive-fonts-extra
 
-import cgitb
-cgitb.enable()
-
 import cgi
 from pathlib import Path
 import re
@@ -11,6 +8,25 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import traceback
+
+GITHUB_URL = 'https://github.com/mrozekma/cv/blob/master/cgi-bin/pdf.py'
+
+def exceptHook(typ, value, tb):
+	print("Content-type: text/plain")
+	print()
+	print("There was an exception trying to generate the PDF. If you're thinking about hiring me, let's agree to pretend this never happened.")
+	print()
+	print(f"{typ.__name__}: {value}")
+	print()
+	summary = traceback.StackSummary.extract(traceback.walk_tb(tb))
+	for line in summary.format():
+		print(line)
+	for frame in summary:
+		if frame.filename == __file__:
+			print(f"See the failing line in Github at {GITHUB_URL}#L{frame.lineno}")
+			break
+sys.excepthook = exceptHook
 
 form = cgi.FieldStorage()
 entries = {name for name in form if form[name].value == 'on'}
@@ -33,14 +49,19 @@ try:
 	tex = tex.replace(r'%%% TAGS %%%', '\n'.join(fr"\usetag{{{entry}}}" for entry in entries))
 	texOut.write_text(tex)
 
-	with open(dest / 'stdout', 'w') as f:
+	with open(dest / 'output', 'w') as f:
 		subprocess.run(['xelatex', '-halt-on-error', '-output-directory', str(dest), str(texOut)], cwd = texDir, stdout = f, stderr = subprocess.STDOUT)
-	print("Content-type: application/pdf\n")
-	sys.stdout.flush()
 	pdf = Path(dest) / 'resume.pdf'
-	sys.stdout.buffer.write(pdf.read_bytes())
+	pdfBytes = pdf.read_bytes()
+
+	# We intentionally put off sending the headers for as long as possible in case of exceptions. At this point we should be safe
+	print("Content-type: application/pdf")
+	print('Content-Disposition: inline; filename="michael_mrozek_resume.pdf"')
+	print()
+	sys.stdout.flush()
+	sys.stdout.buffer.write(pdfBytes)
 except Exception:
-	print((dest / 'stdout').read_text(), file = sys.stderr)
+	print((dest / 'output').read_text(), file = sys.stderr)
 	raise RuntimeError("Failed to generate PDF")
 finally:
 	shutil.rmtree(dest)
