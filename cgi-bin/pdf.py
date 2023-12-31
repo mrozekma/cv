@@ -12,7 +12,6 @@ import traceback
 import urllib
 
 import jinja2
-import yaml
 
 GITHUB_URL = 'https://github.com/mrozekma/cv/blob/master/cgi-bin/pdf.py'
 

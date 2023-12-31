@@ -1,3 +1,4 @@
 #!/bin/bash
-cd "$(dirname "$0")"
-poetry run python ./pdf.py "$@"
+dir=$(dirname "$0")
+poetry install -C "$dir" --no-root &> /dev/null
+poetry run -C "$dir" python ./pdf.py "$@"
