@@ -1,44 +1,6 @@
 \documentclass[11pt, letterpaper]{awesome-cv}
 \usepackage{paracol}
 \usepackage{progressbar}
-\usepackage{tagging}
-
-% Tags are inserted here by pdf.py:
-%%% TAGS %%%
-
-% When editing, manually enable sections:
-\iffalse
-\usetag{technical-skills}
-\usetag{languages-and-frameworks}
-\usetag{tools}
-\usetag{experience}
-\usetag{mercury}
-\usetag{microsemi}
-\usetag{arxan-defense-systems}
-% \usetag{arxan}
-% \usetag{rose-hulman}
-% \usetag{ventures}
-% \usetag{perry-schools}
-% \usetag{perritech}
-\usetag{education}
-\usetag{masters}
-\usetag{bachelors}
-% \usetag{high-school}
-\usetag{projects}
-\usetag{serial-bridge}
-\usetag{chalk}
-\usetag{point-vote}
-\usetag{ninja}
-\usetag{sprint}
-\usetag{noisebot}
-% \usetag{spades}
-% \usetag{got}
-% \usetag{lync-helper}
-% \usetag{gir}
-% \usetag{woop}
-% \usetag{publications}
-% \usetag{subverting-the-fundamentals-sequence}
-\fi
 
 % Settings
 \geometry{left=1cm, top=.8cm, right=1cm, bottom=1cm, footskip=.5cm}
@@ -61,80 +23,29 @@
 \makecvheader[R]
 \makecvfooter{Generated \today. Unabridged version available from \href{https://cv.mrozekma.com/}{https://cv.mrozekma.com/}}{}{\thepage}
 
-\untagged{technical-skills,experience,education,projects,publications}{
+% {{ debug() }}
+
+\jinja if not any_selections
 	\centering
 	\vfill
 	No sections requested\ldots
 	\vfill
-}
+\jinja endif
 
-\iffalse
-\cvsection{Tags}
-\begin{cvparagraph}
-\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-\item background: \iftagged{background}{yes}{no}
-\item technical-skills: \iftagged{technical-skills}{yes}{no}
-	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-	\item languages-and-frameworks: \iftagged{languages-and-frameworks}{yes}{no}
-	\item tools: \iftagged{tools}{yes}{no}
-	\end{itemize}
-\item experience: \iftagged{experience}{yes}{no}
-	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-	\item mercury: \iftagged{mercury}{yes}{no}
-	\item microsemi: \iftagged{microsemi}{yes}{no}
-	\item arxan-defense-systems: \iftagged{arxan-defense-systems}{yes}{no}
-	\item arxan: \iftagged{arxan}{yes}{no}
-	\item rose-hulman: \iftagged{rose-hulman}{yes}{no}
-	\item ventures: \iftagged{ventures}{yes}{no}
-	\item perry-schools: \iftagged{perry-schools}{yes}{no}
-	\item perritech: \iftagged{perritech}{yes}{no}
-	\end{itemize}
-\item education: \iftagged{education}{yes}{no}
-	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-	\item masters: \iftagged{masters}{yes}{no}
-	\item bachelors: \iftagged{bachelors}{yes}{no}
-	\item high-school: \iftagged{high-school}{yes}{no}
-	\end{itemize}
-\item projects: \iftagged{projects}{yes}{no}
-	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-	\item serial-bridge: \iftagged{serial-bridge}{yes}{no}
-	\item chalk: \iftagged{chalk}{yes}{no}
-	\item point-vote: \iftagged{point-vote}{yes}{no}
-	\item ninja: \iftagged{ninja}{yes}{no}
-	\item sprint: \iftagged{sprint}{yes}{no}
-	\item noisebot: \iftagged{noisebot}{yes}{no}
-	\item spades: \iftagged{spades}{yes}{no}
-	\item got: \iftagged{got}{yes}{no}
-	\item lync-helper: \iftagged{lync-helper}{yes}{no}
-	\item gir: \iftagged{gir}{yes}{no}
-	\item woop: \iftagged{woop}{yes}{no}
-	\end{itemize}
-\item publications: \iftagged{publications}{yes}{no}
-	\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-	\item subverting-the-fundamentals-sequence: \iftagged{subverting-the-fundamentals-sequence}{yes}{no}
-	\end{itemize}
-\end{itemize}
-\end{cvparagraph}
-\fi
-
-\begin{taggedblock}{technical-skills}
+\jinja if technical_skills
 \cvsection{Technical Skills}
-
-\newcounter{numSkills}
-\tagged{languages-and-frameworks}{\stepcounter{numSkills}}
-\tagged{tools}{\stepcounter{numSkills}}
-
+\jinja set num_skills = languages_and_frameworks + tools
 \newcommand{\skill}[2]{
 	% Some tweaks are made in two-column mode to get the content to fit better
-	\ifnum\thenumSkills=2
+	\jinja if num_skills == 2
 	\progressbar[width=3em]{#1}~~~\parbox[t]{.43\textwidth}{#2}\\
-	\else
+	\jinja else
 	\progressbar{#1}~~~#2\\
-	\fi
+	\jinja endif
 }
 
-\begin{paracol}{\thenumSkills}
-\tagged{languages-and-frameworks}{
+\begin{paracol}{ {{ num_skills }} }
+	\jinja if languages_and_frameworks
 	\cvsubsection{Languages and Frameworks}
 
 	\begin{cvparagraph}
@@ -144,9 +55,9 @@
 	% For some reason the space between these lines is a little cramped, so I added a tiny manual vspace after the previous skill
 	\skill{.8}{Personal experience with Vue, Vite, Webpack, Yarn, and other modern web development tooling.}
 	\end{cvparagraph}
-}
+	\jinja endif
 \switchcolumn
-\tagged{tools}{
+	\jinja if tools
 	\cvsubsection{Tools}
 
 	\begin{cvparagraph}
@@ -159,31 +70,29 @@
 	% \skill{.7}{Experience with jQuery.}
 	% \skill{.5}{Experience creating GUIs in JavaFX and Qt.}
 	\end{cvparagraph}
-}
+	\jinja endif
 \end{paracol}
 
 % Way too much space after the previous section
-% \ifnum\thenumSkills=2
-% \vspace{-30pt}
-% \else
-\vspace{-20pt}
-% \fi
+\vspace{-15pt}
+\jinja endif
 
-\end{taggedblock}
-\begin{taggedblock}{experience}
-
+\jinja if experience
 \cvsection{Experience}
 
-% \work{Tag}{Company}{Title}{When}{Content}
-\newcommand{\work}[5]{
-	\tagged{#1}{\cventry{#3}{#2}{#4}{}{
+% \work{Company}{Title}{When}{Content}
+\newcommand{\work}[4]{
+	\cventry{#2}{#1}{#3}{}{
 		\begin{cvitems}
-		#5
+		#4
 		\end{cvitems}
-	}}
+	}
+	\vspace{1pt}
 }
+
 \begin{cventries}
-\work{mercury}{Mercury}{Senior Principal Software Engineer}{2016 - Present}{
+\jinja if mercury
+\work{Mercury}{Senior Principal Software Engineer}{2016 - Present}{
 	\item Designed and rolled out an automated build and test system for a number of projects.
 	\item Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.
 		\begin{itemize}[leftmargin=3ex, nosep, noitemsep]
@@ -191,193 +100,222 @@
 		\end{itemize}
 	\item Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes.
 	\item Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers.
-	\item Responsible for assisting newer engineers with understanding tasks, solving problems, debugging issues, and generally answering questions about the system architecture and design.
-	\item Responsible for approving pull requests before they can be merged and suggesting fixes or improvements.
-}%
+	\item Handled communications for several programs, including answering customer questions, debugging issues, and releasing new versions.
+	\item Assisted newer engineers with understanding tasks, solving problems, debugging issues, and generally answering questions about the system architecture.
+	\item Approved pull requests before they could be merged and suggested fixes or improvements.
+}
+\jinja endif
 
-\work{microsemi}{Microsemi}{Software Developer}{2010 - 2016}{
+\jinja if microsemi
+\work{Microsemi}{Software Developer}{2010 - 2016}{
 	\item Implemented and improved miscellaneous whitebox cryptography algorithms, including RSA, AES, and elliptic curve DSA.
 	\item Developed an OpenSSL engine wrapping our whitebox cryptography implementations so they could be used by any application utilizing OpenSSL.
 	\item Implemented the security model and key management policy for an Android password manager.
 	\item Designed and implemented multiple higher level protocols wrapping existing whitebox cryptography to satisfy customer needs.
 	\item Red- and blue-teamed several devices, finding a number of vulnerabilities. Wrote large portions of the final reports detailing the vulnerabilities, their severity, and potential mitigations and fixes.
-}%
+}
+\jinja endif
 
-\work{arxan-defense-systems}{Arxan Defense Systems}{Software Security Analyst}{2009 - 2010}{
+\jinja if arxan_defense_systems
+\work{Arxan Defense Systems}{Software Security Analyst}{2009 - 2010}{
 	\item Implemented many features in CodeSEAL, a product that analyzes executables and modifies them to protect against reverse engineering or modification.
 	\item Developed WhiteboxRSA, an RSA implementation that hides the key to frustrate recovery even when the implementation is under an attacker's control.
-}%
+}
+\jinja endif
 
-\work{arxan}{Arxan}{Intern}{2008 - 2009}{
+\jinja if arxan
+\work{Arxan}{Intern}{2008 - 2009}{
 	\item Engineering intern on a team that developed TransformIT, a white box cryptography solution.
 	\item Subsequently accepted an opportunity to continue work remotely during the school year before transitioning to full-time employment after graduation.
-}%
+}
+\jinja endif
 
-\work{ventures}{Ventures}{Team Lead}{2007 - 2008}{
+\jinja if ventures
+\work{Ventures}{Team Lead}{2007 - 2008}{
 	\item Head of a team of students that specified, designed, developed, and launched the web portal for a promising online startup company.
 	\item Handled maintenance of development servers and software.
 	\item Maintained source code repository and bug tracking system.
 	\item Reviewed code produced by other team members.
-}%
+}
+\jinja endif
 
-\work{rose-hulman}{Rose-Hulman}{Teaching Assistant ~\cdotp~ CSSE Newsletter Editor}{2005 - 2008}{
+\jinja if rose_hulman
+\work{Rose-Hulman}{Teaching Assistant ~\cdotp~ CSSE Newsletter Editor}{2005 - 2008}{
 	\item Assisted students in many introductory programming classes with fundamental object-oriented techniques, UML, project planning, and completing team-based goals.
 	\item Responsible for all phases of the CSSE newsletter production, from writing to publishing.
-}%
+}
+\jinja endif
 
-\work{perry-schools}{Perry Schools}{Website Designer ~\cdotp~ Technician ~\cdotp~ Database Administrator}{2001 - 2007}{
+\jinja if perry_schools
+\work{Perry Schools}{Website Designer ~\cdotp~ Technician ~\cdotp~ Database Administrator}{2001 - 2007}{
 	\item Project coordinator that designed and implemented a completely new look and feel for the school district's 5000+ page website, including a custom CMS and DB design.
 	\item Converted all existing webpages to a new format and implemented a new, more efficient interface.
 	\item Designed, implemented, and maintained the school's first online course registration system.
-}%
+}
+\jinja endif
 
-\work{perritech}{Perritech}{President ~\cdotp~ Technician}{2001 - 2005}{
+\jinja if perritech
+\work{Perritech}{President ~\cdotp~ Technician}{2001 - 2005}{
 	\item Recruited in 2001 as a computer technician, responsible for the 2000+ computer network.
 	\item Subcontracted to various local businesses for programming, website design, networking and system administration.
 	\item Promoted to President in 2005, managing four directors and a number of technicians.
 	\item Spearheaded a presentation at the Ohio State SchoolNet Convention illustrating the benefits of a student-run technology company fully executed within a school district. Subsequently invited to Seoul, Korea for the 6th Global Forum to make a detailed presentation on how to duplicate our success throughout many school districts.
-}%
+}
+\jinja endif
 \end{cventries}
-\vspace{-5pt}
-\end{taggedblock}
-\begin{taggedblock}{education}
 
+\vspace{-5pt}
+\jinja endif
+
+\jinja if education
 \cvsection{Education}
-% \school{Tag}{School}{Degree}{Location}{When}{Content}
-\newcommand{\school}[6]{
-	\tagged{#1}{
-		\cventry{#3}{#2}{#4}{#5}{
-			% At this point I don't think my GPA warrants space on my resume, so commenting out the content here
-			% #6
-		}
-		% Since there's no content, can save some space
-		\vspace{-10pt}
+
+% \school{School}{Degree}{Location}{When}{Content}
+\newcommand{\school}[5]{
+	\cventry{#2}{#1}{#3}{#4}{
+		% At this point I don't think my GPA warrants space on my resume, so commenting out the content here
+		% #5
 	}
+	% Since there's no content, can save some space
+	\vspace{-5pt}
 }
 
 \begin{cventries}
-\school{masters}{Purdue University}{MS Computer Science}{West Lafayette, IN}{May 2015}{
+\jinja if masters
+\school{Purdue University}{MS Computer Science}{West Lafayette, IN}{May 2015}{
 	Cumulative GPA: 3.67
-}%
+}
+\jinja endif
 
-\school{bachelors}{Rose-Hulman Institute of Technology}{BS Computer Science, Software Engineering (Cum Laude)}{Terre Haute, IN}{May 2009}{
+\jinja if bachelors
+\school{Rose-Hulman Institute of Technology}{BS Computer Science, Software Engineering (Cum Laude)}{Terre Haute, IN}{May 2009}{
 	\makebox[2in][l]{Cumulative GPA: 3.48} Upperclass GPA: 3.70
-}%
+}
+\jinja endif
 
-\school{high-school}{Perry High School}{Graduate with Honors}{Perry, OH}{May 2005}{
+\jinja if high_school
+\school{Perry High School}{Graduate with Honors}{Perry, OH}{May 2005}{
 	\makebox[2in][l]{AP Computer Science -- 5} National AP Scholar with Distinction
-}%
+}
+\jinja endif
 \end{cventries}
+
 \vspace{-5pt}
+\jinja endif
 
-\end{taggedblock}
-\begin{taggedblock}{projects}
-
+\jinja if projects
 \cvsection{Projects}
 
-\newcounter{numProjects}
-\tagged{serial-bridge}{\stepcounter{numProjects}}
-\tagged{chalk}{\stepcounter{numProjects}}
-\tagged{point-vote}{\stepcounter{numProjects}}
-\tagged{ninja}{\stepcounter{numProjects}}
-\tagged{sprint}{\stepcounter{numProjects}}
-\tagged{noisebot}{\stepcounter{numProjects}}
-\tagged{spades}{\stepcounter{numProjects}}
-\tagged{got}{\stepcounter{numProjects}}
-\tagged{lync-helper}{\stepcounter{numProjects}}
-\tagged{gir}{\stepcounter{numProjects}}
-\tagged{woop}{\stepcounter{numProjects}}
+\jinja set num_projects = (serial_bridge + chalk + point_vote + ninja + sprint + noisebot + spades + got + lync_helper + gir + woop)
 
 % Use up to three columns for the projects, but only if there are enough projects to cover them
-\newcounter{numProjectCols}
-\ifnum\thenumProjects>3
-\setcounter{numProjectCols}{3}
-\else
-\setcounter{numProjectCols}{\thenumProjects}
-\fi
+\jinja set num_project_cols = min(num_projects, 3)
 
 \newcounter{projectCurCol}
 \globalcounter{projectCurCol}
-% \project{Tag}{Name}{Repo URL}{Content}
-\newcommand{\project}[4]{
-	\tagged{#1}{
-		\cvsubsection{#2} \href{#3}{\faGithubSquare}
+% \project{Name}{Repo URL}{Content}
+\newcommand{\project}[3]{
+	\cvsubsection{#1} \href{#2}{\faGithubSquare}
 
-		\begin{cvparagraph}
-		#4
-		\end{cvparagraph}
-		\vspace{-2mm}
+	\begin{cvparagraph}
+	#3
+	\end{cvparagraph}
+	\vspace{-2mm}
 
-		\stepcounter{projectCurCol}
-		\ifnum\theprojectCurCol=\thenumProjectCols
-		\setcounter{projectCurCol}{0}
-		% This makes every entry in the current column (that we're about to leave) the same height
-		\switchcolumn*
-		\else
-		\switchcolumn
-		\fi
-	}
+	\stepcounter{projectCurCol}
+	\ifnum\theprojectCurCol={{ num_project_cols }}
+	\setcounter{projectCurCol}{0}
+	% This makes every entry in the current column (that we're about to leave) the same height
+	\switchcolumn*
+	\else
+	\switchcolumn
+	\fi
 }
 
-\begin{paracol}{\thenumProjectCols}
-\project{serial-bridge}{Serial Bridge}{https://github.com/mrozekma/serial-bridge}{
+\begin{paracol}{ {{ num_project_cols }} }
+\jinja if serial_bridge
+\project{Serial Bridge}{https://github.com/mrozekma/serial-bridge}{
 	A web-based remote serial port interface heavily utilized at Mercury to interact with hardware UARTs.
 	\vspace{-3mm}
 }
+\jinja endif
 
-\project{chalk}{Chalk}{https://github.com/mrozekma/chalk}{
+\jinja if chalk
+\project{Chalk}{https://github.com/mrozekma/chalk}{
 	A coding interview site with a collaborative live code editor, question library, and compiler.
 }
+\jinja endif
 
-\project{point-vote}{Point Vote}{https://github.com/mrozekma/point-vote}{
-	A website for hosting live scrum planning poker sessions.
+
+\jinja if point_vote
+\project{Point Vote}{https://github.com/mrozekma/point-vote}{
+	A website for hosting live scrum planning poker sessions and other votes.
 }
+\jinja endif
 
-\project{ninja}{Ninja}{https://github.com/mrozekma/ninja}{
+\jinja if ninja
+\project{Ninja}{https://github.com/mrozekma/ninja}{
 	A website for performing calculations via a graphical data flow.
 }
+\jinja endif
 
-\project{sprint}{Sprint}{https://github.com/mrozekma/sprint}{
+\jinja if sprint
+\project{Sprint}{https://github.com/mrozekma/sprint}{
 	A web-based Scrum tracking tool tailor-made for our project needs at Microsemi.
 }
+\jinja endif
 
-\project{noisebot}{Noisebot}{https://github.com/mrozekma/noisebot}{
+\jinja if noisebot
+\project{Noisebot}{https://github.com/mrozekma/noisebot}{
 	An IRC/Slack chat bot that supports reloadable modules and easy modification by end-users.
 }
+\jinja endif
 
-\project{spades}{Spades}{https://github.com/mrozekma/spades}{
+\jinja if spades
+\project{Spades}{https://github.com/mrozekma/spades}{
 	A web-based view of an IRC-hosted Spades card game. Offers a convenient view of the current game state, previous hands, and even past games.
 }
+\jinja endif
 
-\project{got}{Got}{https://github.com/mrozekma/got}{
+\jinja if got
+\project{Got}{https://github.com/mrozekma/got}{
 	A command-line application to automatically download and track Git repositories. Intended to faciliate dependency resolution.
 }
+\jinja endif
 
-\project{lync-helper}{Lync Helper}{https://gitlab.com/mrozekma/lynchelper}{
+\jinja if lync_helper
+\project{Lync Helper}{https://gitlab.com/mrozekma/lynchelper}{
 	A GUI for sharing code over an office chat network. Supports syntax highlighting. Also logs conversations to text files on disk.
 }
+\jinja endif
 
-\project{gir}{Gir}{https://github.com/mrozekma/gir}{
+\jinja if gir
+\project{Gir}{https://github.com/mrozekma/gir}{
 	An ncurses editors for git interactive rebase files, which are normally edited in a regular text editor.
 }
+\jinja endif
 
-\project{woop}{Woop}{}{
+\jinja if woop
+\project{Woop}{}{
 	A webkit-based web browser with vim-style keybindings and modes.
 }
+\jinja endif
 \end{paracol}
-\vspace{-5pt} % Way too much space after the previous section
 
-\end{taggedblock}
-\begin{taggedblock}{publications}
+\vspace{-5pt} % Way too much space after the previous section
+\jinja endif
+
+\jinja if publications
 \vspace{5mm}
 \cvsection{Publications}
 
-\tagged{subverting-the-fundamentals-sequence}{
+\jinja if subverting_the_fundamentals_sequence
 	\begin{cvparagraph}
 	Clifton, C., Kaczmarczyk, L.C., Mrozek, M. ``Subverting the Fundamentals Sequence: Using Version Control to Enhance Course Management''.\\
 	Presented at the 38\textsuperscript{th} Annual Technical Symposium on Computer Science Education (SIGCSE 2007).
 	\end{cvparagraph}
-}
-\end{taggedblock}
+\jinja endif
+
+\jinja endif
 
 \end{document}

@@ -21,6 +21,10 @@
 				</li>
 				<li>Fully automated a recurring task needed by a customer, so it can now be done on demand in about 90 minutes.</li>
 				<li>Fixed and redesigned large portions of an embedded system of interconnected Microblaze cores used by many customers.</li>
+				<li>Assisted newer engineers with understanding tasks, solving problems, debugging issues, and generally answering questions about the system architecture and design.</li>
+				<li>Approved pull requests before they could be merged and suggested fixes or improvements.</li>
+				<li>Tested, packaged, and released many new versions of different projects.</li>
+				<li>Handled communications for several programs, including answering customer questions, debugging issues, writing status reports, and releasing new versions to each customer.</li>
 			</ul>
 		</cv-work>
 

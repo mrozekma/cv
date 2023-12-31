@@ -11,7 +11,7 @@
 		<div class="prompt">make-pdf-resume</div>
 		<div class="pdf-generator">
 			<div class="title"><input type="checkbox" :checked="allChecked" :indeterminate.prop="!allChecked" @click="toggleRoot">&nbsp;PDF Generator</div>
-			<form action="/cgi-bin/pdf.py">
+			<form action="/cgi-bin/pdf">
 				<input type="hidden" name="background" value="on"/>
 				<ul>
 					<li><input type="checkbox" checked disabled> Background</li>
@@ -45,6 +45,7 @@
 		}[];
 	}
 
+	//TODO Parse from sections.txt
 	const sections: Section[] = [
 		{
 			name: 'Technical Skills',

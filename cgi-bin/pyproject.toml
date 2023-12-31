@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "cv"
+version = "0.1.0"
+description = ""
+authors = ["Michael Mrozek <git@mrozekma.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+jinja2 = "^3.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

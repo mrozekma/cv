@@ -1,0 +1,34 @@
+Technical Skills:
+  * Languages and Frameworks
+  * Tools
+
+Experience:
+  * Mercury
+  * Microsemi
+  * Arxan Defense Systems
+  - Arxan
+  - Rose-Hulman
+  - Ventures
+  - Perry Schools
+  - Perritech
+
+Education:
+  * Masters
+  * Bachelors
+  - High School
+
+Projects:
+  * Serial Bridge
+  * Chalk
+  * Point Vote
+  * Ninja
+  * Sprint
+  * Noisebot
+  - Spades
+  - Got
+  - Lync Helper
+  - Gir
+  - Woop
+
+Publications:
+  - Subverting the Fundamentals Sequence
