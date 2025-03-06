@@ -7,14 +7,14 @@
 		</div>
 		<div v-if="links" class="project-links">
 			<a v-if="repo" :class="`${repo.hostKey}-link`" target="_blank" :href="repo.url">
-				<font-awesome-icon :icon="repo.icon"/>&nbsp;{{ repo.hostName }} repository
+				<i :class="['fab', repo.icon]"/>&nbsp;{{ repo.hostName }} repository
 			</a>
 			<template v-if="!repo.public">(private, but available on request)</template>
 			<a v-if="production" class="prod-link" target="_blank" :href="production.url">
-				<font-awesome-icon :icon="production.icon"/>&nbsp;Live website
+				<i :class="['fas', production.icon]"/>&nbsp;Live website
 			</a>
 			<a v-if="docs" class="doc-link" target="_blank" :href="docs.url">
-				<font-awesome-icon :icon="docs.icon"/>&nbsp;Documentation
+				<i :class="['fas', docs.icon]"/>&nbsp;Documentation
 			</a>
 		</div>
 		<slot/>
@@ -28,7 +28,7 @@
 	type RepoSourceName = 'github' | 'gitlab';
 	interface RepoSource {
 		root: string;
-		icon: IconDefinition;
+		icon: string;
 		public: boolean;
 	}
 
@@ -36,7 +36,7 @@
 		repo?: RepoSourceName | {
 			host?: RepoSourceName;
 			name: string;
-			icon?: IconDefinition;
+			icon?: string;
 		};
 		production?: string;
 		docs?: string;
@@ -44,7 +44,7 @@
 
 	interface Link {
 		url: string;
-		icon: IconDefinition;
+		icon: string;
 	}
 
 	interface RepoLink extends Link {
@@ -54,19 +54,17 @@
 		public: boolean;
 	}
 
-	import { faGithub, faGitlab, IconDefinition } from '@fortawesome/free-brands-svg-icons';
-	import { faBook, faColumns } from '@fortawesome/pro-regular-svg-icons';
 	const repoSources: {
 		[ K: /* RepoSourceName */ string ]: RepoSource
 	} = {
 		github: {
 			root: 'https://github.com/mrozekma',
-			icon: faGithub,
+			icon: 'fa-github',
 			public: true,
 		},
 		gitlab: {
 			root: 'https://gitlab.com/mrozekma',
-			icon: faGitlab,
+			icon: 'fa-gitlab',
 			public: false,
 		},
 	};
@@ -120,7 +118,7 @@
 				if(this.links?.production) {
 					return {
 						url: this.links.production,
-						icon: faColumns,
+						icon: 'fa-columns',
 					};
 				}
 			},
@@ -128,7 +126,7 @@
 				if(this.links?.docs) {
 					return {
 						url: this.links.docs,
-						icon: faBook,
+						icon: 'fa-book',
 					};
 				}
 			},

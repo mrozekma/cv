@@ -1,4 +1,5 @@
 <template>
+	<!-- <link href="/fontawesome/css/all.css" rel="stylesheet" /> -->
 	<div id="default">
 		<div class="titlebar" @click="$router.push('/')">
 			<div class="title">{{ title }}</div>

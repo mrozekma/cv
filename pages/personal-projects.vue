@@ -264,11 +264,11 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 				</cv-project-screenshot>
 			</cv-project-screenshots>
 
-			<em>Spades</em> takes some explanation. Several years ago a friend of mine implemented an IRC bot to let users play the card game <a target="_blank" href="https://en.wikipedia.org/wiki/Spades">Spades</a>. (He implemented it in AWK, so the <a class="github-link" target="_blank" href="https://github.com/Andy753421/rhawk/blob/master/spades.awk"><font-awesome-icon :icon="githubIcon"/>&nbsp;code</a> is worth looking at).
+			<em>Spades</em> takes some explanation. Several years ago a friend of mine implemented an IRC bot to let users play the card game <a target="_blank" href="https://en.wikipedia.org/wiki/Spades">Spades</a>. (He implemented it in AWK, so the <a class="github-link" target="_blank" href="https://github.com/Andy753421/rhawk/blob/master/spades.awk"><i class="fab fa-github"/>&nbsp;code</a> is worth looking at).
 
 			You can see a short snippet of what the IRC interface looks like in <a href="#" @click="$refs['spades-screenshots'].show('game-with-irc')">one of the screenshots</a> above; naturally it is somewhat inefficient.
 
-			This project is a web-based interface to show current and historical games. It communicates with the game server and with client browsers using websockets, and shows each play as it happens. The complete history of the current game and all previous games is available. The most technically challenging part of the project was actually <a class="github-link" target="_blank" href="https://github.com/mrozekma/spades/blob/master/EventThread.py#L30-L66"><font-awesome-icon :icon="githubIcon"/>&nbsp;parsing the game server's events</a>, which are the same messages sent to IRC clients and not intended for programmatic use, and <a class="github-link" target="_blank" href="https://github.com/mrozekma/spades/blob/master/GameConstructor.py"><font-awesome-icon :icon="githubIcon"/>&nbsp;reconstructing the game</a> from this one-way information.<br><br>
+			This project is a web-based interface to show current and historical games. It communicates with the game server and with client browsers using websockets, and shows each play as it happens. The complete history of the current game and all previous games is available. The most technically challenging part of the project was actually <a class="github-link" target="_blank" href="https://github.com/mrozekma/spades/blob/master/EventThread.py#L30-L66"><i class="fab fa-github"/>&nbsp;parsing the game server's events</a>, which are the same messages sent to IRC clients and not intended for programmatic use, and <a class="github-link" target="_blank" href="https://github.com/mrozekma/spades/blob/master/GameConstructor.py"><i class="fab fa-github"/>&nbsp;reconstructing the game</a> from this one-way information.<br><br>
 
 			<!-- While the screenshots above cover the highlights, the <a target="_blank" href="http://spades.mrozekma.com/">live site</a> is publicly accessible and will show the state of the current game. -->
 		</cv-project>
@@ -385,7 +385,6 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 	import { iterChildren } from '~/scripts/vue-hierarchy';
 
 	import _ from 'lodash';
-	import { faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
 	import CvTerminal from '~/components/terminal.vue';
 	import CvProject from '~/components/project.vue';
@@ -398,11 +397,6 @@ Projects filtered to only those with the requested tags. <button @click="selecte
 			return {
 				title: 'Personal Projects',
 			};
-		},
-		computed: {
-			githubIcon(): IconDefinition {
-				return faGithub;
-			},
 		},
 		data() {
 			return {
