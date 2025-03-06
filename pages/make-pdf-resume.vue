@@ -57,9 +57,10 @@
 		{
 			name: 'Experience',
 			entries: [
+				{ name: 'Owl' },
 				{ name: 'Mercury' },
 				{ name: 'Microsemi' },
-				{ name: 'Arxan Defense Systems' },
+				{ name: 'Arxan Defense Systems', checked: false },
 				{ name: 'Arxan', checked: false },
 				{ name: 'Rose-Hulman', checked: false },
 				{ name: 'Ventures', checked: false },

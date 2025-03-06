@@ -2,7 +2,7 @@
 	<cv-terminal ref="term" :prompts="['cd /work-history', 'ls -lat **/*']">
 		<cv-subpage path="README.1ST" :mtime="1477280113">
 			<br>
-			My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I've worked at the same place since my <a href="#pre-graduation/arxan">2008 internship</a>, despite the regular name changes:
+			My work history is slightly confusing because of a series of company splits and acquisitions. The short version is that I worked at the same place from 2008 till 2024, despite the regular name changes:
 			<ul>
 				<li><div class="timeframe">Oct 2008</div> Arxan splits into Arxan Defense Systems and Arxan Technologies</li>
 				<li><div class="timeframe">Sep 2010</div> Arxan Defense Systems is <a target="_blank" href="http://investor.microsemi.com/2010-09-15-Microsemi-Corporation-Acquires-Arxan-Defense-Systems-Inc">acquired</a> by Microsemi</li>
@@ -11,7 +11,14 @@
 			The jobs predating this all took place during undergraduate or high school (and are stored in the <code>pre-graduation</code> directory).
 		</cv-subpage>
 
-		<cv-work path="mercury" :mtime="1532302550" url="https://www.mrcy.com/" logo="mercury.png" title="Senior Principal Software Engineer" timeframe="2016 - Present">
+		<cv-work path="owl" :mtime="1741223627" url="https://www.owlcyberdefense.com/" logo="owl.png" title="Principal Software Engineer" timeframe="2024 - Present">
+			<ul>
+				<li>Implemented new protocol adapters and features in a commercial data diode and a government CDS.</li>
+				<li>Automated common build and test procedures.</li>
+			</ul>
+		</cv-work>
+
+		<cv-work path="mercury" :mtime="1741223627" url="https://www.mrcy.com/" logo="mercury.png" title="Senior Principal Software Engineer" timeframe="2016 - 2024">
 			<ul>
 				<li>Designed and rolled out an automated build and test system for a number of projects.</li>
 				<li>Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.

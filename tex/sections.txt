@@ -3,9 +3,10 @@ Technical Skills:
   * Tools
 
 Experience:
+  * Owl
   * Mercury
   * Microsemi
-  * Arxan Defense Systems
+  - Arxan Defense Systems
   - Arxan
   - Rose-Hulman
   - Ventures

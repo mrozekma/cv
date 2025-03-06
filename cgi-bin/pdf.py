@@ -98,7 +98,7 @@ try:
 		loader = jinja2.FileSystemLoader(tex_dir),
 		undefined = jinja2.StrictUndefined,
 		trim_blocks = True,
-		line_statement_prefix = '\jinja',
+		line_statement_prefix = r'\jinja',
 		comment_start_string = '%',
 		comment_end_string = '\n',
 	)

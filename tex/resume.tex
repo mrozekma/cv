@@ -49,11 +49,11 @@
 	\cvsubsection{Languages and Frameworks}
 
 	\begin{cvparagraph}
-	\skill{.9}{Extensive experience with C, Java, Python, Typescript, and scripting.}
-	\skill{.6}{Experience with C++, Rust, and PHP.}
+	\skill{.9}{Extensive experience with C, Python, Typescript, and scripting.}
+	\skill{.6}{Experience with C++, Java, and Rust.}
 	\skill{.4}{Experience with SQL and miscellaneous databases, including MySQL, MariaDB, PostgreSQL, and Redis.\vspace{1mm}}
 	% For some reason the space between these lines is a little cramped, so I added a tiny manual vspace after the previous skill
-	\skill{.8}{Personal experience with Vue, Vite, Webpack, Yarn, and other modern web development tooling.}
+	\skill{.7}{Experience with React, Vue, Vite, Webpack, Yarn, and other modern web development tooling.}
 	\end{cvparagraph}
 	\jinja endif
 \switchcolumn
@@ -67,8 +67,6 @@
 	\skill{.6}{Experience with the Atlassian toolset, including Jira, Bitbucket, and Confluence.\vspace{1mm}}
 	% For some reason the space between these lines is a little cramped, so I added a tiny manual vspace after the previous skill
 	\skill{.5}{Personal experience with Firebase and cloud hosting.}
-	% \skill{.7}{Experience with jQuery.}
-	% \skill{.5}{Experience creating GUIs in JavaFX and Qt.}
 	\end{cvparagraph}
 	\jinja endif
 \end{paracol}
@@ -91,8 +89,15 @@
 }
 
 \begin{cventries}
+\jinja if owl
+\work{Owl Cyber Defense}{Principal Software Engineer}{2024 - Present}{
+	\item Implemented new protocol adapters and features in a commercial data diode and a government CDS.
+	\item Automated common build and test procedures.
+}
+\jinja endif
+
 \jinja if mercury
-\work{Mercury}{Senior Principal Software Engineer}{2016 - Present}{
+\work{Mercury}{Senior Principal Software Engineer}{2016 - 2024}{
 	\item Designed and rolled out an automated build and test system for a number of projects.
 	\item Handled the office migration to Atlassian tools, including moving all projects from Subversion to Bitbucket.
 		\begin{itemize}[leftmargin=3ex, nosep, noitemsep]
