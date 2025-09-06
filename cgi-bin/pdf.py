@@ -1,5 +1,6 @@
 # Dependencies: texlive-xetex texlive-luatex texlive-fonts-extra
 
+from dataclasses import dataclass
 import io
 import os
 from pathlib import Path
@@ -36,35 +37,47 @@ if is_cgi:
 				break
 	sys.excepthook = excepthook
 
-sections: dict[str, str] = {} # entry -> section containing the entry
-entries: dict[str, bool] = {} # entry -> is selected
+@dataclass
+class Entry:
+	name: str
+	section: str
+	selected: bool
 
-def make_form_name(entry: str):
-	entry = entry.lower()
-	entry = re.sub(r'[^a-z0-9]+', '-', entry)
-	entry = re.sub(r'^-+', '', entry)
-	entry = re.sub(r'-+$', '', entry)
-	return entry
+	def __post_init__(self):
+		self.name = Entry.make_form_name(self.name)
+		self.section = Entry.make_form_name(self.section)
 
+	@staticmethod
+	def make_form_name(name: str):
+		name = name.lower()
+		name = re.sub(r'[^a-z0-9]+', '-', name)
+		name = re.sub(r'^-+', '', name)
+		name = re.sub(r'-+$', '', name)
+		return name
+
+entries: list[Entry] = []
 section = None
 for line in (tex_dir / 'sections.txt').read_text().splitlines():
 	if line == '':
 		continue
 	elif line.endswith(':'):
-		section = make_form_name(line[:-1])
+		section = line[:-1]
 	elif line.startswith('  * ') or line.startswith('  - '):
-		entry = make_form_name(line[4:])
-		entries[entry] = (line[2] == '*')
-		sections[entry] = section
+		assert section is not None
+		entries.append(Entry(line[4:], section, line[2] == '*'))
 	else:
 		raise RuntimeError("Malformed sections list")
 del section
 
+def setAllEntries(selection: bool):
+	for entry in entries:
+		entry.selected = selection
+
 if is_cgi:
-	qs = urllib.parse.parse_qsl(os.environ['QUERY_STRING'])
-	for name, value in qs:
-		if name in entries and value == 'on':
-			entries[name] = True
+	qs = urllib.parse.parse_qs(os.environ['QUERY_STRING'])
+	if qs:
+		for entry in entries:
+			entry.selected = qs.get(entry.name, ['off'])[-1] == 'on'
 	args = None
 elif 'TEST' in os.environ:
 	import argparse
@@ -72,18 +85,21 @@ elif 'TEST' in os.environ:
 	parser.add_argument('-o', '--output', type = Path, metavar = 'FILENAME')
 	parser.add_argument('--tmpdir', type = Path, metavar = 'DIR')
 	group = parser.add_mutually_exclusive_group()
-	group.add_argument('-a', '--all', dest = 'selections', action = 'append_const', const = ( None, True ))
-	group.add_argument('-n', '--none', dest = 'selections', action = 'append_const', const = ( None, False ))
+	group.add_argument('-a', '--all', dest = 'selections', action = 'append_const', const = 'all')
+	group.add_argument('-n', '--none', dest = 'selections', action = 'append_const', const = 'none')
 	for entry in entries:
-		parser.add_argument(f"--{entry}", dest = 'selections', action = 'append_const', const = ( entry, True ))
-		parser.add_argument(f"--no-{entry}", dest = 'selections', action = 'append_const', const = ( entry, False ))
+		parser.add_argument(f"--{entry.name}", dest = 'selections', action = 'append_const', const = ( entry, True ))
+		parser.add_argument(f"--no-{entry.name}", dest = 'selections', action = 'append_const', const = ( entry, False ))
 	args = parser.parse_args()
 
-	for selection, selected in args.selections or []:
-		if selection is None:
-			entries = { k: selected for k in entries }
-		else:
-			entries[selection] = selected
+	for selection in args.selections or []:
+		match selection:
+			case 'all':
+				setAllEntries(True)
+			case 'none':
+				setAllEntries(False)
+			case (entry, value):
+				entry.selected = value
 else:
 	raise RuntimeError("Unrecognized request type")
 
@@ -110,12 +126,12 @@ try:
 			'\\begin{cvparagraph}\n'
 			'\\begin{itemize}[leftmargin=2ex, nosep, noitemsep]\n'
 		)
-		for section in sorted({ v for k, v in sections.items() }):
+		for section in sorted({ entry.section for entry in entries }):
 			rtn.write(f"\\item {section}\n")
 			rtn.write("\\begin{itemize}[leftmargin=2ex, nosep, noitemsep]\n")
-			for entry, selected in entries.items():
-				if sections[entry] == section:
-					rtn.write(f"\\item {entry}: {'yes' if selected else 'no'}\n")
+			for entry in entries:
+				if entry.section == section:
+					rtn.write(f"\\item {entry.name}: {'yes' if entry.selected else 'no'}\n")
 			rtn.write("\\end{itemize}\n")
 		rtn.write(
 			'\\end{itemize}\n'
@@ -130,25 +146,16 @@ try:
 		'max': max,
 	}
 
-	for section in sections.values():
+	for section in { entry.section for entry in entries }:
 		vars[section.replace('-', '_')] = False
-	for entry, selected in entries.items():
-		vars[entry.replace('-', '_')] = selected
-		if selected:
-			vars[sections[entry].replace('-', '_')] = True
+	for entry in entries:
+		vars[entry.name.replace('-', '_')] = entry.selected
+		if entry.selected:
+			vars[entry.section.replace('-', '_')] = True
 			vars['any_selections'] = True
 
 	template: jinja2.Template = jinja_env.get_template('resume.tex')
 	tex = template.render(vars)
-		# entry_selected = lambda entry: entry in selected_entries,
-		# section_selected = lambda section: section in selected_sections,
-		# *{ entry: }
-		# debug_entries = debug_entries,
-		# any_selections = len(selected_entries) > 0,
-	# )
-	# tex = tex_in.read_text()
-	# print('\n'.join(fr"\useentry{{{entry}}}" for entry in selected_entries), file = sys.stderr)
-	# tex = tex.replace(r'%%% entries %%%', '\n'.join(fr"\useentry{{{entry}}}" for entry in selected_entries))
 	tex_out.write_text(tex)
 
 	with open(dest / 'output', 'w') as f:
@@ -166,6 +173,9 @@ try:
 	elif args.output:
 		args.output.write_bytes(pdf_bytes)
 	else:
+		for entry in entries:
+			print(entry.name, entry.section, entry.selected)
+		print()
 		print(f"Generated {len(pdf_bytes)} bytes")
 
 except Exception:
