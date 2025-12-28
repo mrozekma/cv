@@ -22,4 +22,4 @@ COPY container/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN uv sync --project=/usr/share/nginx/cgi-bin --frozen
 
 EXPOSE 80
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ENTRYPOINT ["sh", "-c", "rm -f /var/run/fcgiwrap.socket; /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf"]
